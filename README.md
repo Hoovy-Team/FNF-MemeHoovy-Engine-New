@@ -2,9 +2,10 @@
 
 I have an engine based off myself now, watch me fail.
 
-Special Thanks:
+### Special Thanks:
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
+
 
 ### Vanilla description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
