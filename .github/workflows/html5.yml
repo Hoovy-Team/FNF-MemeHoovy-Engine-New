@@ -35,6 +35,7 @@ jobs:
           haxelib install hscript
           haxelib install flixel-tools
           haxelib install flixel-addons
+          haxelib git polymod https://github.com/larsiusprime/polymod
           haxelib list
           haxelib run lime build html5
           

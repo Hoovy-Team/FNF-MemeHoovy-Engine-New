@@ -29,6 +29,7 @@
             haxelib install flixel-tools
             haxelib install flixel-addons
             haxelib install hscript
+            haxelib git polymod https://github.com/larsiusprime/polymod
             haxelib list
         - name: Create Version Tag
           run: echo "${{github.run_id}}" > VERSION
