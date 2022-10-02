@@ -6,6 +6,8 @@ I have an engine based off myself now, watch me fail.
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
 
+Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
+
 ### Vanilla description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
 
