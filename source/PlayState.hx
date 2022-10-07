@@ -1345,7 +1345,7 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score:' + songScore + '| Misses' + songMisses;
+		scoreTxt.text = 'Score:' + songScore + '| Misses:' + songMisses;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1660,6 +1660,7 @@ class PlayState extends MusicBeatState
 					if (daNote.tooLate || !daNote.wasGoodHit)
 					{
 						health -= 0.0475;
+						songMisses += 1;
 						vocals.volume = 0;
 					}
 
@@ -2121,7 +2122,6 @@ class PlayState extends MusicBeatState
 			combo = 0;
 
 			songScore -= 10;
-			songMisses++;
 			
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
@@ -2158,7 +2158,7 @@ class PlayState extends MusicBeatState
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
 		
-		songMisses++;
+		songMisses += 1;
 		
 		if (leftP)
 			noteMiss(0);
