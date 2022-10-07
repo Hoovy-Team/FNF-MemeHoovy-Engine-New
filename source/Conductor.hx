@@ -2,12 +2,11 @@ package;
 
 import Song.SwagSong;
 
-
 typedef BPMChangeEvent =
 {
 	var stepTime:Int;
 	var songTime:Float;
-	var bpm:Float;
+	var bpm:Int;
 }
 
 class Conductor
@@ -33,7 +32,7 @@ class Conductor
 	{
 		bpmChangeMap = [];
 
-		var curBPM:Float = song.bpm;
+		var curBPM:Int = song.bpm;
 		var totalSteps:Int = 0;
 		var totalPos:Float = 0;
 		for (i in 0...song.notes.length)
@@ -56,7 +55,7 @@ class Conductor
 		trace("new BPM map BUDDY " + bpmChangeMap);
 	}
 
-	public static function changeBPM(newBpm:Float)
+	public static function changeBPM(newBpm:Int)
 	{
 		bpm = newBpm;
 
