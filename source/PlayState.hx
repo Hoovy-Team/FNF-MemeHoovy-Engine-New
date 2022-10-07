@@ -855,7 +855,6 @@ class PlayState extends MusicBeatState
 
 		talking = false;
 		startedCountdown = true;
-		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
 		var swagCounter:Int = 0;
