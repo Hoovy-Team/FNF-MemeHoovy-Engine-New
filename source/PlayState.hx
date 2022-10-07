@@ -672,7 +672,8 @@ class PlayState extends MusicBeatState
 		healthBar.scrollFactor.set();
 		if(FlxG.save.data.option_hpc_int == 0){
 		healthBar.createFilledBar(dad.hpcolor, boyfriend.hpcolor);
-		else}
+		}
+		else
 		healthBar.createFilledBar(0xFFFF0000, 0xFF00FF6A);
 		// healthBar
 		add(healthBar);
