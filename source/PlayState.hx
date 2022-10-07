@@ -2068,24 +2068,24 @@ class PlayState extends MusicBeatState
 		
 		
 		if(FlxG.save.data.option_gt_int == 0){
-		if (leftP)
-			noteMiss(0);
-			boyfriend.playAnim('singLEFTmiss', true);
-		if (downP)
-			noteMiss(1);
-			boyfriend.playAnim('singDOWNmiss', true);
-		if (upP)
-			noteMiss(2);
-			boyfriend.playAnim('singUPmiss', true);
-		if (rightP)
-			noteMiss(3);
-			boyfriend.playAnim('singRIGHTmiss', true);
+			if (leftP)
+				noteMiss(0);
+				boyfriend.playAnim('singLEFTmiss', true);
+			if (downP)
+				noteMiss(1);
+				boyfriend.playAnim('singDOWNmiss', true);
+			if (upP)
+				noteMiss(2);
+				boyfriend.playAnim('singUPmiss', true);
+			if (rightP)
+				noteMiss(3);
+				boyfriend.playAnim('singRIGHTmiss', true);
 
-		songMisses++;
-		songScore -= 20;
-		combo = 0;
+			songMisses++;
+			songScore -= 20;
+			combo = 0;
+		}
 	}
-}
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
@@ -2261,8 +2261,6 @@ class PlayState extends MusicBeatState
 				Conductor.changeBPM(SONG.notes[Math.floor(curStep / 16)].bpm);
 				FlxG.log.add('CHANGED BPM!');
 			}
-			// else
-			// Conductor.changeBPM(SONG.bpm);
 
 			// Dad doesnt interupt his own notes
 			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection)
