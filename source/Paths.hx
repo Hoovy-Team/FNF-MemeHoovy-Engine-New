@@ -112,11 +112,11 @@ class Paths
 	public static function returnGraphic(key:String, ?cache:Bool = true):FlxGraphic
 	{
 		var path:String = 'assets/$key.png';
-		if (Assets.exists(path, IMAGE))
+		if (OpenFlAssets.exists(path, IMAGE))
 		{
 			if (!currentTrackedAssets.exists(path))
 			{
-				var graphic:FlxGraphic = FlxGraphic.fromBitmapData(Assets.getBitmapData(path), false, path, cache);
+				var graphic:FlxGraphic = FlxGraphic.fromBitmapData(OpenFlAssets.getBitmapData(path), false, path, cache);
 				graphic.persist = true;
 				currentTrackedAssets.set(path, graphic);
 			}
