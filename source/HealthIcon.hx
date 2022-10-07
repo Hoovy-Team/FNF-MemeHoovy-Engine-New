@@ -47,7 +47,7 @@ class HealthIcon extends FlxSprite
 
 		if (char != this.char)
 		{
-			var name = 'icon-' + char;
+			var name:String = 'icon-' + char;
 			if (!Assets.exists(Paths.image('icons/$name'))){
 				loadGraphic(Paths.image('icons/icon-face'), true, 150, 150); // wouldn't it be ironic if it didn't exist?
 			}
