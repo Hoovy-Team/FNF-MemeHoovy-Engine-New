@@ -854,6 +854,7 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 
 		talking = false;
+		Conductor.songPosition = 0;
 		startedCountdown = true;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
