@@ -74,7 +74,7 @@ class ChartingState extends MusicBeatState
 	**/
 	var curSelectedNote:Array<Dynamic>;
 
-	var tempBpm:Int = 0;
+	var tempBpm:Float = 0;
 
 	var vocals:FlxSound;
 
@@ -434,7 +434,7 @@ class ChartingState extends MusicBeatState
 			}
 			else if (wname == 'section_bpm')
 			{
-				_song.notes[curSection].bpm = Std.int(nums.value);
+				_song.notes[curSection].bpm = Std.float(nums.value);
 				updateGrid();
 			}
 		}
@@ -444,17 +444,9 @@ class ChartingState extends MusicBeatState
 
 	var updatedSection:Bool = false;
 
-	/* this function got owned LOL
-		function lengthBpmBullshit():Float
-		{
-			if (_song.notes[curSection].changeBPM)
-				return _song.notes[curSection].lengthInSteps * (_song.notes[curSection].bpm / _song.bpm);
-			else
-				return _song.notes[curSection].lengthInSteps;
-	}*/
 	function sectionStartTime():Float
 	{
-		var daBPM:Int = _song.bpm;
+		var daBPM:Float = _song.bpm;
 		var daPos:Float = 0;
 		for (i in 0...curSection)
 		{
@@ -648,11 +640,6 @@ class ChartingState extends MusicBeatState
 
 		_song.bpm = tempBpm;
 
-		/* if (FlxG.keys.justPressed.UP)
-				Conductor.changeBPM(Conductor.bpm + 1);
-			if (FlxG.keys.justPressed.DOWN)
-				Conductor.changeBPM(Conductor.bpm - 1); */
-
 		var shiftThing:Int = 1;
 		if (FlxG.keys.pressed.SHIFT)
 			shiftThing = 4;
@@ -829,7 +816,7 @@ class ChartingState extends MusicBeatState
 		else
 		{
 			// get last bpm
-			var daBPM:Int = _song.bpm;
+			var daBPM:Float = _song.bpm;
 			for (i in 0...curSection)
 				if (_song.notes[i].changeBPM)
 					daBPM = _song.notes[i].bpm;
