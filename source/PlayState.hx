@@ -707,7 +707,7 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+		healthBar.createFilledBar(dad.hpcolor, boyfriend.hpcolor);
 		// healthBar
 		add(healthBar);
 
@@ -1345,7 +1345,7 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score:' + songScore + '| Misses' + songMisses;
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1660,6 +1660,7 @@ class PlayState extends MusicBeatState
 					if (daNote.tooLate || !daNote.wasGoodHit)
 					{
 						health -= 0.0475;
+						songMisses += 1;
 						vocals.volume = 0;
 					}
 
@@ -1965,7 +1966,6 @@ class PlayState extends MusicBeatState
 					noteCheck(true, daNote);
 
 				// Jump notes
-				// TODO: Fix the input system
 				if (possibleNotes.length >= 2)
 				{
 					if (possibleNotes[0].strumTime == possibleNotes[1].strumTime)
@@ -2003,6 +2003,35 @@ class PlayState extends MusicBeatState
 				{
 					noteCheck(controlArray[daNote.noteData], daNote);
 				}
+				/* 
+					if (controlArray[daNote.noteData])
+						goodNoteHit(daNote);
+				 */
+				// trace(daNote.noteData);
+				/* 
+						switch (daNote.noteData)
+						{
+							case 2: // NOTES YOU JUST PRESSED
+								if (upP || rightP || downP || leftP)
+									noteCheck(upP, daNote);
+							case 3:
+								if (upP || rightP || downP || leftP)
+									noteCheck(rightP, daNote);
+							case 1:
+								if (upP || rightP || downP || leftP)
+									noteCheck(downP, daNote);
+							case 0:
+								if (upP || rightP || downP || leftP)
+									noteCheck(leftP, daNote);
+						}
+					//this is already done in noteCheck / goodNoteHit
+					if (daNote.wasGoodHit)
+					{
+						daNote.kill();
+						notes.remove(daNote, true);
+						daNote.destroy();
+					}
+				 */
 			}
 			else
 			{
@@ -2093,7 +2122,6 @@ class PlayState extends MusicBeatState
 			combo = 0;
 
 			songScore -= 10;
-			songMisses++;
 			
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
@@ -2130,7 +2158,7 @@ class PlayState extends MusicBeatState
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
 		
-		songMisses++;
+		songMisses += 1;
 		
 		if (leftP)
 			noteMiss(0);
