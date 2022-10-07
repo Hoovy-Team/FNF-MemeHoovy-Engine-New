@@ -38,35 +38,35 @@ class OptionsBeta extends MusicBeatState
     }
 
     override public function update(elapsed:Float)
-        {
+    {
         if(option_gt_int == 1)
-            {
-                option_gt.text = "Ghost Tapping: true";
-            }
-        if(option_gt_int == 0)
-            {
-                option_gt.text = "Ghost Tapping: false";
-            }
-            if(FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.ENTER)
-            {
-                option_gt_int += 1;
-                FlxG.save.data.option_gt_int = option_gt_int;
-            }
-            if (FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.BACKSPACE)
-            {
-                option_gt_int -= 1;
-                FlxG.save.data.option_gt_int = option_gt_int;
-            }
-            if(option_gt_int > 1)
-                option_gt_int = 1;
-            if(option_gt_int < 0)
-                option_gt_int = 0;
-            if(FlxG.keys.justPressed.ESCAPE)
-            {
-                FlxG.switchState(new MainMenuState());
-                FlxG.mouse.visible = false;
-                FlxG.mouse.enabled = false;
-            }
-            super.update(elapsed);
+        {
+            option_gt.text = "Ghost Tapping: true";
+        }
+        else if(option_gt_int == 0)
+        {
+            option_gt.text = "Ghost Tapping: false";
+        }
+        if(FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.ENTER)
+        {
+            option_gt_int += 1;
+            FlxG.save.data.option_gt_int = option_gt_int;
+        }
+        if (FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.BACKSPACE)
+        {
+            option_gt_int -= 1;
+            FlxG.save.data.option_gt_int = option_gt_int;
+        }
+        if(option_gt_int > 1)
+            option_gt_int = 1;
+        if(option_gt_int < 0)
+            option_gt_int = 0;
+        if(FlxG.keys.justPressed.ESCAPE)
+        {
+            FlxG.switchState(new MainMenuState());
+            FlxG.mouse.visible = false;
+            FlxG.mouse.enabled = false;
+        }
+        super.update(elapsed);
     }
 }
