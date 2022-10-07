@@ -8,6 +8,8 @@ I have an engine based off myself now, watch me fail.
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
 
+[504brandon](https://github.com/504brandon) - Assistant Programmer.
+
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 ### Vanilla description:
