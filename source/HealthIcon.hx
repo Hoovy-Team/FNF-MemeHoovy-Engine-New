@@ -47,10 +47,10 @@ class HealthIcon extends FlxSprite
 		{
 				loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
 				animation.add(char, [0, 1], 0, false, isPlayer);
-	}
-			animation.play(char);
-			this.char = char;
 		}
+		animation.play(char);
+		this.char = char;
+	}
 
 	override function update(elapsed:Float)
 	{
