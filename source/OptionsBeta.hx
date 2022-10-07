@@ -49,12 +49,12 @@ class OptionsBeta extends MusicBeatState
         }
         if(FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.ENTER)
         {
-            option_gt_int += 1;
+            option_gt_int++;
             FlxG.save.data.option_gt_int = option_gt_int;
         }
         if (FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.BACKSPACE)
         {
-            option_gt_int -= 1;
+            option_gt_int--;
             FlxG.save.data.option_gt_int = option_gt_int;
         }
         if(option_gt_int > 1)
