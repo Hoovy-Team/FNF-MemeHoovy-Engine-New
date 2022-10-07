@@ -47,11 +47,13 @@ class HealthIcon extends FlxSprite
 
 		if (char != this.char)
 		{
-			/*var name = 'icon-' + char;
-			if (!Assets.exists(Paths.image('icons/$name'))){
+			if (!Assets.exists(Paths.image('icons/icon-' + char))){
 				loadGraphic(Paths.image('icons/icon-face'), true, 150, 150); // wouldn't it be ironic if it didn't exist?
-			}*/
-			loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
+			}
+			else {
+				loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
+				animation.add(char, [0, 1], 0, false, isPlayer);
+			}
 			animation.add(char, [0, 1], 0, false, isPlayer);
 		}
 		animation.play(char);
