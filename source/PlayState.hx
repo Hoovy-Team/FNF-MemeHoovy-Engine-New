@@ -2153,22 +2153,32 @@ class PlayState extends MusicBeatState
 	{
 		// just double pasting this shit cuz fuk u
 		// REDO THIS SYSTEM!
+		// legonds say he will never do it
 		var upP = controls.UP_P;
 		var rightP = controls.RIGHT_P;
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
 		
-		songMisses += 1;
 		
+		if(OptionsBeta.option_gt_int == 0){
 		if (leftP)
 			noteMiss(0);
+			boyfriend.playAnim('singLEFTmiss', true);
 		if (downP)
 			noteMiss(1);
+			boyfriend.playAnim('singDOWNmiss', true);
 		if (upP)
 			noteMiss(2);
+			boyfriend.playAnim('singUPmiss', true);
 		if (rightP)
 			noteMiss(3);
+			boyfriend.playAnim('singRIGHTmiss', true);
+
+		songMisses += 1;
+		songScore -= 20;
+		combo = 0;
 	}
+}
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
