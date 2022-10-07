@@ -47,6 +47,7 @@ class HealthIcon extends FlxSprite
 
 		if (char != this.char)
 		{
+<<<<<<< HEAD
 			if (!Assets.exists(Paths.image('icons/icon-' + char))){
 				loadGraphic(Paths.image('icons/icon-face'), true, 150, 150); // wouldn't it be ironic if it didn't exist?
 			}
@@ -54,6 +55,14 @@ class HealthIcon extends FlxSprite
 				loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
 				animation.add(char, [0, 1], 0, false, isPlayer);
 			}
+=======
+			var name = 'icon-' + char;
+			if (!Assets.exists(Paths.image('icons/$name'))){
+				loadGraphic(Paths.image('icons/icon-face'), true, 150, 150); // wouldn't it be ironic if it didn't exist?
+			}
+			loadGraphic(Paths.image('icons/$name'), true, 150, 150);
+			animation.add(char, [0, 1], 0, false, isPlayer);
+>>>>>>> d8e0e6f8e545cd096b04f781fdb483fbd3d70c35
 		}
 		animation.play(char);
 		this.char = char;
