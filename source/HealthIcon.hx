@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxSprite;
+import openfl.utils.Assets;
 
 using StringTools;
 
@@ -8,6 +9,7 @@ class HealthIcon extends FlxSprite
 {
 	/**
 	 * Used for FreeplayState! If you use it elsewhere, prob gonna annoying
+	 * I wouldn't count on that ninjamuffin99
 	 */
 	public var sprTracker:FlxSprite;
 
@@ -45,8 +47,13 @@ class HealthIcon extends FlxSprite
 
 		if (char != this.char)
 		{
+			if (!Assets.exists(Paths.image('icons/icon-' + char))){
+				loadGraphic(Paths.image('icons/icon-face'), true, 150, 150); // wouldn't it be ironic if it didn't exist?
+			}
+			else {
 				loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
 				animation.add(char, [0, 1], 0, false, isPlayer);
+			}
 		}
 		animation.play(char);
 		this.char = char;
