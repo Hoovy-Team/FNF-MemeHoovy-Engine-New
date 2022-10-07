@@ -423,9 +423,9 @@ class ChartingState extends MusicBeatState
 			}
 			else if (wname == 'song_bpm')
 			{
-				tempBpm = nums.value;
+				tempBpm = Std.int(nums.value);
 				Conductor.mapBPMChanges(_song);
-				Conductor.changeBPM(nums.value);
+				Conductor.changeBPM(Std.int(nums.value));
 			}
 			else if (wname == 'note_susLength')
 			{
@@ -434,7 +434,7 @@ class ChartingState extends MusicBeatState
 			}
 			else if (wname == 'section_bpm')
 			{
-				_song.notes[curSection].bpm = nums.value;
+				_song.notes[curSection].bpm = Std.float(nums.value);
 				updateGrid();
 			}
 		}
