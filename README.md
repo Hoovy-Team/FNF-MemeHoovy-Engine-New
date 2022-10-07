@@ -8,6 +8,8 @@ I have an engine based off myself now, watch me fail.
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
 
+[504brandon](https://github.com/504brandon) - Assistant Programmer.
+
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 ### Vanilla description:
@@ -49,7 +51,6 @@ flixel
 flixel-addons
 flixel-ui
 hscript
-newgrounds
 ```
 So for each of those type `haxelib install [library]` so shit like `haxelib install newgrounds`
 
@@ -63,26 +64,6 @@ You should have everything ready for compiling the game! Follow the guide below 
 
 At the moment, you can optionally fix the transition bug in songs with zoomed-out cameras.
 - Run `haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons` in the terminal/command-prompt.
-
-### Ignored files
-
-I gitignore the API keys for the game so that no one can nab them and post fake high scores on the leaderboards. But because of that the game
-doesn't compile without it.
-
-Just make a file in `/source` and call it `APIStuff.hx`, and copy & paste this into it
-
-```haxe
-package;
-
-class APIStuff
-{
-	public static var API:String = "";
-	public static var EncKey:String = "";
-}
-
-```
-
-and you should be good to go there.
 
 ### Compiling game
 NOTE: If you see any messages relating to deprecated packages, ignore them. They're just warnings that don't affect compiling

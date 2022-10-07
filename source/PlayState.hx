@@ -2121,7 +2121,11 @@ class PlayState extends MusicBeatState
 			combo = 0;
 
 			songScore -= 10;
+<<<<<<< HEAD
 			songMisses += 1;
+=======
+			songMisses++;
+>>>>>>> 1200d86460c80bc1ee805f58594ea94da2d1aacc
 			
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
@@ -2158,7 +2162,11 @@ class PlayState extends MusicBeatState
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
 		
+<<<<<<< HEAD
 		songMisses += 1;
+=======
+		songMisses++;
+>>>>>>> 1200d86460c80bc1ee805f58594ea94da2d1aacc
 		
 		if (leftP)
 			noteMiss(0);
