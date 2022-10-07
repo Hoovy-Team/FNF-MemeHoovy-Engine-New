@@ -11,7 +11,7 @@ typedef SwagSong =
 {
 	var song:String;
 	var notes:Array<SwagSection>;
-	var bpm:Float;
+	var bpm:Int;
 	var needsVoices:Bool;
 	var speed:Float;
 
@@ -24,7 +24,7 @@ class Song
 {
 	public var song:String;
 	public var notes:Array<SwagSection>;
-	public var bpm:Float;
+	public var bpm:Int;
 	public var needsVoices:Bool = true;
 	public var speed:Float = 1;
 
@@ -40,9 +40,6 @@ class Song
 
 	public static function loadFromJson(jsonInput:String, ?folder:String):SwagSong
 	{
-		if (!Assets.exists(Paths.json(folder.toLowerCase() + '/' + jsonInput.toLowerCase()))) {
-			return null;
-		}
 		var rawJson = Assets.getText(Paths.json(folder.toLowerCase() + '/' + jsonInput.toLowerCase())).trim();
 
 		while (!rawJson.endsWith("}"))
