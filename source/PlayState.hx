@@ -115,6 +115,7 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
+	var songAccuracy:Float = 100;
 	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
@@ -1307,7 +1308,9 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		if(songAccuracy > 100)
+			songAccuracy = 100;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1606,6 +1609,7 @@ class PlayState extends MusicBeatState
 						health -= 0.0475;
 						songMisses++;
 						combo = 0;
+						songAccuracy -= 0.23;
 						vocals.volume = 0;
 					}
 
@@ -1721,6 +1725,7 @@ class PlayState extends MusicBeatState
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
+		var acc:Float = 0.10;
 
 		var daRating:String = "sick";
 
@@ -1728,19 +1733,23 @@ class PlayState extends MusicBeatState
 		{
 			daRating = 'shit';
 			score = 50;
+			acc = -0.20;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
 			daRating = 'bad';
 			score = 100;
+			acc = -0.5;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
 			daRating = 'good';
 			score = 200;
+			acc = 0.5;
 		}
 
 		songScore += score;
+		songAccuracy += acc;
 
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
@@ -1767,6 +1776,8 @@ class PlayState extends MusicBeatState
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		add(rating);
+		if(combo > 9)
+			add(comboSpr);
 
 		if (!curStage.startsWith('school'))
 		{
@@ -2081,6 +2092,7 @@ class PlayState extends MusicBeatState
 			songMisses++;
 			songScore -= 20;
 			combo = 0;
+			songAccuracy -= 0.20;
 		}
 	}
 
