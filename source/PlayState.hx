@@ -1660,7 +1660,7 @@ class PlayState extends MusicBeatState
 					if (daNote.tooLate || !daNote.wasGoodHit)
 					{
 						health -= 0.0475;
-						songMisses += 1;
+						songMisses++;
 						vocals.volume = 0;
 					}
 
@@ -2174,7 +2174,7 @@ class PlayState extends MusicBeatState
 			noteMiss(3);
 			boyfriend.playAnim('singRIGHTmiss', true);
 
-		songMisses += 1;
+		songMisses++;
 		songScore -= 20;
 		combo = 0;
 	}
