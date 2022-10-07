@@ -1965,6 +1965,7 @@ class PlayState extends MusicBeatState
 					noteCheck(true, daNote);
 
 				// Jump notes
+				// TODO: Fix the input system
 				if (possibleNotes.length >= 2)
 				{
 					if (possibleNotes[0].strumTime == possibleNotes[1].strumTime)
@@ -2002,35 +2003,6 @@ class PlayState extends MusicBeatState
 				{
 					noteCheck(controlArray[daNote.noteData], daNote);
 				}
-				/* 
-					if (controlArray[daNote.noteData])
-						goodNoteHit(daNote);
-				 */
-				// trace(daNote.noteData);
-				/* 
-						switch (daNote.noteData)
-						{
-							case 2: // NOTES YOU JUST PRESSED
-								if (upP || rightP || downP || leftP)
-									noteCheck(upP, daNote);
-							case 3:
-								if (upP || rightP || downP || leftP)
-									noteCheck(rightP, daNote);
-							case 1:
-								if (upP || rightP || downP || leftP)
-									noteCheck(downP, daNote);
-							case 0:
-								if (upP || rightP || downP || leftP)
-									noteCheck(leftP, daNote);
-						}
-					//this is already done in noteCheck / goodNoteHit
-					if (daNote.wasGoodHit)
-					{
-						daNote.kill();
-						notes.remove(daNote, true);
-						daNote.destroy();
-					}
-				 */
 			}
 			else
 			{
