@@ -10,8 +10,8 @@ class OptionsBeta extends MusicBeatState
     var option_gt:FlxText;
     var option_hpc:FlxText;
     var option_wus:FlxText;
-    public static var option_gt_int:Int = 1;
-    public static var option_hpc_int:Int = 1;
+    public static var option_gt_int:Int = 0;
+    public static var option_hpc_int:Int = 0;
     public static var option_wus_int:Int = 0;
     override function create()//this takes alot of code from my cookie clicker game huh
     {
@@ -41,7 +41,7 @@ class OptionsBeta extends MusicBeatState
         option_hpc.screenCenter(X);
 		add(option_hpc);
 
-        option_wus = new FlxText(0, 200, 0, "n/a", 30);
+        option_wus = new FlxText(0, 300, 0, "n/a", 30);
 		option_wus.pixelPerfectPosition = true;
 		option_wus.borderColor = FlxColor.BLACK;
 		option_wus.borderSize = 3;
@@ -57,7 +57,7 @@ class OptionsBeta extends MusicBeatState
         if (FlxG.save.data.option_hpc_int != option_hpc_int)
 			option_hpc_int = FlxG.save.data.option_hpc_int;
         if (FlxG.save.data.option_wus_int != option_wus_int)
-			option_hpc_int = FlxG.save.data.option_wus_int;
+			option_wus_int = FlxG.save.data.option_wus_int;
         super.create();
     }
 
@@ -79,13 +79,13 @@ class OptionsBeta extends MusicBeatState
         {
             option_hpc.text = "Health Colors: false";
         }
-        if(option_wus_int == 1)
+         if(option_wus_int == 1)
         {
             option_wus.text = "Week Unlock System: true";
         }
         else if(option_wus_int == 0)
         {
-            option_hpc.text = "Week Unlock System: true";
+            option_wus.text = "Week Unlock System: false";
         }
         if(FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.ENTER)
         {
@@ -115,7 +115,7 @@ class OptionsBeta extends MusicBeatState
         if (FlxG.mouse.overlaps(option_wus) && FlxG.keys.justPressed.BACKSPACE)
         {
             option_wus_int--;
-            FlxG.save.data.option_wus_int = option_hpc_int;
+            FlxG.save.data.option_wus_int = option_wus_int;
         }
         if(option_gt_int > 1)
             option_gt_int = 1;
@@ -125,6 +125,8 @@ class OptionsBeta extends MusicBeatState
             option_hpc_int = 1;
         if(option_hpc_int < 0)
             option_hpc_int = 0;
+        if(option_wus_int > 1)
+            option_wus_int = 1;
         if(option_wus_int < 0)
             option_wus_int = 0;
         if(FlxG.keys.justPressed.ESCAPE)
