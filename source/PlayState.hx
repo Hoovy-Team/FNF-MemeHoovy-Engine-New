@@ -1,5 +1,6 @@
 package;
 
+import flixel.input.FlxAccelerometer;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -136,6 +137,8 @@ class PlayState extends MusicBeatState
 	public static var daPixelZoom:Float = 6;
 
 	var inCutscene:Bool = false;
+
+	private var isold:Bool = false;
 
 	#if desktop
 	// Discord RPC variables
@@ -1409,14 +1412,6 @@ class PlayState extends MusicBeatState
 		perfectMode = false;
 		#end
 
-		if (FlxG.keys.justPressed.NINE)
-		{
-			if (iconP1.animation.curAnim.name == 'bf-old')
-				iconP1.animation.play(SONG.player1);
-			else
-				iconP1.animation.play('bf-old');
-		}
-
 		switch (curStage)
 		{
 			case 'philly':
@@ -1447,6 +1442,17 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
 			}
 		}
+
+		if(isold = false){
+		iconP1.changeIcon('bf-old');
+		isold = true;
+		}
+
+		if(FlxG.keys.justReleased.NINE){
+		if(isold = true){
+		iconP1.changeIcon(SONG.player1);
+		}
+	}
 
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		if(songAccuracy > 100)
@@ -2431,8 +2437,8 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		FlxTween.tween(iconP1, {width: iconP1.width + 30}, 0.3, {ease: FlxEase.bounceInOut});
-		FlxTween.tween(iconP2, {width: iconP2.width + 30}, 0.3, {ease: FlxEase.bounceInOut});
+		FlxTween.tween(iconP1, {width: iconP1.width + 30}, 0.04, {ease: FlxEase.bounceInOut});
+		FlxTween.tween(iconP2, {width: iconP2.width + 30}, 0.04, {ease: FlxEase.bounceInOut});
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
