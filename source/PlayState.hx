@@ -650,6 +650,11 @@ class PlayState extends MusicBeatState
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
+		if(gfVersion == 'gf-tank'){
+		gf.x -= 84.15;
+		gf.y += 10.2;
+		}
+
 		dad = new Character(100, 100, SONG.player2);
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
@@ -1442,7 +1447,9 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == 'ugh' && curStep == 828){
 		dad.playAnim('Ugh', true);
 		}
-		//ugh
+		if(SONG.song.toLowerCase() == 'stress' && curStep == 736){
+		dad.playAnim('PrettyGood', true);
+		}
 
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		if(songAccuracy > 100)
