@@ -50,7 +50,7 @@ class TitleState extends MusicBeatState
 	{
 		PlayerSettings.init();
 
-		if (Assets.exists('assets/images/owo.png' == false)){
+		if (Assets.exists(Paths.image('owo')) == false){
 			throw new Exception("bruh");
 		}
 
