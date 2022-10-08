@@ -2431,8 +2431,8 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		FlxTween.tween(iconP1, {width: iconP1.width + 30}, 0.4, {ease: FlxEase.bounceInOut});
-		FlxTween.tween(iconP2, {width: iconP2.width + 30}, 0.4, {ease: FlxEase.bounceInOut});
+		FlxTween.tween(iconP1, {width: iconP1.width + 30}, 0.3, {ease: FlxEase.bounceInOut});
+		FlxTween.tween(iconP2, {width: iconP2.width + 30}, 0.3, {ease: FlxEase.bounceInOut});
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
