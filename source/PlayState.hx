@@ -1435,25 +1435,17 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		if(SONG.song.toLowerCase() == 'ugh' && curStep == 60){
-		dad.playAnim('Ugh', true);
-		
-		}
-		if(SONG.song.toLowerCase() == 'ugh' && curStep == 444){
-		dad.playAnim('Ugh', true);
-		FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
-		}
-		if(SONG.song.toLowerCase() == 'ugh' && curStep == 524){
-		dad.playAnim('Ugh', true);
-		FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
-		}
-		if(SONG.song.toLowerCase() == 'ugh' && curStep == 828){
-		dad.playAnim('Ugh', true);
-		FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
-		}
-		if(SONG.song.toLowerCase() == 'stress' && curStep == 736){
-		dad.playAnim('PrettyGood', true);
-		FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
+			switch(curStep){
+			case 60, 444, 524, 828:
+				if(SONG.song.toLowerCase() == 'ugh'){
+				dad.playAnim('Ugh', true);
+				FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+				}
+			case 736:
+				if(SONG.song.toLowerCase() == 'stress'){
+				dad.playAnim('PrettyGood', true);
+				FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
+			}
 		}
 
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
@@ -2439,8 +2431,8 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
-		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
+		FlxTween.tween(iconP1, {width: iconP1.width + 30}, 0.4, {ease: FlxEase.bounceInOut});
+		FlxTween.tween(iconP2, {width: iconP2.width + 30}, 0.4, {ease: FlxEase.bounceInOut});
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
