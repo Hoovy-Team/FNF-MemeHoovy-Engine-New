@@ -14,6 +14,8 @@ class Paths
 
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 
+	public static var localTrackedAssets:Array<String> = [];
+
 	static public function setCurrentLevel(name:String)
 	{
 		currentLevel = name.toLowerCase();
