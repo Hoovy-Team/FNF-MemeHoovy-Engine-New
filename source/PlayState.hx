@@ -112,6 +112,16 @@ class PlayState extends MusicBeatState
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
+	var tankBop1:FlxSprite;
+	var tankBop2:FlxSprite;
+	var tankBop3:FlxSprite;
+	var tankBop4:FlxSprite;
+	var tankBop5:FlxSprite;
+	var tankBop6:FlxSprite;
+	var smokeRight:FlxSprite;
+	var smokeLeft:FlxSprite;
+	var tower:FlxSprite;
+
 	var talking:Bool = true;
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
@@ -481,6 +491,115 @@ class PlayState extends MusicBeatState
 				bg.scale.set(6, 6);
 				add(bg);
 			}
+			case 'ugh' | 'guns' | 'stress':
+				curStage = 'tank';
+				defaultCamZoom = 0.9;
+				var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('tank/tankSky'));
+				sky.scrollFactor.set(0, 0);
+				sky.antialiasing = true;
+				sky.setGraphicSize(Std.int(sky.width * 1.5));
+				add(sky);
+
+				var clouds:FlxSprite = new FlxSprite(FlxG.random.int(-700, -100), FlxG.random.int(-20, 20)).loadGraphic(Paths.image('tank/tankClouds'));
+				clouds.scrollFactor.set(0.1, 0.1);
+				clouds.velocity.x = FlxG.random.float(5, 15);
+				clouds.antialiasing = true;
+				clouds.updateHitbox();
+				add(clouds);
+
+				var mountains:FlxSprite = new FlxSprite(-300,-20).loadGraphic(Paths.image('tank/tankMountains'));
+				mountains.scrollFactor.set(0.2, 0.2);
+				mountains.setGraphicSize(Std.int(1.2 * mountains.width));
+				mountains.updateHitbox();
+				mountains.antialiasing = true;
+				add(mountains);
+
+				var buildings:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('tank/tankBuildings'));
+				buildings.scrollFactor.set(0.3, 0.3);
+				buildings.setGraphicSize(Std.int(buildings.width * 1.1));
+				buildings.updateHitbox();
+				buildings.antialiasing = true;
+				add(buildings);
+
+				var ruins:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('tank/tankRuins'));
+				ruins.scrollFactor.set(0.35, 0.35);
+				ruins.setGraphicSize(Std.int(ruins.width * 1.1));
+				ruins.updateHitbox();
+				ruins.antialiasing = true;
+				add(ruins);
+
+				var smokeLeft:FlxSprite = new FlxSprite(-200,-100);
+				smokeLeft.frames = Paths.getSparrowAtlas('tank/smokeLeft');
+				smokeLeft.animation.addByPrefix('idle', 'SmokeBlurLeft ', 24, true);
+				smokeLeft.scrollFactor.set(0.4, 0.4);
+				smokeLeft.antialiasing = true;
+				smokeLeft.animation.play('idle');
+				add(smokeLeft);
+
+				var smokeRight:FlxSprite = new FlxSprite(1100,-100);
+				smokeRight.frames = Paths.getSparrowAtlas('tank/smokeRight');
+				smokeRight.animation.addByPrefix('idle', 'SmokeRight ', 24, true);
+				smokeRight.scrollFactor.set(0.4, 0.4);
+				smokeRight.antialiasing = true;
+				smokeRight.animation.play('idle');
+				add(smokeRight);
+
+				tower = new FlxSprite(100, 120);
+				tower.frames = Paths.getSparrowAtlas('tank/tankWatchtower');
+				tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
+				tower.antialiasing = true;
+				add(tower);
+
+				var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('tankGround'));
+				ground.scrollFactor.set();
+				ground.antialiasing = true;
+				ground.setGraphicSize(Std.int(ground.width * 1.15));
+				ground.scrollFactor.set(1, 1);
+
+				ground.updateHitbox();
+				add(ground);
+
+				tankBop1 = new FlxSprite(-500,650);
+				tankBop1.frames = Paths.getSparrowAtlas('tank/tank0');
+				tankBop1.animation.addByPrefix('bop', 'fg tankhead far right', 24);
+				tankBop1.scrollFactor.set(1.7, 1.5);
+				tankBop1.antialiasing = true;
+				add(tankBop1);
+
+				tankBop2 = new FlxSprite(-300,750);
+				tankBop2.frames = Paths.getSparrowAtlas('tank/tank1');
+				tankBop2.animation.addByPrefix('bop','fg tankhead 5', 24);
+				tankBop2.scrollFactor.set(2.0, 0.2);
+				tankBop2.antialiasing = true;
+				add(tankBop2);
+
+				tankBop3 = new FlxSprite(450,940);
+				tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
+				tankBop3.animation.addByPrefix('bop','foreground man 3', 24);
+				tankBop3.scrollFactor.set(1.5, 1.5);
+				tankBop3.antialiasing = true;
+				add(tankBop3);
+
+				tankBop4 = new FlxSprite(1300,1200);
+				tankBop4.frames = Paths.getSparrowAtlas('tank/tank3');
+				tankBop4.animation.addByPrefix('bop','fg tankhead 4', 24);
+				tankBop4.scrollFactor.set(3.5, 2.5);
+				tankBop4.antialiasing = true;
+				add(tankBop4);
+
+				tankBop5 = new FlxSprite(1300,900);
+				tankBop5.frames = Paths.getSparrowAtlas('tank/tank4');
+				tankBop5.animation.addByPrefix('bop','fg tankman bobbin 3', 24);
+				tankBop5.scrollFactor.set(1.5, 1.5);
+				tankBop5.antialiasing = true;
+				add(tankBop5);
+
+				tankBop6 = new FlxSprite(1620,700);
+				tankBop6.frames = Paths.getSparrowAtlas('tank/tank5');
+				tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24);
+				tankBop6.scrollFactor.set(1.5, 1.5);
+				tankBop6.antialiasing = true;
+				add(tankBop6);
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -670,7 +789,11 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
+		if(FlxG.save.data.option_hpc_int == 1){
 		healthBar.createFilledBar(dad.hpcolor, boyfriend.hpcolor);
+		}
+		else
+		healthBar.createFilledBar(0xFFFF0000, 0xFF00FF6A);
 		// healthBar
 		add(healthBar);
 
@@ -855,6 +978,7 @@ class PlayState extends MusicBeatState
 
 		talking = false;
 		startedCountdown = true;
+		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
 		var swagCounter:Int = 0;
@@ -2357,6 +2481,14 @@ class PlayState extends MusicBeatState
 					trainCooldown = FlxG.random.int(-4, 0);
 					trainStart();
 				}
+			case "tank":
+				tankBop1.animation.play('bop', true);
+				tankBop2.animation.play('bop', true);
+				tankBop3.animation.play('bop', true);
+				tankBop4.animation.play('bop', true);
+				tankBop5.animation.play('bop', true);
+				tankBop6.animation.play('bop', true);
+				tower.animation.play('idle', true);
 		}
 
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)

@@ -1,5 +1,6 @@
 package;
 
+import openfl.display.Window;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
