@@ -555,7 +555,6 @@ class PlayState extends MusicBeatState
 				ground.antialiasing = true;
 				ground.setGraphicSize(Std.int(ground.width * 1.15));
 				ground.scrollFactor.set(1, 1);
-
 				ground.updateHitbox();
 				add(ground);
 
@@ -977,6 +976,7 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 
 		talking = false;
+		Conductor.songPosition = 0;
 		startedCountdown = true;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
@@ -1429,6 +1429,20 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+
+		if(SONG.song.toLowerCase() == 'ugh' && curStep == 60){
+		dad.playAnim('Ugh', true);
+		}
+		if(SONG.song.toLowerCase() == 'ugh' && curStep == 444){
+		dad.playAnim('Ugh', true);
+		}
+		if(SONG.song.toLowerCase() == 'ugh' && curStep == 524){
+		dad.playAnim('Ugh', true);
+		}
+		if(SONG.song.toLowerCase() == 'ugh' && curStep == 828){
+		dad.playAnim('Ugh', true);
+		}
+		//ugh
 
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		if(songAccuracy > 100)
@@ -2495,5 +2509,6 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 	}
+
 	var curLight:Int = 0;
 }
