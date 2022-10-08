@@ -112,6 +112,7 @@ class PlayState extends MusicBeatState
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
+	var tankBopArray:Array<FlxSprite> = new Array<FlxSprite>();
 	var tankBop1:FlxSprite;
 	var tankBop2:FlxSprite;
 	var tankBop3:FlxSprite;
@@ -565,6 +566,7 @@ class PlayState extends MusicBeatState
 				tankBop1.scrollFactor.set(1.7, 1.5);
 				tankBop1.antialiasing = true;
 				add(tankBop1);
+				tankBopArray.push(tankBop1);
 
 				tankBop2 = new FlxSprite(-300,750);
 				tankBop2.frames = Paths.getSparrowAtlas('tank/tank1');
@@ -572,6 +574,7 @@ class PlayState extends MusicBeatState
 				tankBop2.scrollFactor.set(2.0, 0.2);
 				tankBop2.antialiasing = true;
 				add(tankBop2);
+				tankBopArray.push(tankBop2);
 
 				tankBop3 = new FlxSprite(450,940);
 				tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
@@ -579,6 +582,7 @@ class PlayState extends MusicBeatState
 				tankBop3.scrollFactor.set(1.5, 1.5);
 				tankBop3.antialiasing = true;
 				add(tankBop3);
+				tankBopArray.push(tankBop3);
 
 				tankBop4 = new FlxSprite(1300,1200);
 				tankBop4.frames = Paths.getSparrowAtlas('tank/tank3');
@@ -586,6 +590,7 @@ class PlayState extends MusicBeatState
 				tankBop4.scrollFactor.set(3.5, 2.5);
 				tankBop4.antialiasing = true;
 				add(tankBop4);
+				tankBopArray.push(tankBop4);
 
 				tankBop5 = new FlxSprite(1300,900);
 				tankBop5.frames = Paths.getSparrowAtlas('tank/tank4');
@@ -593,6 +598,7 @@ class PlayState extends MusicBeatState
 				tankBop5.scrollFactor.set(1.5, 1.5);
 				tankBop5.antialiasing = true;
 				add(tankBop5);
+				tankBopArray.push(tankBop5);
 
 				tankBop6 = new FlxSprite(1620,700);
 				tankBop6.frames = Paths.getSparrowAtlas('tank/tank5');
@@ -600,6 +606,7 @@ class PlayState extends MusicBeatState
 				tankBop6.scrollFactor.set(1.5, 1.5);
 				tankBop6.antialiasing = true;
 				add(tankBop6);
+				tankBopArray.push(tankBop6);
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -2477,12 +2484,15 @@ class PlayState extends MusicBeatState
 					trainStart();
 				}
 			case "tank":
-				tankBop1.animation.play('bop', true);
-				tankBop2.animation.play('bop', true);
-				tankBop3.animation.play('bop', true);
-				tankBop4.animation.play('bop', true);
-				tankBop5.animation.play('bop', true);
-				tankBop6.animation.play('bop', true);
+				// tankBop1.animation.play('bop', true);
+				// tankBop2.animation.play('bop', true);
+				// tankBop3.animation.play('bop', true);
+				// tankBop4.animation.play('bop', true);
+				// tankBop5.animation.play('bop', true);
+				// tankBop6.animation.play('bop', true);
+				tankBopArray.forEach(function() {
+					tankBopArray.animation.play('bop', true);
+				}	
 				tower.animation.play('idle', true);
 		}
 
