@@ -1437,18 +1437,23 @@ class PlayState extends MusicBeatState
 
 		if(SONG.song.toLowerCase() == 'ugh' && curStep == 60){
 		dad.playAnim('Ugh', true);
+		
 		}
 		if(SONG.song.toLowerCase() == 'ugh' && curStep == 444){
 		dad.playAnim('Ugh', true);
+		FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
 		}
 		if(SONG.song.toLowerCase() == 'ugh' && curStep == 524){
 		dad.playAnim('Ugh', true);
+		FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
 		}
 		if(SONG.song.toLowerCase() == 'ugh' && curStep == 828){
 		dad.playAnim('Ugh', true);
+		FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
 		}
 		if(SONG.song.toLowerCase() == 'stress' && curStep == 736){
 		dad.playAnim('PrettyGood', true);
+		FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
 		}
 
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
