@@ -73,9 +73,6 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		if(FlxG.save.data.option_wus_int == 1){
-		weekUnlocked = [true, false, false, false, false, false, false];
-		}
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 
