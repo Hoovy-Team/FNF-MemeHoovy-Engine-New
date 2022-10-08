@@ -112,7 +112,7 @@ class PlayState extends MusicBeatState
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
-	var tankBopArray:Array<FlxSprite> = new Array<FlxSprite>();
+	var tankBopArray:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 	var tankBop1:FlxSprite;
 	var tankBop2:FlxSprite;
 	var tankBop3:FlxSprite;
