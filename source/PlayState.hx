@@ -2496,7 +2496,7 @@ class PlayState extends MusicBeatState
 				// tankBop6.animation.play('bop', true);
 				tankBopArray.forEach(function() {
 					tankBopArray.animation.play('bop', true);
-				}	
+				});
 				tower.animation.play('idle', true);
 		}
 
