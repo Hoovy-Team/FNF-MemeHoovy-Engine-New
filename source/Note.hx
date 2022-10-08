@@ -171,6 +171,10 @@ class Note extends FlxSprite
 	{
 		super.update(elapsed);
 
+		// removes psych engine events since they're not supported
+		if (noteData == -1)
+			this.kill();
+
 		if (mustPress)
 		{
 			// The * 0.5 is so that it's easier to hit them too late, instead of too early

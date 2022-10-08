@@ -654,8 +654,8 @@ class PlayState extends MusicBeatState
 		gf.scrollFactor.set(0.95, 0.95);
 
 		if(gfVersion == 'gf-tank'){
-		gf.x -= 84.15;
-		gf.y += 10.2;
+		gf.x -= 84.11;
+		gf.y -= 80.2;
 		}
 
 		dad = new Character(100, 100, SONG.player2);
@@ -827,11 +827,6 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
-
-		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
 		if (isStoryMode)
@@ -2424,9 +2419,15 @@ class PlayState extends MusicBeatState
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
-		// HARDCODING FOR MILF ZOOMS!
+		// HARDCODING FOR ZOOMS!
 		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
 		{
+			FlxG.camera.zoom += 0.015;
+			camHUD.zoom += 0.03;
+		}
+
+		// I mean, it's a modded engine so why not?
+		if (curSong.toLowerCase() == 'blammed' && curBeat >= 128 && curBeat <= 192 && curBeat % 1 == 0 && camZooming){
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
