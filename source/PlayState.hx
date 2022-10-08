@@ -789,11 +789,7 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		if(FlxG.save.data.option_hpc_int == 1){
 		healthBar.createFilledBar(dad.hpcolor, boyfriend.hpcolor);
-		}
-		else
-		healthBar.createFilledBar(0xFFFF0000, 0xFF00FF6A);
 		// healthBar
 		add(healthBar);
 
@@ -978,7 +974,6 @@ class PlayState extends MusicBeatState
 
 		talking = false;
 		startedCountdown = true;
-		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
 		var swagCounter:Int = 0;

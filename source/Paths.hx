@@ -4,12 +4,17 @@ import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
+import flixel.graphics.FlxGraphic;
 
 class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 
 	static var currentLevel:String;
+
+	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
+
+	public static var localTrackedAssets:Array<String> = [];
 
 	static public function setCurrentLevel(name:String)
 	{
@@ -104,6 +109,27 @@ class Paths
 	{
 		return 'assets/fonts/$key';
 	}
+
+	// Credit: MAJigsaw77
+	public static function returnGraphic(key:String, ?cache:Bool = true):FlxGraphic
+	{
+		var path:String = 'assets/$key.png';
+		if (OpenFlAssets.exists(path, IMAGE))
+		{
+			if (!currentTrackedAssets.exists(path))
+			{
+				var graphic:FlxGraphic = FlxGraphic.fromBitmapData(OpenFlAssets.getBitmapData(path), false, path, cache);
+				graphic.persist = true;
+				currentTrackedAssets.set(path, graphic);
+			}
+
+			localTrackedAssets.push(path);
+			return currentTrackedAssets.get(path);
+		}
+
+		trace('oh no $key its returning null NOOOO');
+		return null;
+	}	
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)
 	{
