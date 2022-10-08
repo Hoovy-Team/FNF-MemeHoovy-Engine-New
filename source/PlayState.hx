@@ -2505,6 +2505,5 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 	}
-
 	var curLight:Int = 0;
 }
