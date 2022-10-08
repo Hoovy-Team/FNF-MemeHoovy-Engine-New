@@ -550,7 +550,7 @@ class PlayState extends MusicBeatState
 				tower.antialiasing = true;
 				add(tower);
 
-				var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('tankGround'));
+				var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('tank/tankGround'));
 				ground.scrollFactor.set();
 				ground.antialiasing = true;
 				ground.setGraphicSize(Std.int(ground.width * 1.15));
@@ -641,6 +641,8 @@ class PlayState extends MusicBeatState
 				gfVersion = 'gf-pixel';
 			case 'schoolEvil':
 				gfVersion = 'gf-pixel';
+			case 'tank':
+				gfVersion = 'gf-tank';
 		}
 
 		if (curStage == 'limo')
@@ -689,6 +691,8 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'tankman':
+				dad.y += 180;//ahh shi we dont want guns yet
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);

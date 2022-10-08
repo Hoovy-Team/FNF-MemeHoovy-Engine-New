@@ -555,7 +555,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 				hpcolor = 0xFF0F0F0F;
-			case 'bf-and-gf':	
+			case 'bf-holding-gf':	
 				frames = Paths.getSparrowAtlas('bfAndGF');
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
