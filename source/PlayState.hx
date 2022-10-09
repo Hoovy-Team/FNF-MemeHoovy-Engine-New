@@ -867,22 +867,6 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'thorns':
 					schoolIntro(doof);
-			#if windows
-				case 'ugh':
-					{
-						MP4Sprite.playVideo('ughCutscene');
-					}
-
-				case 'guns':
-					{
-						MP4Sprite.playVideo('gunsCutscene');
-					}
-
-				case 'stress':
-					{
-						MP4Sprite.playVideo('stressCutscene');
-					}
-				#end
 				default:
 					startCountdown();
 			}
