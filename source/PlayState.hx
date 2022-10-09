@@ -1447,10 +1447,11 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 		if(SONG.song.toLowerCase() == 'ugh'){				
-		switch(curStep){
-		case 60 | 444 | 524 | 828:
-			dad.playAnim('Ugh', true);
-			FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+			switch(curStep){
+			case 60 | 444 | 524 | 828:
+				dad.playAnim('Ugh', true);
+				FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+			}
 		}
 		if(SONG.song.toLowerCase() == 'stress'){
 			switch (curStep) {
