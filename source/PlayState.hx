@@ -146,6 +146,9 @@ class PlayState extends MusicBeatState
 	var detailsPausedText:String = "";
 	#end
 
+	private var totalPlayed:Int = 0;
+	private var totalNotesHit:Float = 0;
+
 	override public function create()
 	{
 		if (FlxG.sound.music != null)
@@ -880,6 +883,14 @@ class PlayState extends MusicBeatState
 		super.create();
 	}
 
+	function updateAccuracy(){
+		totalPlayed += 1;
+		songAccuracy = totalNotesHit / totalPlayed * 100;
+		if (songAccuracy >= 100){
+			songAccuracy = 100;
+		}
+	}
+
 	function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
@@ -1443,8 +1454,6 @@ class PlayState extends MusicBeatState
 		}
 				
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + '% | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
-		if(songAccuracy > 100)
-			songAccuracy = 100;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1859,7 +1868,7 @@ class PlayState extends MusicBeatState
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
-		var acc:Float = 0.10;
+		// var acc:Float = 0.10;
 
 		var daRating:String = "sick";
 
@@ -1867,23 +1876,28 @@ class PlayState extends MusicBeatState
 		{
 			daRating = 'shit';
 			score = 50;
-			acc = -0.20;
+			// acc = -0.20;
+			totalNotesHit += 1 - 0.9;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
 			daRating = 'bad';
 			score = 100;
-			acc = -0.5;
+			// acc = -0.5;
+			totalNotesHit += 1 - 0.75;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
 			daRating = 'good';
 			score = 200;
-			acc = 0.5;
+			// acc = 0.5;
+			totalNotesHit += 1 - 0.2;
 		}
+		if (daRating == 'sick')
+			totalNotesHit += 1;
 
 		songScore += score;
-		songAccuracy += acc;
+		// songAccuracy += acc;
 
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
@@ -2195,6 +2209,7 @@ class PlayState extends MusicBeatState
 				case 3:
 					boyfriend.playAnim('singRIGHTmiss', true);
 			}
+			updateAccuracy();
 		}
 	}
 
@@ -2249,6 +2264,8 @@ class PlayState extends MusicBeatState
 				popUpScore(note.strumTime);
 				combo += 1;
 			}
+			else
+				totalNotesHit += 1;
 
 			if (note.noteData >= 0)
 				health += 0.023;
@@ -2284,6 +2301,7 @@ class PlayState extends MusicBeatState
 				notes.remove(note, true);
 				note.destroy();
 			}
+			updateAccuracy();
 		}
 	}
 
