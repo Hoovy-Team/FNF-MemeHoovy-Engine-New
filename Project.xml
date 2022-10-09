@@ -110,8 +110,6 @@
 	<haxelib name="polymod"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 
-	<haxedef name="HXCPP_ARM64" />
-
 	<haxedef name="no-deprecation-warnings" />
 
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
@@ -137,9 +135,6 @@
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
 	
-	<icon path="art/icon16.png" size='16'/>
-	<icon path="art/icon32.png" size='32'/>
-	<icon path="art/icon64.png" size='64'/>
-	<icon path="art/iconOG.png" />
+	<icon path="icon.png" />
 	
 </project>

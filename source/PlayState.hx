@@ -74,7 +74,7 @@ class PlayState extends MusicBeatState
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
 	private var playerStrums:FlxTypedGroup<FlxSprite>;
 
-	private var camZooming:Bool = true;
+	private var camZooming:Bool = false;
 	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;
@@ -126,6 +126,8 @@ class PlayState extends MusicBeatState
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
 	var songAccuracy:Float = 100;
+	var songRateingacc:String = 'Great';
+	var songRateingmiss:String = 'FC';
 	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
@@ -867,22 +869,6 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'thorns':
 					schoolIntro(doof);
-			#if windows
-				case 'ugh':
-					{
-						MP4Sprite.playVideo('ughCutscene');
-					}
-
-				case 'guns':
-					{
-						MP4Sprite.playVideo('gunsCutscene');
-					}
-
-				case 'stress':
-					{
-						MP4Sprite.playVideo('stressCutscene');
-					}
-				#end
 				default:
 					startCountdown();
 			}
@@ -1475,8 +1461,23 @@ class PlayState extends MusicBeatState
 			}
 		}
 				
-		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Rateings:' +	songRateingacc + '(' + songRateingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		//rate code
+		if(songMisses == 0)
+			songRateingmiss = 'FC';
+		if(songMisses == 0 && songAccuracy > 80)
+			songRateingmiss = 'GFC';
+		if(songMisses > 0 && songMisses < 5)
+			songRateingmiss = 'PG';
+		if(songMisses < 5 && songMisses > 10)
+			songRateingmiss = 'OOF';
+		if(songMisses > 20)
+			songRateingmiss = 'Clear';
 
+		if(songAccuracy < 80)
+			songRateingacc = 'GREAT!';
+		if(songAccuracy < 99)
+			songRateingacc = 'GOOD';
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
