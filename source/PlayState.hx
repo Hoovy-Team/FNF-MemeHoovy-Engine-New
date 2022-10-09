@@ -1408,6 +1408,13 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 
+	function truncateFloat(number:Float, precision:Int):Float {
+		var num = number;
+		num = num * Math.pow(10, precision);
+		num = Math.round( num ) / Math.pow(10, precision);
+		return num;
+	}
+
 	override public function update(elapsed:Float)
 	{
 		#if !debug
@@ -1439,21 +1446,21 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-				
+		if(SONG.song.toLowerCase() == 'ugh'){				
 		switch(curStep){
-			case 60, 444, 524, 828:
-				if(SONG.song.toLowerCase() == 'ugh'){
-				dad.playAnim('Ugh', true);
-				FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
-				}
+		case 60 | 444 | 524 | 828:
+			dad.playAnim('Ugh', true);
+			FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+		}
+		if(SONG.song.toLowerCase() == 'stress'){
+			switch (curStep) {
 			case 736:
-				if(SONG.song.toLowerCase() == 'stress'){
 				dad.playAnim('PrettyGood', true);
 				FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
 			}
 		}
 				
-		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + '% | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
