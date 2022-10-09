@@ -26,7 +26,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import openfl.Assets;
+import openfl.utils.Assets;
+import flash.system.System;
+import haxe.Exception;
 
 using StringTools;
 
@@ -47,6 +49,10 @@ class TitleState extends MusicBeatState
 	override public function create():Void
 	{
 		PlayerSettings.init();
+
+		if (Assets.exists(Paths.image('owo')) == false){
+			throw new Exception("bruh");
+		}
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
@@ -314,7 +320,7 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 1:
-				createCoolText(['MemeHoovy']);
+				createCoolText(['MemeHoovy', 'Brandon']);
 			case 3:
 				addMoreText('presents');
 			case 4:
