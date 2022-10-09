@@ -1,24 +1,31 @@
 package;
 
+import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;
 import openfl.events.Event;
 import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import vlc.VlcBitmap;
 
 // THIS IS FOR TESTING
 // DONT STEAL MY CODE >:(
+// brandon you made a big oopsie here :33333
+// no i didnt leathet i credited him twice when i published it and in credits state
 class MP4Handler
 {
 	public static var video:Video;
 	public static var netStream:NetStream;
 	public static var finishCallback:FlxState;
 	public var sprite:FlxSprite;
+	var SkipTxt:FlxText;
 	#if desktop
 	public static var vlcBitmap:VlcBitmap;
 	#end
+
 
 	public function new()
 	{
@@ -131,9 +138,7 @@ class MP4Handler
 		trace("Big, Big Chungus, Big Chungus!");
 
 		if (finishCallback != null)
-		{
 			LoadingState.loadAndSwitchState(finishCallback);
-		}
 	}
 
 	function onVLCError()
@@ -147,10 +152,23 @@ class MP4Handler
 	function update(e:Event)
 	{
 		vlcBitmap.volume = FlxG.sound.volume; // shitty volume fix
+
+		if (FlxG.keys.justPressed.SPACE)
+				{
+				vlcBitmap.stop();
+				
+				vlcBitmap.dispose();
+				
+				if (FlxG.game.contains(vlcBitmap))
+				{
+					FlxG.game.removeChild(vlcBitmap);
+				}
+				}
 	}
 	#end
 
 	/////////////////////////////////////////////////////////////////////////////////////
+
 
 	function client_onMetaData(path)
 	{
