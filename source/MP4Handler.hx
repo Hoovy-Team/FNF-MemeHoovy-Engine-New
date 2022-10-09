@@ -1,99 +1,53 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxState;
 import openfl.events.Event;
-import openfl.media.Video;
-import openfl.net.NetConnection;
-import openfl.net.NetStream;
-import vlc.VlcBitmap;
+import flixel.FlxG;
 
-// THIS IS FOR TESTING
-// DONT STEAL MY CODE >:(
-class MP4Handler
+/**
+ * Play a video using cpp.
+ * Use bitmap to connect to a graphic or use `MP4Sprite`.
+ */
+class MP4Handler extends vlc.VlcBitmap
 {
-	public static var video:Video;
-	public static var netStream:NetStream;
-	public static var finishCallback:FlxState;
-	public var sprite:FlxSprite;
-	#if desktop
-	public static var vlcBitmap:VlcBitmap;
-	#end
+	public var readyCallback:Void->Void;
+	public var finishCallback:Void->Void;
 
-	public function new()
+	var pauseMusic:Bool;
+
+	public function new(width:Float = 320, height:Float = 240, autoScale:Bool = true)
 	{
-		FlxG.autoPause = false;
+		super(width, height, autoScale);
 
-		if (FlxG.sound.music != null)
-		{
-			FlxG.sound.music.stop();
-		}
-	}
+		onVideoReady = onVLCVideoReady;
+		onComplete = finishVideo;
+		onError = onVLCError;
 
-	public function playMP4(path:String, callback:FlxState, ?outputTo:FlxSprite = null, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
-	{
-		#if html5
-		FlxG.autoPause = false;
-
-		if (FlxG.sound.music != null)
-		{
-			FlxG.sound.music.stop();
-		}
-
-		finishCallback = callback;
-
-		video = new Video();
-		video.x = 0;
-		video.y = 0;
-
-		FlxG.addChildBelowMouse(video);
-
-		var nc = new NetConnection();
-		nc.connect(null);
-
-		netStream = new NetStream(nc);
-		netStream.client = {onMetaData: client_onMetaData};
-
-		nc.addEventListener("netStatus", netConnection_onNetStatus);
-
-		netStream.play(path);
-		#else
-		finishCallback = callback;
-
-		vlcBitmap = new VlcBitmap();
-		vlcBitmap.set_height(FlxG.stage.stageHeight);
-		vlcBitmap.set_width(FlxG.stage.stageHeight * (16 / 9));
-
-		trace("Setting width to " + FlxG.stage.stageHeight * (16 / 9));
-		trace("Setting height to " + FlxG.stage.stageHeight);
-
-		vlcBitmap.onVideoReady = onVLCVideoReady;
-		vlcBitmap.onComplete = onVLCComplete;
-		vlcBitmap.onError = onVLCError;
+		FlxG.addChildBelowMouse(this);
 
 		FlxG.stage.addEventListener(Event.ENTER_FRAME, update);
 
-		if (repeat)
-			vlcBitmap.repeat = -1;
-		else
-			vlcBitmap.repeat = 0;
-
-		vlcBitmap.inWindow = isWindow;
-		vlcBitmap.fullscreen = isFullscreen;
-
-		FlxG.addChildBelowMouse(vlcBitmap);
-		vlcBitmap.play(checkFile(path));
-		if (outputTo != null)
+		FlxG.signals.focusGained.add(function()
 		{
-			// lol this is bad kek
-			vlcBitmap.alpha = 0;
-
-			sprite = outputTo;
-		}
-		#end
+			resume();
+		});
+		FlxG.signals.focusLost.add(function()
+		{
+			pause();
+		});
 	}
 
-	#if desktop
+	function update(e:Event)
+	{
+		if ((FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE) && isPlaying)
+			finishVideo();
+
+		if (FlxG.sound.muted || FlxG.sound.volume <= 0)
+			volume = 0;
+		else
+			volume = FlxG.sound.volume + 0.4;
+	}
+
+	#if sys
 	function checkFile(fileName:String):String
 	{
 		var pDir = "";
@@ -106,96 +60,59 @@ class MP4Handler
 
 		return pDir + fileName;
 	}
-
-	/////////////////////////////////////////////////////////////////////////////////////
+	#end
 
 	function onVLCVideoReady()
 	{
-		trace("video loaded!");
-		if (sprite != null)
-			sprite.loadGraphic(vlcBitmap.bitmapData);	
-	}
+		trace("Video loaded!");
 
-	public function onVLCComplete()
-	{
-		vlcBitmap.stop();
-
-		// Clean player, just in case!
-		vlcBitmap.dispose();
-
-		if (FlxG.game.contains(vlcBitmap))
-		{
-			FlxG.game.removeChild(vlcBitmap);
-		}
-
-		trace("Big, Big Chungus, Big Chungus!");
-
-		if (finishCallback != null)
-		{
-			LoadingState.loadAndSwitchState(finishCallback);
-		}
+		if (readyCallback != null)
+			readyCallback();
 	}
 
 	function onVLCError()
 	{
-		if (finishCallback != null)
+		// TODO: Catch the error
+		throw "VLC caught an error!";
+	}
+
+	public function finishVideo()
+	{
+		if (FlxG.sound.music != null && pauseMusic)
+			FlxG.sound.music.resume();
+
+		FlxG.stage.removeEventListener(Event.ENTER_FRAME, update);
+
+		dispose();
+
+		if (FlxG.game.contains(this))
 		{
-			LoadingState.loadAndSwitchState(finishCallback);
+			FlxG.game.removeChild(this);
+
+			if (finishCallback != null)
+				finishCallback();
 		}
 	}
 
-	function update(e:Event)
-	{
-		vlcBitmap.volume = FlxG.sound.volume; // shitty volume fix
-	}
-	#end
-
-	/////////////////////////////////////////////////////////////////////////////////////
-
-	function client_onMetaData(path)
-	{
-		video.attachNetStream(netStream);
-
-		video.width = FlxG.width;
-		video.height = FlxG.height;
-	}
-
-	function netConnection_onNetStatus(path)
-	{
-		if (path.info.code == "NetStream.Play.Complete")
-		{
-			finishVideo();
-		}
-	}
-
-	function finishVideo()
-	{
-		netStream.dispose();
-
-		if (FlxG.game.contains(video))
-		{
-			FlxG.game.removeChild(video);
-		}
-
-		if (finishCallback != null)
-		{
-			LoadingState.loadAndSwitchState(finishCallback);
-		}
-		else
-			LoadingState.loadAndSwitchState(new MainMenuState());
-	}
-
-	// old html5 player
-	/*
-		var nc:NetConnection = new NetConnection();
-		nc.connect(null);
-		var ns:NetStream = new NetStream(nc);
-		var myVideo:Video = new Video();
-		myVideo.width = FlxG.width;
-		myVideo.height = FlxG.height;
-		myVideo.attachNetStream(ns);
-		ns.play(path);
-		return myVideo;
-		ns.close();
+	/**
+	 * Native video support for Flixel & OpenFL
+	 * @param path Example: `your/video/here.mp4`
+	 * @param repeat Repeat the video.
+	 * @param pauseMusic Pause music until done video.
 	 */
+	public function playVideo(path:String, ?repeat:Bool = false, pauseMusic:Bool = false)
+	{
+		this.pauseMusic = pauseMusic;
+
+		if (FlxG.sound.music != null && pauseMusic)
+			FlxG.sound.music.pause();
+
+		#if sys
+		play(checkFile(path));
+
+		this.repeat = repeat ? -1 : 0;
+		#else
+		throw "Doesn't support sys";
+		#end
+	}
 }

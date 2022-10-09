@@ -550,7 +550,7 @@ class PlayState extends MusicBeatState
 				tower.antialiasing = true;
 				add(tower);
 
-				var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('tankGround'));
+				var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('tank/tankGround'));
 				ground.scrollFactor.set();
 				ground.antialiasing = true;
 				ground.setGraphicSize(Std.int(ground.width * 1.15));
@@ -641,7 +641,13 @@ class PlayState extends MusicBeatState
 				gfVersion = 'gf-pixel';
 			case 'schoolEvil':
 				gfVersion = 'gf-pixel';
+			case 'tank':
+				gfVersion = 'gf-tank';
 		}
+			if(gfVersion == 'gf-tank'){
+			gf.x -= 84.15;
+			gf.y += 10.2;
+			}
 
 		if (curStage == 'limo')
 			gfVersion = 'gf-car';
@@ -689,6 +695,8 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'tankman':
+				dad.y + 180;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -857,6 +865,22 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'thorns':
 					schoolIntro(doof);
+			#if windows
+				case 'ugh':
+					{
+						MP4Sprite.playVideo('ughCutscene');
+					}
+
+				case 'guns':
+					{
+						MP4Sprite.playVideo('gunsCutscene');
+					}
+
+				case 'stress':
+					{
+						MP4Sprite.playVideo('stressCutscene');
+					}
+				#end
 				default:
 					startCountdown();
 			}
@@ -899,7 +923,6 @@ class PlayState extends MusicBeatState
 				add(red);
 			}
 		}
-
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
 		{
 			black.alpha -= 0.15;
@@ -968,6 +991,7 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 
 		talking = false;
+		Conductor.songPosition = 0;
 		startedCountdown = true;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
@@ -1421,7 +1445,20 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		switch(curStep){
+			case 60, 444, 524, 828:
+				if(SONG.song.toLowerCase() == 'ugh'){
+				dad.playAnim('Ugh', true);
+				FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+				}
+			case 736:
+				if(SONG.song.toLowerCase() == 'stress'){
+				dad.playAnim('PrettyGood', true);
+				FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
+			}
+		}
+
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + FlxMath.roundDecimal(songAccuracy, 4) + '% | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		if(songAccuracy > 100)
 			songAccuracy = 100;
 

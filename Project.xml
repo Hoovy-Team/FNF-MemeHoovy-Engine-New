@@ -110,6 +110,8 @@
 	<haxelib name="polymod"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 
+	<haxedef name="HXCPP_ARM64" />
+
 	<haxedef name="no-deprecation-warnings" />
 
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
