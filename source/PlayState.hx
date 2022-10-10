@@ -42,6 +42,11 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 
+#if mobile
+import mobile.ControlsMobile;
+import mobile.Hitbox;
+#end
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -150,6 +155,10 @@ class PlayState extends MusicBeatState
 
 	private var totalPlayed:Int = 0;
 	private var totalNotesHit:Float = 0;
+
+	#if mobile
+	var mcontrols:Mobilecontrols;
+	#end
 
 	override public function create()
 	{
@@ -805,12 +814,6 @@ class PlayState extends MusicBeatState
 		// healthBar
 		add(healthBar);
 
-		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.screenCenter(X);
-		scoreTxt.scrollFactor.set();
-		add(scoreTxt);
-
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
@@ -819,14 +822,38 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
+		scoreTxt = new FlxText(487, healthBarBG.y + 30, 0, "", 20);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.scrollFactor.set();
+		add(scoreTxt);
+
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
+		scoreTxt.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
-		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+
+		#if mobile
+		mcontrols = new Mobilecontrols();
+
+		controls.setHitBoxNOTES(mcontrols._hitbox);
+
+		trackedinputsNOTES = controls.trackedinputsNOTES;
+		controls.trackedinputsNOTES = [];
+
+		mcontrols.cameras = [CamMobile];
+
+		mcontrols.visible = false;
+	
+		var CamMobile = new FlxCamera();
+		FlxG.cameras.add(CamMobile);
+		CamMobile.bgColor.alpha = 0;
+		
+		add(mcontrols);
+	#end
 
 		startingSong = true;
 

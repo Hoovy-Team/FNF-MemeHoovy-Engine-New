@@ -78,6 +78,8 @@ class TitleState extends MusicBeatState
 				StoryMenuState.weekUnlocked[0] = true;
 		}
 
+		Polymod_Coolness.reloadMods();
+
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();

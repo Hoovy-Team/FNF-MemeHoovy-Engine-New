@@ -11,6 +11,11 @@ import flixel.input.gamepad.FlxGamepadButton;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 
+#if mobile
+import mobile.Hitbox;
+import mobile.ControlsMobile;
+#end
+
 #if (haxe >= "4.0.0")
 enum abstract Action(String) to String from String
 {
@@ -739,4 +744,22 @@ class Controls extends FlxActionSet
 	{
 		return input.device == GAMEPAD && (deviceID == FlxInputDeviceID.ALL || input.deviceID == deviceID);
 	}
+
+	#if mobile
+	public function setHitBoxNOTES(hitbox:Hitbox) 
+	{
+		inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonuNOTES(action, hitbox.buttonUp, state));
+		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonuNOTES(action, hitbox.buttonDown, state));
+		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonuNOTES(action, hitbox.buttonLeft, state));
+		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonuNOTES(action, hitbox.buttonRight, state));	
+	}
+
+	public function setHitBoxUI(hitbox:Hitbox) 
+	{
+		inline forEachBound(Control.UI_UP, (action, state) -> addbuttonuUI(action, hitbox.buttonUp, state));
+		inline forEachBound(Control.UI_DOWN, (action, state) -> addbuttonuUI(action, hitbox.buttonDown, state));
+		inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonuUI(action, hitbox.buttonLeft, state));
+		inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonuUI(action, hitbox.buttonRight, state));	
+	}
+	#end
 }
