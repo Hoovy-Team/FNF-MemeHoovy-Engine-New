@@ -1515,7 +1515,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 				
-		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Rateings:' +	songRateingacc + '(' + songRateingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Ratings:' +	songRateingacc + '(' + songRateingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		//rate code
 		if(songMisses == 0)
 			songRateingmiss = 'FC';
