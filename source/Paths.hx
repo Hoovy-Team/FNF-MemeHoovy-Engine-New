@@ -115,6 +115,11 @@ class Paths
 		return 'assets/fonts/$key';
 	}
 
+	inline static public function hscript(key:String, ?library:String)
+	{
+		return getPath('data/$key.hx', TEXT, library);
+	}
+
 	// Credit: MAJigsaw77
 	public static function returnGraphic(key:String, ?cache:Bool = true):FlxGraphic
 	{
