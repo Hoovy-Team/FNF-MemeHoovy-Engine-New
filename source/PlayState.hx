@@ -41,6 +41,7 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import openfl.utils.Assets;
 
 #if mobile
 import mobile.ControlsMobile;
@@ -2642,8 +2643,8 @@ class PlayState extends MusicBeatState
 
 		var hxdata:String = "";
 
-		if (FileSystem.exists(path))
-			hxdata = File.getContent(path);
+		if (Assets.exists(path))
+			hxdata = Assets.getText(path);
 
 		if (hxdata != "")
 		{
@@ -2696,17 +2697,14 @@ class PlayState extends MusicBeatState
 			script.setVariable("FlxSprite", FlxSprite);
 			script.setVariable("Math", Math);
 			script.setVariable("FlxG", FlxG);
-			script.setVariable("ClientPrefs", ClientPrefs);
 			script.setVariable("FlxTimer", FlxTimer);
 			script.setVariable("Main", Main);
-			script.setVariable("Event", Event);
 			script.setVariable("Conductor", Conductor);
 			script.setVariable("Std", Std);
 			script.setVariable("FlxTextBorderStyle", FlxTextBorderStyle);
 			script.setVariable("Paths", Paths);
 			script.setVariable("CENTER", FlxTextAlign.CENTER);
 			script.setVariable("FlxTextFormat", FlxTextFormat);
-			script.setVariable("InputFormatter", InputFormatter);
 			script.setVariable("FlxTextFormatMarkerPair", FlxTextFormatMarkerPair);
 			script.setVariable("Type", Type);
 

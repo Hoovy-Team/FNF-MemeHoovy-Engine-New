@@ -1,6 +1,7 @@
 package;
 
 import lime.utils.Assets;
+import flixel.FlxG;
 
 using StringTools;
 

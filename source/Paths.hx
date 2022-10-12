@@ -120,6 +120,11 @@ class Paths
 		return getPath('data/$key.hx', TEXT, library);
 	}
 
+	inline static public function formatToSongPath(path:String)
+	{
+		return path.toLowerCase().replace(' ', '-');
+	}
+
 	// Credit: MAJigsaw77
 	public static function returnGraphic(key:String, ?cache:Bool = true):FlxGraphic
 	{
