@@ -123,12 +123,6 @@ class DialogueBox extends FlxSpriteGroup
 		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
 		add(handSelect);
 
-
-		if (!talkingRight)
-		{
-			// box.flipX = true;
-		}
-
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
 		dropText.color = 0xFFD89494;
@@ -141,8 +135,6 @@ class DialogueBox extends FlxSpriteGroup
 		add(swagDialogue);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
-		// dialogue.x = 90;
-		// add(dialogue);
 	}
 
 	var dialogueOpened:Bool = false;

@@ -127,7 +127,6 @@ class PlayState extends MusicBeatState
 	var smokeLeft:FlxSprite;
 	var tower:FlxSprite;
 
-	var talking:Bool = true;
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
 	var songAccuracy:Float = 100;
@@ -160,12 +159,18 @@ class PlayState extends MusicBeatState
 	var mcontrols:Mobilecontrols;
 	#end
 
+	#if FEATURE_HSCRIPT
+	// Hscript
+	public var script:Script;
+	#end
+
+	public static var instance:PlayState;
+
 	override public function create()
 	{
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
-		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -183,6 +188,8 @@ class PlayState extends MusicBeatState
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
+
+		instance = this;
 
 		switch (SONG.song.toLowerCase())
 		{
@@ -775,11 +782,11 @@ class PlayState extends MusicBeatState
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
-		// startCountdown();
-
 		generateSong(SONG.song);
 
-		// add(strumLine);
+		#if FEATURE_HSCRIPT
+		startScript();
+		#end
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 
@@ -794,7 +801,6 @@ class PlayState extends MusicBeatState
 		add(camFollow);
 
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
-		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
@@ -910,6 +916,13 @@ class PlayState extends MusicBeatState
 		}
 
 		super.create();
+
+		#if FEATURE_HSCRIPT
+		if (script != null)
+		{
+			script.executeFunc("onCreate");
+		}
+		#end
 	}
 
 	function updateAccuracy(){
@@ -1013,7 +1026,13 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
-		talking = false;
+		#if FEATURE_HSCRIPT
+		if (script != null)
+		{
+			script.executeFunc("onStartCountdown");
+		}
+		#end
+
 		Conductor.songPosition = 0;
 		startedCountdown = true;
 		Conductor.songPosition -= Conductor.crochet * 5;
@@ -1126,6 +1145,13 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.onComplete = endSong;
 		vocals.play();
 
+		#if FEATURE_HSCRIPT
+		if (script != null)
+		{
+			script.executeFunc("onSongStart");
+		}
+		#end
+
 		#if desktop
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
@@ -1139,8 +1165,6 @@ class PlayState extends MusicBeatState
 
 	private function generateSong(dataPath:String):Void
 	{
-		// FlxG.log.add(ChartParser.parse());
-
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm);
 
@@ -1823,6 +1847,13 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
 		#end
+
+		#if FEATURE_HSCRIPT
+		if (script != null)
+		{
+			script.executeFunc("onUpdate");
+		}
+		#end
 	}
 
 	function endSong():Void
@@ -2355,6 +2386,21 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	override public function destroy(){
+		#if FEATURE_HSCRIPT
+		if (script != null)
+		{
+			script.executeFunc("destroy");
+
+			script.destroy();
+		}
+		#end
+
+		instance = null;
+
+		super.destroy();
+	}
+
 	var fastCarCanDrive:Bool = true;
 
 	function resetFastCar():Void
@@ -2451,6 +2497,14 @@ class PlayState extends MusicBeatState
 		{
 			resyncVocals();
 		}
+
+		#if FEATURE_HSCRIPT
+		if (script != null)
+		{
+			script.setVariable("curStep", curStep);
+			script.executeFunc("onStepHit");
+		}
+		#end
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -2576,4 +2630,85 @@ class PlayState extends MusicBeatState
 	}
 
 	var curLight:Int = 0;
+
+	public function startScript()
+	{
+		#if FEATURE_HSCRIPT
+		var formattedFolder:String = Paths.formatToSongPath(SONG.song);
+
+		var path:String = Paths.hscript(formattedFolder + '/script');
+
+		var hxdata:String = "";
+
+		if (FileSystem.exists(path))
+			hxdata = File.getContent(path);
+
+		if (hxdata != "")
+		{
+			script = new Script();
+
+			script.setVariable("onSongStart", function()
+			{
+			});
+
+			script.setVariable("destroy", function()
+			{
+			});
+
+			script.setVariable("onCreate", function()
+			{
+			});
+
+			script.setVariable("onStartCountdown", function()
+			{
+			});
+
+			script.setVariable("onStepHit", function()
+			{
+			});
+
+			script.setVariable("onUpdate", function()
+			{
+			});
+
+			script.setVariable("import", function(lib:String, ?as:Null<String>) // Does this even work?
+			{
+				if (lib != null && Type.resolveClass(lib) != null)
+				{
+					script.setVariable(as != null ? as : lib, Type.resolveClass(lib));
+				}
+			});
+
+			script.setVariable("fromRGB", function(Red:Int, Green:Int, Blue:Int, Alpha:Int = 255)
+			{
+				return FlxColor.fromRGB(Red, Green, Blue, Alpha);
+			});
+
+			script.setVariable("curStep", curStep);
+			script.setVariable("bpm", SONG.bpm);
+
+			// PRESET CLASSES
+			script.setVariable("PlayState", instance);
+			script.setVariable("FlxTween", FlxTween);
+			script.setVariable("FlxEase", FlxEase);
+			script.setVariable("FlxSprite", FlxSprite);
+			script.setVariable("Math", Math);
+			script.setVariable("FlxG", FlxG);
+			script.setVariable("ClientPrefs", ClientPrefs);
+			script.setVariable("FlxTimer", FlxTimer);
+			script.setVariable("Main", Main);
+			script.setVariable("Event", Event);
+			script.setVariable("Conductor", Conductor);
+			script.setVariable("Std", Std);
+			script.setVariable("FlxTextBorderStyle", FlxTextBorderStyle);
+			script.setVariable("Paths", Paths);
+			script.setVariable("CENTER", FlxTextAlign.CENTER);
+			script.setVariable("FlxTextFormat", FlxTextFormat);
+			script.setVariable("InputFormatter", InputFormatter);
+			script.setVariable("FlxTextFormatMarkerPair", FlxTextFormatMarkerPair);
+
+			script.runScript(hxdata);
+		}
+		#end
+	}
 }

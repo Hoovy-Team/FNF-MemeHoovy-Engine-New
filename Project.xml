@@ -129,7 +129,18 @@
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 
 	<!-- Enable HScript fine error reporting at parsing time -->
+	<!-- Fixes polymods stupid bullshit -->
 	<haxedef name="hscriptPos" if="hscript" />
+
+	<!-- Defines if hscript are enabled. Dosen't work in browser -->
+	<define name="FEATURE_HSCRIPT" if="desktop" />
+
+	<!-- This is from Hope Engine, go check out the engine its underrated as hell. -->
+	<error value="Seems like you're using Haxe ${haxe}, please update!" if="${haxe == 4.1.5}" />
+	<error value="haxe ${haxe} ain't gonna do it come on" if="${haxe &lt; 4.1.5}" />
+
+	<!-- HTML5 hasn't been tested. -->
+	<warn value="HTML5 builds haven't been tested and might not work, use at your own risk." if="web" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
