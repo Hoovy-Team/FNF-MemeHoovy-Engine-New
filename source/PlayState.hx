@@ -657,7 +657,7 @@ class PlayState extends MusicBeatState
 			case 'tank':
 				gfVersion = 'gf-tank';
 		}
-			if(gfVersion == 'gf-tank'){
+			if(gfVersion == 'gf-tank' && gf != null){
 			gf.x -= 84.15;
 			gf.y += 10.2;
 			}
