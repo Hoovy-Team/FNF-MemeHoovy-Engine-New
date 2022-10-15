@@ -2239,7 +2239,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function badNoteCheck()
+	function badNoteHit()
 	{
 		// just double pasting this shit cuz fuk u
 		// REDO THIS SYSTEM!
@@ -2248,8 +2248,7 @@ class PlayState extends MusicBeatState
 		var rightP = controls.RIGHT_P;
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
-		
-		
+
 		if(FlxG.save.data.option_gt_int == 0){
 			if (leftP)
 				noteMiss(0);
@@ -2268,16 +2267,6 @@ class PlayState extends MusicBeatState
 			songScore -= 20;
 			combo = 0;
 			songAccuracy -= 0.20;
-		}
-	}
-
-	function noteCheck(keyP:Bool, note:Note):Void
-	{
-		if (keyP)
-			goodNoteHit(note);
-		else
-		{
-			badNoteCheck();
 		}
 	}
 
