@@ -12,7 +12,7 @@ No, it's not dead, I've just been busy.
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
 
-[504brandon](https://github.com/504brandon) - Assistant Programmer.
+[504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Nike engine lol.)
 
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
