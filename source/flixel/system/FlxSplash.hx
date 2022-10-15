@@ -115,7 +115,7 @@ class FlxSplash extends FlxState
 	{
 		_functions[_curPart]();
 		_text.textColor = _colors[_curPart];
-		_text.text = "HaxeFlixel";
+		_text.text = "MemeHoovy Engine";
 		_curPart++;
 
 		if (_curPart == 5)
