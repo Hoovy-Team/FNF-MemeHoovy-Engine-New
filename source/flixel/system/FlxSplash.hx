@@ -72,7 +72,7 @@ class FlxSplash extends FlxState
 		var dtf = new TextFormat(FlxAssets.FONT_DEFAULT, 16, 0xffffff);
 		dtf.align = TextFormatAlign.CENTER;
 		_text.defaultTextFormat = dtf;
-		_text.text = "HaxeFlixel";
+		_text.text = "MemeHoovy Engine";
 		FlxG.stage.addChild(_text);
 
 		onResize(stageWidth, stageHeight);
