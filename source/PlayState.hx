@@ -2244,10 +2244,10 @@ class PlayState extends MusicBeatState
 		// just double pasting this shit cuz fuk u
 		// REDO THIS SYSTEM!
 		// legonds say he will never do it
-		var upP = controls.UP_P;
-		var rightP = controls.RIGHT_P;
-		var downP = controls.DOWN_P;
-		var leftP = controls.LEFT_P;
+		var upP = controls.UI_UP_P;
+		var rightP = controls.UI_RIGHT_P;
+		var downP = controls.UI_DOWN_P;
+		var leftP = controls.UI_LEFT_P;
 
 		if(FlxG.save.data.option_gt_int == 0){
 			if (leftP)

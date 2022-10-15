@@ -42,14 +42,6 @@ class FreeplayState extends MusicBeatState
 			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
 		}
 
-		/* 
-			if (FlxG.sound.music != null)
-			{
-				if (!FlxG.sound.music.playing)
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			}
-		 */
-
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -138,23 +130,6 @@ class FreeplayState extends MusicBeatState
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-
-			FlxG.stage.addChild(texFel);
-
-			// scoreText.textField.htmlText = md;
-
-			trace(md);
-		 */
-
 		super.create();
 	}
 
@@ -194,8 +169,8 @@ class FreeplayState extends MusicBeatState
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
+		var upP = controls.UI_UP_P;
+		var downP = controls.UI_RIGHT_P;
 		var accepted = controls.ACCEPT;
 
 		if (upP)
@@ -207,9 +182,9 @@ class FreeplayState extends MusicBeatState
 			changeSelection(1);
 		}
 
-		if (controls.LEFT_P)
+		if (controls.UI_LEFT_P)
 			changeDiff(-1);
-		if (controls.RIGHT_P)
+		if (controls.UI_RIGHT_P)
 			changeDiff(1);
 
 		if (controls.BACK)
