@@ -67,22 +67,22 @@ class OptionsBeta extends MusicBeatState
         {
             option_hpc.text = "Health Colors: false";
         }
-        if(FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.ENTER)
+        if(FlxG.mouse.overlaps(option_gt) && FlxG.mouse.justPressed)
         {
             option_gt_int++;
             FlxG.save.data.option_gt_int = option_gt_int;
         }
-        if (FlxG.mouse.overlaps(option_gt) && FlxG.keys.justPressed.BACKSPACE)
+        if (FlxG.mouse.overlaps(option_gt) && FlxG.mouse.justPressedRight)
         {
             option_gt_int--;
             FlxG.save.data.option_gt_int = option_gt_int;
         }
-        if(FlxG.mouse.overlaps(option_hpc) && FlxG.keys.justPressed.ENTER)
+        if(FlxG.mouse.overlaps(option_hpc) && FlxG.mouse.justPressed)
         {
             option_hpc_int++;
             FlxG.save.data.option_hpc_int = option_hpc_int;
         }
-        if (FlxG.mouse.overlaps(option_hpc) && FlxG.keys.justPressed.BACKSPACE)
+        if (FlxG.mouse.overlaps(option_hpc) && FlxG.mouse.justPressedRight)
         {
             option_hpc_int--;
             FlxG.save.data.option_hpc_int = option_hpc_int;
