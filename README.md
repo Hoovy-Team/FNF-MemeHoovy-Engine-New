@@ -2,6 +2,8 @@
 
 I have an engine based off myself now, watch me fail.
 
+No, it's not dead, I've just been busy.
+
 ![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
 
 ### Special Thanks:
