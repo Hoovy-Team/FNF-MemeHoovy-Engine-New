@@ -16,7 +16,7 @@ No, it's not dead, I've just been busy.
 
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
-### Vanilla description:
+### Original description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
 
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
