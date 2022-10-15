@@ -6,6 +6,8 @@ No, it's not dead, I've just been busy.
 
 ![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
 
+# THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.
+
 ### Special Thanks:
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
