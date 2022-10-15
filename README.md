@@ -6,15 +6,17 @@ No, it's not dead, I've just been busy.
 
 ![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
 
+# THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.
+
 ### Special Thanks:
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
 
-[504brandon](https://github.com/504brandon) - Assistant Programmer.
+[504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Nike engine lol.)
 
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
-### Vanilla description:
+### Original description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
 
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
