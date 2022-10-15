@@ -80,7 +80,7 @@ class PlayState extends MusicBeatState
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
 	private var playerStrums:FlxTypedGroup<FlxSprite>;
 
-	private var camZooming:Bool = false;
+	private var camZooming:Bool = true;
 	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;
@@ -2477,7 +2477,9 @@ class PlayState extends MusicBeatState
 
 		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 		{
-			FlxTween.tween(camHUD, {zoom: camHUD.zoom + 0.07}, 0.3, {ease: FlxEase.circInOut});
+			// FlxTween.tween(camHUD, {zoom: camHUD.zoom + 0.07}, 0.3, {ease: FlxEase.circInOut});
+			FlxG.camera.zoom += 0.015;
+			camHUD.zoom += 0.03;
 		}
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
