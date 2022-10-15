@@ -1,5 +1,10 @@
 package;
 
+#if mobile
+import mobile.Hitbox;
+import mobile.ControlsMobile;
+#end
+
 import haxe.DynamicAccess;
 import haxe.Json;
 import haxe.ds.EnumValueMap;
@@ -740,4 +745,22 @@ class Controls extends FlxActionSet
 		}
 		return cannotReturn ? null : obj;
 	}
+
+	#if mobile
+	public function setHitBoxNOTES(hitbox:Hitbox) 
+	{
+		inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonuNOTES(action, hitbox.buttonUp, state));
+		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonuNOTES(action, hitbox.buttonDown, state));
+		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonuNOTES(action, hitbox.buttonLeft, state));
+		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonuNOTES(action, hitbox.buttonRight, state));	
+	}
+
+	public function setHitBoxUI(hitbox:Hitbox) 
+	{
+		inline forEachBound(Control.UI_UP, (action, state) -> addbuttonuUI(action, hitbox.buttonUp, state));
+		inline forEachBound(Control.UI_DOWN, (action, state) -> addbuttonuUI(action, hitbox.buttonDown, state));
+		inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonuUI(action, hitbox.buttonLeft, state));
+		inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonuUI(action, hitbox.buttonRight, state));	
+	}
+	#end
 }
