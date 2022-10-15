@@ -170,7 +170,7 @@ class FreeplayState extends MusicBeatState
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
 		var upP = controls.UI_UP_P;
-		var downP = controls.UI_RIGHT_P;
+		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
 
 		if (upP)
