@@ -29,6 +29,7 @@ import lime.app.Application;
 import openfl.utils.Assets;
 import flash.system.System;
 import haxe.Exception;
+import flixel.input.keyboard.FlxKey;
 
 using StringTools;
 
@@ -53,6 +54,8 @@ class TitleState extends MusicBeatState
 		if (Assets.exists(Paths.image('owo')) == false){
 			throw new Exception("bruh");
 		}
+
+		FlxG.sound.muteKeys = FlxKey.ZERO;
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
