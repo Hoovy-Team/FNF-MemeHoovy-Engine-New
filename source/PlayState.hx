@@ -749,8 +749,6 @@ class PlayState extends MusicBeatState
 		add(boyfriend);
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
-		// doof.x += 70;
-		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
 		doof.finishThing = startCountdown;
 
@@ -1578,8 +1576,6 @@ class PlayState extends MusicBeatState
 				{
 					songTime = (songTime + Conductor.songPosition) / 2;
 					Conductor.lastSongPos = Conductor.songPosition;
-					// Conductor.songPosition += FlxG.elapsed * 1000;
-					// trace('MISSED FRAME');
 				}
 			}
 
@@ -2057,7 +2053,6 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
 		var releaseArray:Array<Bool> = [controls.NOTE_LEFT_R, controls.NOTE_DOWN_R, controls.NOTE_UP_R, controls.NOTE_RIGHT_R];
 
-		// FlxG.watch.addQuick('asdfa', upP);
 		if (holdingArray.contains(true) && generatedMusic)
 		{
 			notes.forEachAlive(function(daNote:Note)
