@@ -47,6 +47,8 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
+	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
+
 	override public function create():Void
 	{
 		PlayerSettings.init();
@@ -55,7 +57,7 @@ class TitleState extends MusicBeatState
 			throw new Exception("bruh");
 		}
 
-		FlxG.sound.muteKeys = FlxKey.ZERO;
+		FlxG.sound.muteKeys = muteKeys;
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
