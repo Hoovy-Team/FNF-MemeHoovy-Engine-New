@@ -7,7 +7,9 @@ using StringTools;
 
 class CoolUtil
 {
-	public static var difficultyArray:Array<String> = ['EASY', "NORMAL", "HARD"];
+	public static var difficultyArray:Array<String> = ['EASY', 'NORMAL', 'HARD'];
+
+	public static var defaultDifficulty:String = 'NORMAL'; // no suffix
 
 	public static function difficultyString():String
 	{
@@ -26,7 +28,7 @@ class CoolUtil
 		return daList;
 	}
 
-	public static function numberArray(max:Int, ?min = 0):Array<Int>
+	public static function numberArray(max:Int, min = 0):Array<Int>
 	{
 		var dumbArray:Array<Int> = [];
 		for (i in min...max)
