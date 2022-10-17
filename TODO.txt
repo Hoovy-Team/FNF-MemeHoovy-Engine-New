@@ -18,8 +18,10 @@ TODO List:
 -Optimization
 -And many more I can't think of
 
-
 Misc Things:
 -Fix Bugs
 -Merge PRS (That don't suck)
 -Get new coders who wanna help (I'm already fine on my own but the help would be appreciated)
+
+DONE:
+-Week 7 charts
