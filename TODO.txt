@@ -19,6 +19,7 @@ TODO List:
 -NoteTypes
 -Some 0.2.8 things
 -Modchart support (That's what Lua & HScript is for)
+-Botplay & Practice mode
 -And many more I can't think of
 
 Misc Things:
