@@ -166,7 +166,6 @@ class PlayState extends MusicBeatState
 	// Time signatures
 	public var curNumerator = Conductor.timeSignature[0];
 	public var curDenominator = Conductor.timeSignature[1];
-	public var timeSignatures(get, set):Void;
 
 	public static var instance:PlayState;
 
@@ -2602,22 +2601,5 @@ class PlayState extends MusicBeatState
 			script.runScript(hxdata);
 		}
 		#end
-	}
-
-	private function get_timeSignatures(signatures:Array<Int> = [])
-	{
-		return signatures = Conductor.timeSignature.copy();
-	}
-
-	private function set_timeSignatures(newSignatures:Array<Int> = [])
-	{
-		var backupSignatures:Array<Int> = [4,4];
-		if (newSignatures[0] > 0 || newSignatures[1] > 0){
-			return Conductor.timeSignature = newSignatures.copy();
-		}
-		else {
-			return Conductor.timeSignature = backupSignatures.copy();
-			trace("You somehow fucked up your signatures: " + newSignatures.toString());
-		}
 	}	
 }
