@@ -16,6 +16,8 @@ TODO List:
 -Time signatures (Love them & Starmapo)
 -Playback rates
 -Optimization
+-NoteTypes
+-Some 0.2.8 things
 -And many more I can't think of
 
 Misc Things:
@@ -25,3 +27,5 @@ Misc Things:
 
 DONE:
 -Week 7 charts
+
+Wither362 is goated bro.
