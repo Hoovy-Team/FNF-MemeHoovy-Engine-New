@@ -333,10 +333,7 @@ class ChartingState extends MusicBeatState
 		stepperSusLength.value = 0;
 		stepperSusLength.name = 'note_susLength';
 
-		var applyLength:FlxButton = new FlxButton(100, 10, 'Apply');
-
 		tab_group_note.add(stepperSusLength);
-		tab_group_note.add(applyLength);
 
 		UI_box.addGroup(tab_group_note);
 	}
