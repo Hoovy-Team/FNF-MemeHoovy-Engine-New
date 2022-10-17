@@ -114,7 +114,7 @@ class StoryMenuState extends MusicBeatState
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
 
-		trace("Line 70");
+		trace("Line 117");
 		
 		#if desktop
 		// Updating Discord Rich Presence
@@ -191,7 +191,7 @@ class StoryMenuState extends MusicBeatState
 		sprDifficulty.frames = ui_tex;
 		for(dif in CoolUtil.difficultyArray)
 			sprDifficulty.animation.addByPrefix(dif.toLowerCase(), dif.toUpperCase());
-		sprDifficulty.animation.play(CoolUtil.defaultDifficulty);
+		sprDifficulty.animation.play(CoolUtil.defaultDifficulty.toLowerCase());
 		changeDifficulty();
 
 		difficultySelectors.add(sprDifficulty);
@@ -203,7 +203,7 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.animation.play('idle');
 		difficultySelectors.add(rightArrow);
 
-		trace("Line 150");
+		trace("Line 206");
 
 		add(yellowBG);
 		add(grpWeekCharacters);
