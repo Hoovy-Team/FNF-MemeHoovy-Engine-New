@@ -19,7 +19,7 @@ TODO List:
 -NoteTypes
 -Some 0.2.8 things
 -Modchart support (That's what Lua & HScript is for)
--Botplay & Practice mode
+-Botplay
 -Events (ofc)
 -Editors (or some shit like that)
 -And many more I can't think of
@@ -31,5 +31,7 @@ Misc Things:
 
 DONE:
 -Week 7 charts
+-Practice mode
+-Death counter
 
 Wither362 is goated bro.
