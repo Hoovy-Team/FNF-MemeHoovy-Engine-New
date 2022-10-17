@@ -163,6 +163,9 @@ class PlayState extends MusicBeatState
 	public var script:Script;
 	#end
 
+	public static var deathCounter:Int = 0;
+	public static var practiceMode:Bool = false;
+
 	// Time signatures
 	public var curNumerator = Conductor.timeSignature[0];
 	public var curDenominator = Conductor.timeSignature[1];
@@ -1675,7 +1678,7 @@ class PlayState extends MusicBeatState
 			trace("RESET = True");
 		}
 
-		if (health <= 0)
+		if (health <= 0 && !practiceMode)
 		{
 			boyfriend.stunned = true;
 
@@ -1685,6 +1688,8 @@ class PlayState extends MusicBeatState
 
 			vocals.stop();
 			FlxG.sound.music.stop();
+
+			deathCounter++;
 
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
@@ -1815,16 +1820,18 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 		canPause = false;
+		deathCounter = 0;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
-		if (SONG.validScore)
+		if (SONG.validScore && !practiceMode)
 		{
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 		}
 
 		if (isStoryMode)
 		{
-			campaignScore += songScore;
+			if (!practiceMode)
+				campaignScore += songScore;
 
 			storyPlaylist.remove(storyPlaylist[0]);
 
@@ -1932,7 +1939,8 @@ class PlayState extends MusicBeatState
 		if (daRating == 'sick')
 			totalNotesHit += 1;
 
-		songScore += score;
+		if (!practiceMode)
+			songScore += score;
 		// songAccuracy += acc;
 
 		var pixelShitPart1:String = "";
@@ -2167,7 +2175,8 @@ class PlayState extends MusicBeatState
 			}
 			combo = 0;
 
-			songScore -= 10;
+			if (!practiceMode)
+				songScore -= 10;
 			
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
@@ -2225,7 +2234,9 @@ class PlayState extends MusicBeatState
 			}
 
 			songMisses++;
-			songScore -= 20;
+			if (!practiceMode)
+				songScore -= 20;
+
 			combo = 0;
 			songAccuracy -= 0.20;
 		}

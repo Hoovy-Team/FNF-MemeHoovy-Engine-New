@@ -17,8 +17,9 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Options', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Options', 'Toggle Practice Mode', 'Exit to menu'];
 	var curSelected:Int = 0;
+	var practiceText:FlxText;
 
 	var pauseMusic:FlxSound;
 
@@ -51,15 +52,33 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
+		practiceText = new FlxText(20, 15 + 96, 0, "PRACTICE MODE", 32);
+		practiceText.scrollFactor.set();
+		practiceText.setFormat(Paths.font('vcr.ttf'), 32);
+		practiceText.updateHitbox();
+		practiceText.x = FlxG.width - (practiceText.width + 20);
+		practiceText.visible = PlayState.practiceMode;
+		add(practiceText);
+
+		var levelDeathCounter:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
+		levelDeathCounter.text += "Blueballed: " + PlayState.deathCounter;
+		levelDeathCounter.scrollFactor.set();
+		levelDeathCounter.setFormat(Paths.font('vcr.ttf'), 32);
+		levelDeathCounter.updateHitbox();
+		add(levelDeathCounter);
+
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
+		levelDeathCounter.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
+		levelDeathCounter.x = FlxG.width - (levelDeathCounter.width + 20);
 
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
+		FlxTween.tween(levelDeathCounter, {alpha: 1, y: levelDeathCounter.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
@@ -111,6 +130,10 @@ class PauseSubState extends MusicBeatSubstate
 					FlxG.switchState(new OptionsBeta());
 				case "Exit to menu":
 					FlxG.switchState(new MainMenuState());
+					PlayState.deathCounter = 0;
+				case "Toggle Practice Mode":
+					PlayState.practiceMode = !PlayState.practiceMode;
+					practiceText.visible = PlayState.practiceMode;
 			}
 		}
 	}
