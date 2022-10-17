@@ -53,6 +53,8 @@ class TitleState extends MusicBeatState
 	{
 		PlayerSettings.init();
 
+		FlxG.autoPause = false; // might make this an option ¯\_(ツ)_/¯
+
 		if (Assets.exists(Paths.image('owo')) == false){
 			throw new Exception("bruh");
 		}

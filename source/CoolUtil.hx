@@ -38,7 +38,7 @@ class CoolUtil
 		return dumbArray;
 	}
 
-	inline public function isInState(state:String)
+	inline public static function isInState(state:String)
 	{
 		return Type.getClassName(Type.getClass(FlxG.state)).contains(state);
 	}
