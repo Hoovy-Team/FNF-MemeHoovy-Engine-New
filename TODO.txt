@@ -22,6 +22,9 @@ TODO List:
 -Botplay
 -Events (ofc)
 -Editors (or some shit like that)
+-Downscroll
+-Middlescroll
+-More than 2 strums (maybe?)
 -And many more I can't think of
 
 Misc Things:
