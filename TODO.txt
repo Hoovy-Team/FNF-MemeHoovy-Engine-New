@@ -25,6 +25,7 @@ TODO List:
 -Downscroll
 -Middlescroll
 -More than 2 strums (maybe?)
+-Credits Menu
 -And many more I can't think of
 
 Misc Things:
