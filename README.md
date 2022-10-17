@@ -14,6 +14,8 @@ No, it's not dead, I've just been busy.
 
 [504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Nike engine lol.)
 
+[Wither362](https://github.com/Wither362) - Contributor.
+
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 ### Original description:
