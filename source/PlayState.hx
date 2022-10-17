@@ -206,15 +206,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Making difficulty text for Discord Rich Presence.
-		switch (storyDifficulty)
-		{
-			case 0:
-				storyDifficultyText = "Easy";
-			case 1:
-				storyDifficultyText = "Normal";
-			case 2:
-				storyDifficultyText = "Hard";
-		}
+		storyDifficultyText = CoolUtil.difficultyArray[storyDifficulty];
 
 		iconRPC = SONG.player2;
 
@@ -650,17 +642,15 @@ class PlayState extends MusicBeatState
 				gfVersion = 'gf-car';
 			case 'mall' | 'mallEvil':
 				gfVersion = 'gf-christmas';
-			case 'school':
-				gfVersion = 'gf-pixel';
-			case 'schoolEvil':
+			case 'school' | 'schoolEvil':
 				gfVersion = 'gf-pixel';
 			case 'tank':
 				gfVersion = 'gf-tank';
 		}
-			if(gfVersion == 'gf-tank' && gf != null){
+		if(gfVersion == 'gf-tank' && gf != null) {
 			gf.x -= 84.15;
 			gf.y += 10.2;
-			}
+		}
 
 		if (curStage == 'limo')
 			gfVersion = 'gf-car';
@@ -841,11 +831,11 @@ class PlayState extends MusicBeatState
 		mcontrols.cameras = [CamMobile];
 
 		mcontrols.visible = false;
-	
+
 		var CamMobile = new FlxCamera();
 		FlxG.cameras.add(CamMobile);
 		CamMobile.bgColor.alpha = 0;
-		
+
 		add(mcontrols);
 		#end
 
@@ -883,12 +873,10 @@ class PlayState extends MusicBeatState
 							});
 						});
 					});
-				case 'senpai':
+				case 'senpai' | 'thorns':
 					schoolIntro(doof);
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
-					schoolIntro(doof);
-				case 'thorns':
 					schoolIntro(doof);
 				default:
 					startCountdown();
@@ -1481,11 +1469,11 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		switch(curStep){
+		switch(curStep) {
 			case 60 | 444 | 524 | 828:
-				if(SONG.song.toLowerCase() == 'ugh'){
-				dad.playAnim('Ugh', true);
-				FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+				if(SONG.song.toLowerCase() == 'ugh') {
+					dad.playAnim('Ugh', true);
+					FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
 				}
 			case 736:
 				if(SONG.song.toLowerCase() == 'stress'){
@@ -1493,7 +1481,7 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
 			}
 		}
-				
+
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Ratings:' +	songRateingacc + '(' + songRateingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		//rate code
 		if(songMisses == 0)
@@ -2069,19 +2057,9 @@ class PlayState extends MusicBeatState
 
 	private function keyShit():Void
 	{
-		var holdingArray:Array<Bool> = [controls.NOTE_LEFT, controls.NOTE_DOWN, controls.NOTE_UP, controls.NOTE_RIGHT];
-		var controlArray:Array<Bool> = [
-			controls.NOTE_LEFT_P,
-			controls.NOTE_DOWN_P,
-			controls.NOTE_UP_P,
-			controls.NOTE_RIGHT_P
-		];
-		var releaseArray:Array<Bool> = [
-			controls.NOTE_LEFT_R,
-			controls.NOTE_DOWN_R,
-			controls.NOTE_UP_R,
-			controls.NOTE_RIGHT_R
-		];
+		var holdingArray:Array<Bool> = [controls.NOTE_LEFT,   controls.NOTE_DOWN,   controls.NOTE_UP,   controls.NOTE_RIGHT];
+		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
+		var releaseArray:Array<Bool> = [controls.NOTE_LEFT_R, controls.NOTE_DOWN_R, controls.NOTE_UP_R, controls.NOTE_RIGHT_R];
 
 		// FlxG.watch.addQuick('asdfa', upP);
 		if (holdingArray.contains(true) && generatedMusic)
@@ -2240,19 +2218,23 @@ class PlayState extends MusicBeatState
 		var downP = controls.UI_DOWN_P;
 		var leftP = controls.UI_LEFT_P;
 
-		if(FlxG.save.data.option_gt_int == 0){
-			if (leftP)
+		if(FlxG.save.data.option_gt_int == 0) {
+			if (leftP) {
 				noteMiss(0);
 				boyfriend.playAnim('singLEFTmiss', true);
-			if (downP)
+			}
+			if (downP) {
 				noteMiss(1);
 				boyfriend.playAnim('singDOWNmiss', true);
-			if (upP)
+			}
+			if (upP) {
 				noteMiss(2);
 				boyfriend.playAnim('singUPmiss', true);
-			if (rightP)
+			}
+			if (rightP) {
 				noteMiss(3);
 				boyfriend.playAnim('singRIGHTmiss', true);
+			}
 
 			songMisses++;
 			songScore -= 20;
@@ -2278,17 +2260,8 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.004;
 
-			switch (note.noteData)
-			{
-				case 0:
-					boyfriend.playAnim('singLEFT', true);
-				case 1:
-					boyfriend.playAnim('singDOWN', true);
-				case 2:
-					boyfriend.playAnim('singUP', true);
-				case 3:
-					boyfriend.playAnim('singRIGHT', true);
-			}
+			var boyAnimArray:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
+			boyfriend.playAnim('sing' + boyAnimArray[note.noteData % 4], true);
 
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
@@ -2311,7 +2284,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	override public function destroy(){
+	override public function destroy() {
 		#if FEATURE_HSCRIPT
 		if (script != null)
 		{
