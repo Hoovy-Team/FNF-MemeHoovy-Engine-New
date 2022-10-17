@@ -114,7 +114,7 @@ class StoryMenuState extends MusicBeatState
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
 
-		trace("Line 70");
+		trace("Line 117");
 		
 		#if desktop
 		// Updating Discord Rich Presence
@@ -189,10 +189,9 @@ class StoryMenuState extends MusicBeatState
 
 		sprDifficulty = new FlxSprite(leftArrow.x + 130, leftArrow.y);
 		sprDifficulty.frames = ui_tex;
-		sprDifficulty.animation.addByPrefix('easy', 'EASY');
-		sprDifficulty.animation.addByPrefix('normal', 'NORMAL');
-		sprDifficulty.animation.addByPrefix('hard', 'HARD');
-		sprDifficulty.animation.play('easy');
+		for(dif in CoolUtil.difficultyArray)
+			sprDifficulty.animation.addByPrefix(dif.toLowerCase(), dif.toUpperCase());
+		sprDifficulty.animation.play(CoolUtil.defaultDifficulty.toLowerCase());
 		changeDifficulty();
 
 		difficultySelectors.add(sprDifficulty);
@@ -204,7 +203,7 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.animation.play('idle');
 		difficultySelectors.add(rightArrow);
 
-		trace("Line 150");
+		trace("Line 206");
 
 		add(yellowBG);
 		add(grpWeekCharacters);
@@ -311,14 +310,10 @@ class StoryMenuState extends MusicBeatState
 			PlayState.isStoryMode = true;
 			selectedWeek = true;
 
-			var diffic = "";
+			var diffic = '';
 
-			switch (curDifficulty)
-			{
-				case 0:
-					diffic = '-easy';
-				case 2:
-					diffic = '-hard';
+			if(CoolUtil.defaultDifficulty.toLowerCase() != CoolUtil.difficultyArray[curDifficulty].toLowerCase()) {
+				diffic = '-' + CoolUtil.difficultyArray[curDifficulty].toLowerCase();
 			}
 
 			PlayState.storyDifficulty = curDifficulty;
@@ -344,17 +339,13 @@ class StoryMenuState extends MusicBeatState
 
 		sprDifficulty.offset.x = 0;
 
+		sprDifficulty.animation.play(CoolUtil.difficultyArray[curDifficulty].toLowerCase());
 		switch (curDifficulty)
 		{
-			case 0:
-				sprDifficulty.animation.play('easy');
+			case 0 | 2: // easy, hard
 				sprDifficulty.offset.x = 20;
-			case 1:
-				sprDifficulty.animation.play('normal');
+			case 1: // normal
 				sprDifficulty.offset.x = 70;
-			case 2:
-				sprDifficulty.animation.play('hard');
-				sprDifficulty.offset.x = 20;
 		}
 
 		sprDifficulty.alpha = 0;
