@@ -59,8 +59,6 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
-	var halloweenLevel:Bool = false;
-
 	private var vocals:FlxSound;
 
 	private var dad:Character;
@@ -165,6 +163,11 @@ class PlayState extends MusicBeatState
 	public var script:Script;
 	#end
 
+	// Time signatures
+	public var curNumerator = Conductor.timeSignature[0];
+	public var curDenominator = Conductor.timeSignature[1];
+	public var timeSignatures(get, set):Void;
+
 	public static var instance:PlayState;
 
 	override public function create()
@@ -243,7 +246,6 @@ class PlayState extends MusicBeatState
 			case 'spookeez' | 'monster' | 'south':
 			{
 				curStage = 'spooky';
-				halloweenLevel = true;
 
 				var hallowTex = Paths.getSparrowAtlas('halloween_bg');
 
@@ -2601,4 +2603,21 @@ class PlayState extends MusicBeatState
 		}
 		#end
 	}
+
+	private function get_timeSignatures(signatures:Array<Int> = [])
+	{
+		return signatures = Conductor.timeSignature.copy();
+	}
+
+	private function set_timeSignatures(newSignatures:Array<Int> = [])
+	{
+		var backupSignatures:Array<Int> = [4,4];
+		if (newSignatures[0] > 0 || newSignatures[1] > 0){
+			return Conductor.timeSignature = newSignatures.copy();
+		}
+		else {
+			return Conductor.timeSignature = backupSignatures.copy();
+			trace("You somehow fucked up your signatures: " + newSignatures.toString());
+		}
+	}	
 }
