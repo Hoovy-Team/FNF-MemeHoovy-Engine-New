@@ -5,7 +5,7 @@ TODO List:
 -Notesplashes
 -Fix Week 7 & finish it in general
 -Shaders support
--Finish the options menu
+-Finish the options menu (currently in beta)
 -Fix some input drops
 -Finish mobile support
 -Better chart editor
