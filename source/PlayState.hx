@@ -172,7 +172,7 @@ class PlayState extends MusicBeatState
 
 	public static var instance:PlayState;
 
-	public static var isDownscroll:Bool = FlxG.save.data.option_downscroll_int = 1;
+	public static var isDownscroll:Bool = false;
 
 	override public function create()
 	{
@@ -192,6 +192,9 @@ class PlayState extends MusicBeatState
 
 		persistentUpdate = true;
 		persistentDraw = true;
+
+		if (FlxG.save.data.option_downscroll_int != null)
+			isDownscroll = FlxG.save.data.option_downscroll_int = 1;
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
