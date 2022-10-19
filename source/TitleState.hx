@@ -316,7 +316,7 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 1:
-				createCoolText(['MemeHoovy', 'Brandon']);
+				createCoolText(['MemeHoovy', 'Brandon', 'Wither']);
 			case 3:
 				addMoreText('presents');
 			case 4:
