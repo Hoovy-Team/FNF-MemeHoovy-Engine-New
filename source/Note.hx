@@ -119,7 +119,11 @@ class Note extends FlxSprite
 				animation.play('redScroll');
 		}
 
-		// trace(prevNote);
+		if (PlayState.isDownscroll && sustainNote){
+			flipY = true;
+		}else{
+			flipY = false;
+		}
 
 		if (isSustainNote && prevNote != null)
 		{

@@ -172,7 +172,7 @@ class PlayState extends MusicBeatState
 
 	public static var instance:PlayState;
 
-	public var isDownscroll:Bool = FlxG.save.data.option_downscroll_int = 1;
+	public static var isDownscroll:Bool = FlxG.save.data.option_downscroll_int = 1;
 
 	override public function create()
 	{
@@ -793,7 +793,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 
-		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
+		healthBarBG = new FlxSprite(0, isDownscroll ? FlxG.height * 0.1 : FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
@@ -816,11 +816,7 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		if (!isDownscroll)
-			scoreTxt = new FlxText(487, healthBarBG.y + 30, 0, "", 20);
-		else
-			scoreTxt = new FlxText(487, FlxG.height * 0.1, 0, "", 20);
-
+		scoreTxt = new FlxText(487, !isDownscroll ? healthBarBG.y + 30 : FlxG.height * 0.1, 0, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
