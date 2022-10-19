@@ -194,7 +194,7 @@ class PlayState extends MusicBeatState
 		persistentDraw = true;
 
 		if (FlxG.save.data.option_downscroll_int != null)
-			isDownscroll = FlxG.save.data.option_downscroll_int = 1;
+			isDownscroll = OptionsBeta.downScrollEnabled;
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
@@ -819,7 +819,7 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		scoreTxt = new FlxText(487, !isDownscroll ? healthBarBG.y + 30 : FlxG.height * 0.1, 0, "", 20);
+		scoreTxt = new FlxText(487, !isDownscroll ? healthBarBG.y + 30 : FlxG.height * 0.02, 0, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);

@@ -7,12 +7,17 @@ import flixel.text.FlxText;
 
 class OptionsBeta extends MusicBeatState
 {
+    // I'm coming so close to just recreating this shit from the ground up, it's buggy af
     var option_gt:FlxText;
     var option_hpc:FlxText;
     var option_downscroll:FlxText;
     public static var option_gt_int:Int = 0;
     public static var option_hpc_int:Int = 0;
     public static var option_downscroll_int:Int = 0;
+    public static var option_downscroll_bool:Bool = false;
+
+    public static var downScrollEnabled:Bool = false;
+
     override function create()//this takes alot of code from my cookie clicker game huh
     {
         super.create();
@@ -57,7 +62,11 @@ class OptionsBeta extends MusicBeatState
         if (FlxG.save.data.option_hpc_int != option_hpc_int)
 			option_hpc_int = FlxG.save.data.option_hpc_int;
         if (FlxG.save.data.option_downscroll_int != option_downscroll_int)
-			option_downscroll_int = FlxG.save.data.option_downscroll_int;        
+			option_downscroll_int = FlxG.save.data.option_downscroll_int;
+        if (FlxG.save.data.option_downscroll_bool != option_downscroll_bool) {
+			option_downscroll_bool = FlxG.save.data.option_downscroll_bool;
+            downScrollEnabled = option_downscroll_bool;
+        }
         super.create();
     }
 
@@ -84,10 +93,14 @@ class OptionsBeta extends MusicBeatState
         if(option_downscroll_int == 1)
         {
             option_downscroll.text = "Downscroll: true";
+            downScrollEnabled = true;
+            option_downscroll_bool = downScrollEnabled;
         }
         else if(option_downscroll_int == 0)
         {
             option_downscroll.text = "Downscroll: false";
+            downScrollEnabled = false;
+            option_downscroll_bool = downScrollEnabled;
         }
 
         if(FlxG.mouse.overlaps(option_gt) && FlxG.mouse.justPressed)
