@@ -22,7 +22,6 @@ TODO List:
 -Botplay
 -Events (ofc)
 -Editors (or some shit like that)
--Downscroll
 -Middlescroll
 -More than 2 strums (maybe?)
 -Credits Menu
@@ -37,5 +36,6 @@ DONE:
 -Week 7 charts
 -Practice mode
 -Death counter
+-Downscroll (Kinda buggy though)
 
 Wither362 is goated bro.
