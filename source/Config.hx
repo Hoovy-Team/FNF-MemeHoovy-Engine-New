@@ -15,6 +15,7 @@ class Config
 
 	public static function resetSettings():Void
 	{
+        FlxG.save.data.healthBarColors = false;
 		FlxG.save.data.downscroll = false;
 		FlxG.save.data.ghostTapping = false;
 		reload();
