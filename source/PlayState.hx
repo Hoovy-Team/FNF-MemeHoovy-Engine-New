@@ -194,7 +194,7 @@ class PlayState extends MusicBeatState
 		persistentDraw = true;
 
 		if (FlxG.save.data.option_downscroll_int != null)
-			isDownscroll = OptionsBeta.option_downscroll_int = 1;
+			isDownscroll = FlxG.save.data.option_downscroll_int = 1;
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
