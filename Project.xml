@@ -4,9 +4,6 @@
 
 	<app title="Friday Night Funkin' MemeHoovy Engine" file="MemeHoovy Engine" packageName="com.memehoovy.memehoovyengine" package="com.memehoovy.memehoovyengine" main="Main" version="0.2.7.1" company="memehoovy" />
 
-	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
-		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
-	<!-- <app preloader="Preloader" resizable="true" /> -->
 	<app preloader="flixel.system.FlxPreloader" />
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
