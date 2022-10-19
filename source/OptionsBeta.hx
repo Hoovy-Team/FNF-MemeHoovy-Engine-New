@@ -11,12 +11,14 @@ class OptionsBeta extends MusicBeatState
     var option_gt:FlxText;
     var option_hpc:FlxText;
     var option_downscroll:FlxText;
-    public static var option_gt_int:Int = 0;
-    public static var option_hpc_int:Int = 0;
-    public static var option_downscroll_int:Int = 0;
-    public static var option_downscroll_bool:Bool = false;
+    // public static var option_gt_int:Int = 0;
+    // public static var option_hpc_int:Int = 0;
+    // public static var option_downscroll_int:Int = 0;
+    // public static var option_downscroll_bool:Bool = false;
 
-    public static var downScrollEnabled:Bool = false;
+    public static var downValue:Bool = false;
+    public static var ghostValue:Bool = false;
+    public static var healthColorsValue:Bool = false;
 
     override function create()//this takes alot of code from my cookie clicker game huh
     {
@@ -29,6 +31,8 @@ class OptionsBeta extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = true;
 		add(bg);
+
+        Config.reload();
 
         option_gt = new FlxText(0, 100, 0, "n/a", 30);
 		option_gt.pixelPerfectPosition = true;
@@ -57,102 +61,94 @@ class OptionsBeta extends MusicBeatState
         FlxG.mouse.visible = true;
         FlxG.mouse.enabled = true;
 
-        if (FlxG.save.data.option_gt_int != option_gt_int)
-			option_gt_int = FlxG.save.data.option_gt_int;
-        if (FlxG.save.data.option_hpc_int != option_hpc_int)
-			option_hpc_int = FlxG.save.data.option_hpc_int;
-        if (FlxG.save.data.option_downscroll_int != option_downscroll_int)
-			option_downscroll_int = FlxG.save.data.option_downscroll_int;
-        if (FlxG.save.data.option_downscroll_bool != option_downscroll_bool) {
-			option_downscroll_bool = FlxG.save.data.option_downscroll_bool;
-            downScrollEnabled = option_downscroll_bool;
-        }
+        downValue = Config.downscroll;
+        ghostValue = Config.ghostTapping;
+        healthColorsValue = Config.healthBarColors;
+
+        // if (FlxG.save.data.option_gt_int != option_gt_int)
+		// 	option_gt_int = FlxG.save.data.option_gt_int;
+        // if (FlxG.save.data.option_hpc_int != option_hpc_int)
+		// 	option_hpc_int = FlxG.save.data.option_hpc_int;
+        // if (FlxG.save.data.option_downscroll_int != option_downscroll_int)
+		// 	option_downscroll_int = FlxG.save.data.option_downscroll_int;
+        // if (FlxG.save.data.option_downscroll_bool != option_downscroll_bool) {
+		// 	option_downscroll_bool = FlxG.save.data.option_downscroll_bool;
+        //     downScrollEnabled = option_downscroll_bool;
+        // }
         super.create();
     }
 
     override public function update(elapsed:Float)
     {
-        if(option_gt_int == 1)
-        {
-            option_gt.text = "Ghost Tapping: true";
-        }
-        else if(option_gt_int == 0)
-        {
-            option_gt.text = "Ghost Tapping: false";
-        }
-
-        if(option_hpc_int == 1)
-        {
-            option_hpc.text = "Health Colors: true";
-        }
-        else if(option_hpc_int == 0)
-        {
-            option_hpc.text = "Health Colors: false";
-        }
-
-        if(option_downscroll_int == 1)
-        {
-            option_downscroll.text = "Downscroll: true";
-            downScrollEnabled = true;
-            option_downscroll_bool = downScrollEnabled;
-        }
-        else if(option_downscroll_int == 0)
-        {
-            option_downscroll.text = "Downscroll: false";
-            downScrollEnabled = false;
-            option_downscroll_bool = downScrollEnabled;
-        }
-
         if(FlxG.mouse.overlaps(option_gt) && FlxG.mouse.justPressed)
         {
-            option_gt_int++;
-            FlxG.save.data.option_gt_int = option_gt_int;
-        }
-        if (FlxG.mouse.overlaps(option_gt) && FlxG.mouse.justPressedRight)
-        {
-            option_gt_int--;
-            FlxG.save.data.option_gt_int = option_gt_int;
+            ghostValue = !ghostValue;
+            writeToConfig();
         }
 
         if(FlxG.mouse.overlaps(option_hpc) && FlxG.mouse.justPressed)
         {
-            option_hpc_int++;
-            FlxG.save.data.option_hpc_int = option_hpc_int;
-        }
-        if (FlxG.mouse.overlaps(option_hpc) && FlxG.mouse.justPressedRight)
-        {
-            option_hpc_int--;
-            FlxG.save.data.option_hpc_int = option_hpc_int;
+            healthColorsValue = !healthColorsValue;
+            writeToConfig();
         }
 
         if(FlxG.mouse.overlaps(option_downscroll) && FlxG.mouse.justPressed)
         {
-            option_downscroll_int++;
-            FlxG.save.data.option_downscroll_int = option_downscroll_int;
+            downValue = !downValue;
+            writeToConfig();
         }
-        if (FlxG.mouse.overlaps(option_downscroll) && FlxG.mouse.justPressedRight)
+
+        if(ghostValue)
         {
-            option_downscroll_int--;
-            FlxG.save.data.option_downscroll_int = option_downscroll_int;
+            option_gt.text = "Ghost Tapping: true";
         }
-        if(option_gt_int > 1)
-            option_gt_int = 1;
-        if(option_gt_int < 0)
-            option_gt_int = 0;
-        if(option_hpc_int > 1)
-            option_hpc_int = 1;
-        if(option_hpc_int < 0)
-            option_hpc_int = 0;
-        if(option_downscroll_int > 1)
-            option_downscroll_int = 1;
-        if(option_downscroll_int < 0)
-            option_downscroll_int = 0;
+        else
+        {
+            option_gt.text = "Ghost Tapping: false";
+        }
+
+        if(healthColorsValue)
+        {
+            option_hpc.text = "Health Colors: true";
+        }
+        else
+        {
+            option_hpc.text = "Health Colors: false";
+        }
+
+        if(downValue)
+        {
+            option_downscroll.text = "Downscroll: true";
+        }
+        else
+        {
+            option_downscroll.text = "Downscroll: false";
+        }
+
+        // if(option_gt_int > 1)
+        //     option_gt_int = 1;
+        // if(option_gt_int < 0)
+        //     option_gt_int = 0;
+        // if(option_hpc_int > 1)
+        //     option_hpc_int = 1;
+        // if(option_hpc_int < 0)
+        //     option_hpc_int = 0;
+        // if(option_downscroll_int > 1)
+        //     option_downscroll_int = 1;
+        // if(option_downscroll_int < 0)
+        //     option_downscroll_int = 0;
         if(FlxG.keys.justPressed.ESCAPE)
         {
             FlxG.switchState(new MainMenuState());
             FlxG.mouse.visible = false;
             FlxG.mouse.enabled = false;
+            // Config.resetSettings();
+            writeToConfig();
         }
         super.update(elapsed);
     }
+
+	function writeToConfig(){
+		Config.write(downValue, ghostValue, healthColorsValue);
+	}    
 }

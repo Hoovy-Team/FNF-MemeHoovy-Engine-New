@@ -172,7 +172,7 @@ class PlayState extends MusicBeatState
 
 	public static var instance:PlayState;
 
-	public static var isDownscroll:Bool = false;
+	// public static var isDownscroll:Bool = false;
 
 	override public function create()
 	{
@@ -193,8 +193,8 @@ class PlayState extends MusicBeatState
 		persistentUpdate = true;
 		persistentDraw = true;
 
-		if (FlxG.save.data.option_downscroll_int != null)
-			isDownscroll = OptionsBeta.downScrollEnabled;
+		// if (FlxG.save.data.option_downscroll_int != null)
+		// 	isDownscroll = OptionsBeta.downScrollEnabled;
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
@@ -757,7 +757,7 @@ class PlayState extends MusicBeatState
 
 		Conductor.songPosition = -5000;
 
-		if(isDownscroll){
+		if(Config.downscroll){
 			strumLine = new FlxSprite(0, 570).makeGraphic(FlxG.width, 10);
 		}
 		else {
@@ -796,7 +796,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 
-		healthBarBG = new FlxSprite(0, isDownscroll ? FlxG.height * 0.1 : FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
+		healthBarBG = new FlxSprite(0, Config.downscroll ? FlxG.height * 0.1 : FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
@@ -804,7 +804,7 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		if (FlxG.save.data.option_hpc_int != 0)
+		if (Config.healthBarColors)
 			healthBar.createFilledBar(dad.hpcolor, boyfriend.hpcolor);
 		else
 			healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
@@ -819,7 +819,7 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		scoreTxt = new FlxText(487, !isDownscroll ? healthBarBG.y + 30 : FlxG.height * 0.02, 0, "", 20);
+		scoreTxt = new FlxText(487, !Config.downscroll ? healthBarBG.y + 30 : FlxG.height * 0.02, 0, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
@@ -1735,7 +1735,7 @@ class PlayState extends MusicBeatState
 					daNote.active = true;
 				}
 
-				if (!isDownscroll)
+				if (!Config.downscroll)
 					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
 				else
 					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
@@ -1790,7 +1790,7 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
-				if (daNote.y < -daNote.height && !isDownscroll || daNote.y >= strumLine.y + 106 && isDownscroll)
+				if (daNote.y < -daNote.height && !Config.downscroll || daNote.y >= strumLine.y + 106 && Config.downscroll)
 				{
 					if (daNote.tooLate || !daNote.wasGoodHit)
 					{
@@ -2224,7 +2224,7 @@ class PlayState extends MusicBeatState
 		var downP = controls.UI_DOWN_P;
 		var leftP = controls.UI_LEFT_P;
 
-		if(FlxG.save.data.option_gt_int == 0) {
+		if(!Config.ghostTapping) {
 			if (leftP) {
 				noteMiss(0);
 				boyfriend.playAnim('singLEFTmiss', true);
