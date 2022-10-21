@@ -12,6 +12,8 @@ class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
+	var normalAnim:Array<String> = ['singLEFT', 'singUP', 'singDOWN', 'singRIGHT'];
+	var normalAnimLow:Array<String> = ['left', 'up', 'down', 'right'];
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'bf';
@@ -41,11 +43,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
 				animation.addByPrefix('singUP', 'GF Up Note', 24, false);
 				animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
-				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('sad', 'gf sad', CoolUtil.numberArray(13), "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
-				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat', CoolUtil.numberArray(30, 15), "", 24, false);
+				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", CoolUtil.numberArray(4), "", 24);
+				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", CoolUtil.numberArray(12), "", 24, false);
 				animation.addByPrefix('scared', 'GF FEAR', 24);
 
 				addOffset('cheer');
@@ -74,11 +76,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
 				animation.addByPrefix('singUP', 'GF Up Note', 24, false);
 				animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
-				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('sad', 'gf sad', CoolUtil.numberArray(13), "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
-				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat', CoolUtil.numberArray(30, 15), "", 24, false);
+				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", CoolUtil.numberArray(4), "", 24);
+				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", CoolUtil.numberArray(12), "", 24, false);
 				animation.addByPrefix('scared', 'GF FEAR', 24);
 
 				addOffset('cheer');
@@ -104,8 +106,7 @@ class Character extends FlxSprite
 				frames = tex;
 				animation.addByIndices('singUP', 'GF Dancing Beat Hair blowing CAR', [0], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat Hair blowing CAR', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing Beat Hair blowing CAR', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24,
-					false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat Hair blowing CAR', CoolUtil.numberArray(30, 15), "", 24, false);
 
 				addOffset('danceLeft', 0);
 				addOffset('danceRight', 0);
@@ -119,7 +120,7 @@ class Character extends FlxSprite
 				frames = tex;
 				animation.addByIndices('singUP', 'GF IDLE', [2], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF IDLE', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				animation.addByIndices('danceRight', 'GF IDLE', CoolUtil.numberArray(30, 15), "", 24, false);
 
 				addOffset('danceLeft', 0);
 				addOffset('danceRight', 0);
@@ -136,11 +137,10 @@ class Character extends FlxSprite
 				// DAD ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('DADDY_DEAREST');
 				frames = tex;
+
 				animation.addByPrefix('idle', 'Dad idle dance', 24);
-				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
+				for (anim in 0...normalAnim.length)
+					animation.addByPrefix(normalAnim[i], 'Dad Sing Note ' + normalAnimLow[i].toUpperCase(), 24);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 50);
@@ -586,9 +586,9 @@ class Character extends FlxSprite
 				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('gfTankmen');
 				frames = tex;
-				animation.addByIndices('sad', 'GF Crying at Gunpoint ', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('sad', 'GF Crying at Gunpoint ', CoolUtil.numberArray(13), "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing at Gunpoint', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing at Gunpoint', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dancing at Gunpoint', CoolUtil.numberArray(30, 15), "", 24, false);
 
 				addOffset('sad', -2, -2);
 				addOffset('danceLeft', 0, -9);
