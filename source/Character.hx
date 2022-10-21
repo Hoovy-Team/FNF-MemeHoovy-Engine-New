@@ -140,7 +140,7 @@ class Character extends FlxSprite
 
 				animation.addByPrefix('idle', 'Dad idle dance', 24);
 				for (anim in 0...normalAnim.length)
-					animation.addByPrefix(normalAnim[i], 'Dad Sing Note ' + normalAnimLow[i].toUpperCase(), 24);
+					animation.addByPrefix(normalAnim[anim], 'Dad Sing Note ' + normalAnimLow[anim].toUpperCase(), 24);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 50);
