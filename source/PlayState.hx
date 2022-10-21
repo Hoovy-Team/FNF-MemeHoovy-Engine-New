@@ -167,8 +167,8 @@ class PlayState extends MusicBeatState
 	public static var practiceMode:Bool = false;
 
 	// Time signatures
-	public var curNumerator = Conductor.timeSignature[0];
-	public var curDenominator = Conductor.timeSignature[1];
+	public var curNumerator:Int = 4;
+	public var curDenominator:Int = 4;
 
 	public static var instance:PlayState;
 
@@ -177,6 +177,9 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		openfl.system.System.gc(); // basic optimization
+
+		curNumerator = Conductor.timeSignature[0];
+		curDenominator = Conductor.timeSignature[1];
 
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -193,8 +196,8 @@ class PlayState extends MusicBeatState
 		persistentUpdate = true;
 		persistentDraw = true;
 
-		// if (FlxG.save.data.option_downscroll_int != null)
-		// 	isDownscroll = OptionsBeta.downScrollEnabled;
+		/*if (FlxG.save.data.option_downscroll_int != null)
+			isDownscroll = OptionsBeta.downScrollEnabled;*/
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
@@ -895,7 +898,7 @@ class PlayState extends MusicBeatState
 					startCountdown();
 			}
 		}
-		else
+		else // freeplay dialogue
 		{
 			switch (curSong.toLowerCase())
 			{
@@ -1475,16 +1478,18 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		switch(curStep) {
-			case 60 | 444 | 524 | 828:
-				if(SONG.song.toLowerCase() == 'ugh') {
-					dad.playAnim('Ugh', true);
-					FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
-				}
-			case 736:
-				if(SONG.song.toLowerCase() == 'stress'){
-				dad.playAnim('PrettyGood', true);
-				FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
+		if(SONG.song.toLowerCase() == 'ugh' || SONG.song.toLowerCase() == 'stress') { // optimization
+			switch(curStep) {
+				case 60 | 444 | 524 | 828:
+					if(SONG.song.toLowerCase() == 'ugh') {
+						dad.playAnim('Ugh', true);
+						FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut});
+					}
+				case 736:
+					if(SONG.song.toLowerCase() == 'stress') {
+						dad.playAnim('PrettyGood', true);
+						FlxTween.tween(camGame, {zoom: 1.8}, 2, {ease: FlxEase.quadInOut});
+					}
 			}
 		}
 
@@ -1505,6 +1510,7 @@ class PlayState extends MusicBeatState
 			songRateingacc = 'GREAT!';
 		if(songAccuracy < 99)
 			songRateingacc = 'GOOD';
+
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
@@ -1868,11 +1874,9 @@ class PlayState extends MusicBeatState
 			{
 				var difficulty:String = "";
 
-				if (storyDifficulty == 0)
-					difficulty = '-easy';
-
-				if (storyDifficulty == 2)
-					difficulty = '-hard';
+				if(CoolUtil.defaultDifficulty.toLowerCase() != CoolUtil.difficultyArray[storyDifficulty].toLowerCase()) {
+					difficulty = '-' + CoolUtil.difficultyArray[storyDifficulty].toLowerCase();
+				}
 
 				trace('LOADING NEXT SONG');
 				trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
@@ -2080,9 +2084,7 @@ class PlayState extends MusicBeatState
 			boyfriend.holdTimer = 0;
 
 			var possibleNotes:Array<Note> = [];
-
 			var ignoreList:Array<Int> = [];
-
 			var removeList:Array<Note> = [];
 
 			notes.forEachAlive(function(daNote:Note)
@@ -2186,7 +2188,7 @@ class PlayState extends MusicBeatState
 
 			if (!practiceMode)
 				songScore -= 10;
-			
+
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 			// FlxG.log.add('played imss note');
