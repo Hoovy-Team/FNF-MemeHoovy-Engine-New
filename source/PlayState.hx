@@ -1540,6 +1540,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
+		// ok, I lied, it's not week7 bopping (maybe on html5 it is)
 		iconP1.setGraphicSize(Std.int(150 + 0.85 * (iconP1.width - 150)));
 		iconP2.setGraphicSize(Std.int(150 + 0.85 * (iconP2.width - 150)));
 
