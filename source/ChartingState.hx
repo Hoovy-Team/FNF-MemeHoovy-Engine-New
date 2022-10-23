@@ -81,6 +81,10 @@ class ChartingState extends MusicBeatState
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
 
+	// chart
+	var mutedInst:Bool = false; // i like it to save when im charting
+	var mutedVoices:Bool = false;
+
 	override function create()
 	{
 		curSection = lastSection;
@@ -178,21 +182,23 @@ class ChartingState extends MusicBeatState
 		typingShit = UI_songTitle;
 
 		var check_voices = new FlxUICheckBox(10, 25, null, null, "Has voice track", 100);
-		check_voices.checked = _song.needsVoices;
+		check_voices.checked = (_song.needsVoices || !mutedVoices);
 		// _song.needsVoices = check_voices.checked;
 		check_voices.callback = function()
 		{
 			_song.needsVoices = check_voices.checked;
-			trace('CHECKED!');
+			mutedVoices = !check_voices.checked;
+			FlxG.log.add('CHECKED!');
 		};
 
 		var check_mute_inst = new FlxUICheckBox(10, 200, null, null, "Mute Instrumental (in editor)", 100);
-		check_mute_inst.checked = false;
+		check_mute_inst.checked = mutedInst;
 		check_mute_inst.callback = function()
 		{
+			mutedInst = check_mute_inst.checked;
 			var vol:Float = 1;
 
-			if (check_mute_inst.checked)
+			if (mutedInst)
 				vol = 0;
 
 			FlxG.sound.music.volume = vol;
@@ -524,6 +530,7 @@ class ChartingState extends MusicBeatState
 		{
 			lastSection = curSection;
 
+			autosaveSong();
 			PlayState.SONG = _song;
 			FlxG.sound.music.stop();
 			vocals.stop();
@@ -732,7 +739,7 @@ class ChartingState extends MusicBeatState
 		}
 	}
 
-	function copySection(?sectionNum:Int = 1)
+	function copySection(sectionNum:Int = 1)
 	{
 		var daSec = FlxMath.maxInt(curSection, sectionNum);
 
@@ -870,7 +877,7 @@ class ChartingState extends MusicBeatState
 	{
 		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i[0] == note.strumTime && i[1] % 4 == note.noteData)
+			if ((i[0] == note.strumTime) && ((i[1] % 4) == note.noteData))
 			{
 				FlxG.log.add('FOUND EVIL NUMBER');
 				_song.notes[curSection].sectionNotes.remove(i);
