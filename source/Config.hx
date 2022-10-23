@@ -9,15 +9,15 @@ using StringTools;
 
 class Config
 {
-	public static var downscroll:Bool;
-	public static var healthBarColors:Bool;
-	public static var ghostTapping:Bool;
+	public static var downscroll:Bool = false;
+	public static var healthBarColors:Bool = true;
+	public static var ghostTapping:Bool = false;
 
 	public static function resetSettings():Void
 	{
-        FlxG.save.data.healthBarColors = false;
-		FlxG.save.data.downscroll = false;
-		FlxG.save.data.ghostTapping = false;
+		FlxG.save.data.healthBarColors = healthBarColors;
+		FlxG.save.data.downscroll = downscroll;
+		FlxG.save.data.ghostTapping = ghostTapping;
 		reload();
 	}
 
@@ -25,10 +25,10 @@ class Config
 	{
 		ghostTapping = FlxG.save.data.ghostTapping;
 		downscroll = FlxG.save.data.downscroll;
-        healthBarColors = FlxG.save.data.healthBarColors;
+		healthBarColors = FlxG.save.data.healthBarColors;
 	}
 
-	public static function write(downscrollW:Bool, ghostTappingW:Bool, healthBarColorsW:Bool):Void
+	public static function write(downscrollW:Bool = false, ghostTappingW:Bool = false, healthBarColorsW:Bool = true):Void
 	{
 		FlxG.save.data.downscroll = downscrollW;
 		FlxG.save.data.ghostTapping = ghostTappingW;
@@ -42,10 +42,10 @@ class Config
 	public static function configCheck():Void
 	{
 		if (FlxG.save.data.downscroll == null)
-			FlxG.save.data.downscroll = false;
+			FlxG.save.data.downscroll = downscroll;
 		if (FlxG.save.data.healthBarColors == null)
-			FlxG.save.data.healthBarColors = false;
+			FlxG.save.data.healthBarColors = healthBarColors;
 		if (FlxG.save.data.ghostTapping == null)
-			FlxG.save.data.ghostTapping = false;
+			FlxG.save.data.ghostTapping = ghostTapping;
 	}
 }
