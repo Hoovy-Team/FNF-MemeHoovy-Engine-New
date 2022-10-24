@@ -25,6 +25,7 @@ import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
 import flixel.util.FlxColor;
 import haxe.Json;
+import haxe.Exception;
 import lime.utils.Assets;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
@@ -349,13 +350,18 @@ class ChartingState extends MusicBeatState
 		if (FlxG.sound.music != null)
 		{
 			FlxG.sound.music.stop();
-			// vocals.stop();
+			/*if(vocals != null)
+				vocals.stop();*/
 		}
 
 		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
 
 		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
-		vocals = new FlxSound().loadEmbedded(Paths.voices(daSong));
+		if(daSong != 'tutorial' && daSong != 'test') {
+			vocals = new FlxSound().loadEmbedded(Paths.voices(daSong));
+		} else {
+			vocals = new FlxSound();
+		}
 		FlxG.sound.list.add(vocals);
 
 		FlxG.sound.music.pause();
@@ -466,7 +472,7 @@ class ChartingState extends MusicBeatState
 
 		if (curBeat % 4 == 0 && curStep >= 16 * (curSection + 1))
 		{
-			trace(curStep);
+			trace('curStep:' + curStep);
 			trace((_song.notes[curSection].lengthInSteps) * (curSection + 1));
 			trace('DUMBSHIT');
 
@@ -483,7 +489,7 @@ class ChartingState extends MusicBeatState
 
 		if (FlxG.mouse.justPressed)
 		{
-			if (FlxG.mouse.overlaps(curRenderedNotes))
+			if (FlxG.mouse.overlaps(curRenderedNotes) && !FlxG.keys.pressed.K)) // more notes ºwº
 			{
 				curRenderedNotes.forEach(function(note:Note)
 				{
@@ -580,10 +586,7 @@ class ChartingState extends MusicBeatState
 
 			if (FlxG.keys.justPressed.R)
 			{
-				if (FlxG.keys.pressed.SHIFT)
-					resetSection(true);
-				else
-					resetSection();
+				resetSection(FlxG.keys.pressed.SHIFT);
 			}
 
 			if (FlxG.mouse.wheel != 0)
@@ -714,7 +717,7 @@ class ChartingState extends MusicBeatState
 		updateSectionUI();
 	}
 
-	function changeSection(sec:Int = 0, ?updateMusic:Bool = true):Void
+	function changeSection(sec:Int = 0, updateMusic:Bool = true):Void
 	{
 		trace('changing section' + sec);
 
@@ -959,14 +962,24 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
-		FlxG.resetState();
+		if(song.replace(' ', '').length > 1) {
+			PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+			FlxG.resetState();
+		} else {
+			trace('ChartingState.hx: loadSong: no song name founded');
+			throw new Exception("no song");
+		}
 	}
 
 	function loadAutosave():Void
 	{
-		PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
-		FlxG.resetState();
+		if(FlxG.save.data.autosave != null) {
+			PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
+			FlxG.resetState();
+		} else {
+			trace('no autosave detected');
+			throw new Exception('no autosave saved');
+		}
 	}
 
 	function autosaveSong():Void
@@ -992,6 +1005,7 @@ class ChartingState extends MusicBeatState
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 			_file.save(data.trim(), _song.song.toLowerCase() + ".json");
+			//FlxG.log.notice('Trying to save SONG DATA');
 		}
 	}
 
@@ -1001,7 +1015,7 @@ class ChartingState extends MusicBeatState
 		_file.removeEventListener(Event.CANCEL, onSaveCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 		_file = null;
-		FlxG.log.notice("Successfully saved LEVEL DATA.");
+		FlxG.log.notice("Successfully saved SONG DATA.");
 	}
 
 	/**
@@ -1013,6 +1027,7 @@ class ChartingState extends MusicBeatState
 		_file.removeEventListener(Event.CANCEL, onSaveCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 		_file = null;
+		//FlxG.log.notice('Canceled saved SONG DATA');
 	}
 
 	/**
