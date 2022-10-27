@@ -174,6 +174,11 @@ class PlayState extends MusicBeatState
 
 	// public static var isDownscroll:Bool = false;
 
+	public var sicks:Int = 0;
+	public var goods:Int = 0;
+	public var bads:Int = 0;
+	public var shits:Int = 0;
+
 	override public function create()
 	{
 		openfl.system.System.gc(); // basic optimization
@@ -1495,9 +1500,9 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Ratings:' +	songRateingacc + '(' + songRateingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		//rate code
-		if(songMisses == 0)
+		if(songMisses == 0 && bads > 0)
 			songRateingmiss = 'FC';
-		if(songMisses == 0 && songAccuracy > 80)
+		if(songMisses == 0 && goods > 0)
 			songRateingmiss = 'GFC';
 		if(songMisses > 0 && songMisses < 5)
 			songRateingmiss = 'PG';
@@ -1506,9 +1511,9 @@ class PlayState extends MusicBeatState
 		if(songMisses > 20)
 			songRateingmiss = 'Clear';
 
-		if(songAccuracy < 80)
+		if(songAccuracy < 80 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
 			songRateingacc = 'GREAT!';
-		if(songAccuracy < 99)
+		if(songAccuracy < 99 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
 			songRateingacc = 'GOOD';
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
@@ -1936,6 +1941,7 @@ class PlayState extends MusicBeatState
 			score = 50;
 			// acc = -0.20;
 			totalNotesHit += 1 - 0.9;
+			shits++;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
@@ -1943,6 +1949,7 @@ class PlayState extends MusicBeatState
 			score = 100;
 			// acc = -0.5;
 			totalNotesHit += 1 - 0.75;
+			bads++;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
@@ -1950,9 +1957,12 @@ class PlayState extends MusicBeatState
 			score = 200;
 			// acc = 0.5;
 			totalNotesHit += 1 - 0.2;
+			goods++;
 		}
-		if (daRating == 'sick')
+		if (daRating == 'sick') {
 			totalNotesHit += 1;
+			sicks++;
+		}
 
 		if (!practiceMode)
 			songScore += score;
@@ -2062,8 +2072,6 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
-
-		curSection += 1;
 	}
 
 	private function keyShit():Void
@@ -2190,8 +2198,6 @@ class PlayState extends MusicBeatState
 				songScore -= 10;
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-			// FlxG.log.add('played imss note');
 
 			boyfriend.stunned = true;
 
@@ -2378,8 +2384,6 @@ class PlayState extends MusicBeatState
 		gf.playAnim('hairFall');
 		phillyTrain.x = FlxG.width + 200;
 		trainMoving = false;
-		// trainSound.stop();
-		// trainSound.time = 0;
 		trainCars = 8;
 		trainFinishing = false;
 		startedMoving = false;
