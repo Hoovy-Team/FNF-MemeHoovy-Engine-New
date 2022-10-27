@@ -2070,7 +2070,6 @@ class PlayState extends MusicBeatState
 	{
 		var holdingArray:Array<Bool> = [controls.NOTE_LEFT,   controls.NOTE_DOWN,   controls.NOTE_UP,   controls.NOTE_RIGHT];
 		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
-		var releaseArray:Array<Bool> = [controls.NOTE_LEFT_R, controls.NOTE_DOWN_R, controls.NOTE_UP_R, controls.NOTE_RIGHT_R];
 
 		if (holdingArray.contains(true) && generatedMusic)
 		{
