@@ -8,6 +8,8 @@ No, it's not dead, I've just been busy.
 
 # THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.
 
+Also if you make a mod with this engine, credit me, Brandon, & Wither, and also open source your mods too you goons.
+
 ### Special Thanks:
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
