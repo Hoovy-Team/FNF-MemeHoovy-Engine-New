@@ -16,6 +16,8 @@ No, it's not dead, I've just been busy.
 
 [Wither362](https://github.com/Wither362) - Contributor & Assistant Programmer.
 
+[Yoshubs](https://github.com/Yoshubs) - Some inspiration.
+
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 ### Original description:
