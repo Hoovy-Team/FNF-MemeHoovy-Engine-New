@@ -9,7 +9,7 @@ class CoolUtil
 {
 	public static var difficultyArray:Array<String> = ['EASY', 'NORMAL', 'HARD'];
 
-	public static var defaultDifficulty:String = 'NORMAL'; // no suffix
+	public static inline final defaultDifficulty:String = 'NORMAL'; // no suffix
 
 	public static function difficultyString():String
 	{
