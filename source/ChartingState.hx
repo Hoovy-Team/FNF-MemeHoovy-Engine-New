@@ -489,7 +489,7 @@ class ChartingState extends MusicBeatState
 
 		if (FlxG.mouse.justPressed)
 		{
-			if (FlxG.mouse.overlaps(curRenderedNotes) && !FlxG.keys.pressed.K)) // more notes ºwº
+			if (FlxG.mouse.overlaps(curRenderedNotes) && !FlxG.keys.pressed.K) // more notes ºwº
 			{
 				curRenderedNotes.forEach(function(note:Note)
 				{
