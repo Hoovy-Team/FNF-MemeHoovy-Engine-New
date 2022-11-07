@@ -1,6 +1,7 @@
 package;
 
 import haxe.Json;
+import haxe.Exception;
 
 #if polymod
 import polymod.Polymod;
@@ -23,8 +24,14 @@ class JsonTools extends JSONParseFormat
 
         var stringedJSON = Json.stringify(jsonParsed);
 
-        if (stringedJSON != null || stringedJSON != '')
+        if (stringedJSON != null || stringedJSON != '' && Std.isOfType(StringedJSON, String))
             return stringedJSON;
+        else if (Std.isOfType(StringedJSON, Json)){
+            throw new Exception('Invalid Stringed JSON: ' + Json.stringify(stringedJSON));
+        }
+        else if (!Std.isOfType(StringedJSON, String)){
+            throw new Exception('Unknown Stringed JSON: ' + stringedJSON);
+        }
         else
             return null;
     }
