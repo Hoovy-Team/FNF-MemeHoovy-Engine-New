@@ -22,6 +22,8 @@ Also if you make a mod with this engine, credit me, Brandon, & Wither, and also 
 
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
+Also check out: [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
+
 ### Original description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
 
