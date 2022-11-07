@@ -1,11 +1,35 @@
 package;
 
+import haxe.Json;
+
 #if polymod
 import polymod.Polymod;
 import polymod.format.ParseRules.JSONParseFormat;
+#end
 
-class JsonLoaderFuni extends JSONParseFormat
+class JsonTools extends JSONParseFormat
 {
+    public static function loadJSON(json:Json){
+        var jsonParsed = Json.parse(json);
+
+        if (jsonParsed != null)
+            return jsonParsed;
+        else
+            return null;
+    }
+
+    public static function StringifyJSON(json:Json){
+        var jsonParsed = Json.parse(json);
+
+        var stringedJSON = Json.stringify(jsonParsed);
+
+        if (stringedJSON != null || stringedJSON != '')
+            return stringedJSON;
+        else
+            return null;
+    }
+
+    #if polymod
     override private function _mergeObjects(a:Dynamic, b:Dynamic, signatureSoFar:String = ''):Dynamic
     {
         if (Std.isOfType(a, Array) && Std.isOfType(b, Array))
@@ -77,5 +101,7 @@ class JsonLoaderFuni extends JSONParseFormat
 
         return a;
     }
+
+
 }
 #end
