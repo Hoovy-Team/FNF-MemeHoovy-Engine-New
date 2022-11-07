@@ -11,29 +11,36 @@ import polymod.format.ParseRules.JSONParseFormat;
 class JsonTools extends JSONParseFormat
 {
     public static function loadJSON(json:Json){
-        var jsonParsed = Json.parse(json);
-
-        if (jsonParsed != null)
+        try {
+            var jsonParsed = Json.parse(json);
+            //
             return jsonParsed;
-        else
-            return null;
+        }
+        catch (e){
+            throw e;
+        }
     }
 
     public static function StringifyJSON(json:Json){
-        var jsonParsed = Json.parse(json);
+        try {
+            var jsonParsed = Json.parse(json);
 
-        var stringedJSON = Json.stringify(jsonParsed);
-
-        if (stringedJSON != null || stringedJSON != '' && Std.isOfType(StringedJSON, String))
-            return stringedJSON;
-        else if (Std.isOfType(StringedJSON, Json)){
+            var stringedJSON = Json.stringify(jsonParsed);
+    
+            if (stringedJSON != null || stringedJSON != '')
+                return stringedJSON;
+        }
+        catch (e){
+            throw e;
+        }
+        /*else if (Std.isOfType(StringedJSON, Json)){
             throw new Exception('Invalid Stringed JSON: ' + Json.stringify(stringedJSON));
         }
         else if (!Std.isOfType(StringedJSON, String)){
             throw new Exception('Unknown Stringed JSON: ' + stringedJSON);
         }
         else
-            return null;
+            return null;*/
     }
 
     #if polymod
