@@ -14,7 +14,7 @@ Also if you make a mod with this engine, credit me, Brandon, & Wither, and also 
 
 [Stillic](https://github.com/Stilic) - Polymod fix.
 
-[504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Nike engine lol.)
+[504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
 
 [Wither362](https://github.com/Wither362) - Contributor & Assistant Programmer.
 
