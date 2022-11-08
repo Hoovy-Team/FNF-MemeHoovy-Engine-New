@@ -2,6 +2,7 @@ package;
 
 import haxe.Json;
 import haxe.Exception;
+import openfl.utils.Assets;
 
 #if polymod
 import polymod.Polymod;
@@ -10,9 +11,14 @@ import polymod.format.ParseRules.JSONParseFormat;
 
 class JsonTools extends JSONParseFormat
 {
-    public static function loadJSON(json:Json){
+    public static function loadJSON(json:String, ?library:String){
+        var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
+
+        if (!Assets.exists(jsonPath))
+            return null;
+
         try {
-            var jsonParsed = Json.parse(json);
+            var jsonParsed = Json.parse(jsonPath);
             //
             return jsonParsed;
         }
@@ -21,9 +27,24 @@ class JsonTools extends JSONParseFormat
         }
     }
 
+    public static function unsafeLoadJSON(json:String, ?library:String){
+        var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
+
+        if (!Assets.exists(jsonPath))
+            return null;
+
+        var jsonParsed = Json.parse(jsonPath);
+        return jsonParsed;
+    }
+
     public static function StringifyJSON(json:Json){
+        var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
+        
+        if (!Assets.exists(jsonPath))
+            return null;
+
         try {
-            var jsonParsed = Json.parse(json);
+            var jsonParsed = Json.parse(jsonPath);
 
             var stringedJSON = Json.stringify(jsonParsed);
     
