@@ -27,6 +27,11 @@ import polymod.format.ParseRules.JSONParseFormat;
 
 class JsonTools extends JSONParseFormat
 {
+    /**
+     * [Description] Loads a JSON file from the specified path.
+     * @param json The JSON file to load.
+     * @param library The library for the location of the JSON file.
+     */
     public static function loadJSON(json:String, ?library:String){
         var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
 
@@ -43,6 +48,11 @@ class JsonTools extends JSONParseFormat
         }
     }
 
+    /**
+     * [Description] Loads a JSON file from the specified path. (But does not include safety measures.)
+     * @param json The JSON file to load.
+     * @param library The library for the location of the JSON file.
+     */
     public static function unsafeLoadJSON(json:String, ?library:String){
         var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
 
@@ -53,6 +63,11 @@ class JsonTools extends JSONParseFormat
         return jsonParsed;
     }
 
+    /**
+     * [Description] Loads a JSON file from the specified path & converts it into a string.
+     * @param json The JSON file to load.
+     * @param library The library for the location of the JSON file.
+     */
     public static function StringifyJSON(json:String, ?library:String){
         var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
         
@@ -80,6 +95,11 @@ class JsonTools extends JSONParseFormat
             return null;*/
     }
 
+    /**
+     * [Description] Loads a JSON file from the specified path & converts it into a string. (But without safety measures).
+     * @param json The JSON file to load.
+     * @param library The library for the location of the JSON file.
+     */
     public static function unsafeStringifyJSON(json:String, ?library:String){
         var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
         
