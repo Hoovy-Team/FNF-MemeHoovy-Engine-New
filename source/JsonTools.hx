@@ -37,7 +37,7 @@ class JsonTools extends JSONParseFormat
         return jsonParsed;
     }
 
-    public static function StringifyJSON(json:Json){
+    public static function StringifyJSON(json:String, ?library:String){
         var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
         
         if (!Assets.exists(jsonPath))
@@ -62,6 +62,20 @@ class JsonTools extends JSONParseFormat
         }
         else
             return null;*/
+    }
+
+    public static function unsafeStringifyJSON(json:String, ?library:String){
+        var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
+        
+        if (!Assets.exists(jsonPath))
+            return null;
+
+        var jsonParsed = Json.parse(jsonPath);
+
+        var stringedJSON = Json.stringify(jsonParsed);
+
+        if (stringedJSON != null || stringedJSON != '')
+            return stringedJSON;
     }
 
     #if polymod
