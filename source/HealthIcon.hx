@@ -25,7 +25,7 @@ class HealthIcon extends FlxSprite
 		antialiasing = true;
 		scrollFactor.set();
 	}
-	
+
 	public function changeIcon(char:String)
 	{
 		if (char != 'bf-pixel' && char != 'bf-old')
@@ -33,11 +33,13 @@ class HealthIcon extends FlxSprite
 
 		if (char != this.char)
 		{
-			if (!Assets.exists(Paths.image('icons/icon-' + char))){
+			if (!Assets.exists(Paths.image('icons/icon-' + char)))
+			{
 				loadGraphic(Paths.image('icons/icon-face'), true, 150, 150); // wouldn't it be ironic if it didn't exist?
 				animation.add('face', [0, 1], 0, false, isPlayer);
 			}
-			else {
+			else
+			{
 				loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
 				animation.add(char, [0, 1], 0, false, isPlayer);
 			}

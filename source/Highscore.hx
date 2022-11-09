@@ -51,7 +51,7 @@ class Highscore
 	{
 		var daSong:String = song;
 
-		if(CoolUtil.defaultDifficulty != CoolUtil.difficultyArray[diff])
+		if (CoolUtil.defaultDifficulty != CoolUtil.difficultyArray[diff])
 			daSong += '-' + CoolUtil.difficultyArray[diff].toLowerCase();
 
 		return daSong;

@@ -115,7 +115,7 @@ class StoryMenuState extends MusicBeatState
 		add(grpLocks);
 
 		trace("Line 117");
-		
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -189,7 +189,7 @@ class StoryMenuState extends MusicBeatState
 
 		sprDifficulty = new FlxSprite(leftArrow.x + 130, leftArrow.y);
 		sprDifficulty.frames = ui_tex;
-		for(dif in CoolUtil.difficultyArray)
+		for (dif in CoolUtil.difficultyArray)
 			sprDifficulty.animation.addByPrefix(dif.toLowerCase(), dif.toUpperCase());
 		sprDifficulty.animation.play(CoolUtil.defaultDifficulty.toLowerCase());
 		changeDifficulty();
@@ -312,7 +312,8 @@ class StoryMenuState extends MusicBeatState
 
 			var diffic = '';
 
-			if(CoolUtil.defaultDifficulty.toLowerCase() != CoolUtil.difficultyArray[curDifficulty].toLowerCase()) {
+			if (CoolUtil.defaultDifficulty.toLowerCase() != CoolUtil.difficultyArray[curDifficulty].toLowerCase())
+			{
 				diffic = '-' + CoolUtil.difficultyArray[curDifficulty].toLowerCase();
 			}
 
@@ -333,8 +334,8 @@ class StoryMenuState extends MusicBeatState
 		curDifficulty += change;
 
 		if (curDifficulty < 0)
-			curDifficulty = CoolUtil.difficultyArray.length-1;
-		if (curDifficulty > CoolUtil.difficultyArray.length-1)
+			curDifficulty = CoolUtil.difficultyArray.length - 1;
+		if (curDifficulty > CoolUtil.difficultyArray.length - 1)
 			curDifficulty = 0;
 
 		sprDifficulty.offset.x = 0;

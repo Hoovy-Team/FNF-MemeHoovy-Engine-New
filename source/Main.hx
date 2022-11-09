@@ -51,14 +51,15 @@ class Main extends Sprite
 	// thx sqirraRNG
 	function onWindowFocusOut()
 	{
-		if (!CoolUtil.isInState('PlayState')) {
+		if (!CoolUtil.isInState('PlayState'))
+		{
 			trace("Game unfocused");
 
 			// Lower global volume when unfocused
 			if (focusMusicTween != null)
 				focusMusicTween.cancel();
 			focusMusicTween = FlxTween.tween(FlxG.sound, {volume: 0.3}, 0.5);
-	
+
 			// Conserve power by lowering draw framerate when unfocuced
 			FlxG.drawFramerate = 30;
 		}
@@ -66,14 +67,15 @@ class Main extends Sprite
 
 	function onWindowFocusIn()
 	{
-		if (!CoolUtil.isInState('PlayState')) {
+		if (!CoolUtil.isInState('PlayState'))
+		{
 			trace("Game focused");
 
 			// Normal global volume when focused
 			if (focusMusicTween != null)
 				focusMusicTween.cancel();
 			focusMusicTween = FlxTween.tween(FlxG.sound, {volume: FlxG.sound.volume}, 0.5);
-	
+
 			// Bring framerate back when focused
 			FlxG.drawFramerate = 150;
 		}

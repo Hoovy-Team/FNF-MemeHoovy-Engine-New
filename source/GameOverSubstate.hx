@@ -21,10 +21,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		switch (daStage)
 		{
 			case 'school' | 'schoolEvil':
-			{
-				stageSuffix = '-pixel';
-				boyfriendName = 'bf-pixel-dead';
-			}
+				{
+					stageSuffix = '-pixel';
+					boyfriendName = 'bf-pixel-dead';
+				}
 		}
 
 		super();

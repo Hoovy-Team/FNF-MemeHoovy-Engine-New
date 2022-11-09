@@ -94,7 +94,7 @@ class Paths
 
 	inline static public function video(key:String, ?library:String)
 	{
-		return('assets/videos/$key.mp4');
+		return ('assets/videos/$key.mp4');
 	}
 
 	inline static public function music(key:String, ?library:String)
@@ -151,7 +151,7 @@ class Paths
 
 		trace('oh no $key its returning null NOOOO');
 		return null;
-	}	
+	}
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)
 	{

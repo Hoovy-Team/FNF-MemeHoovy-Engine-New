@@ -13,7 +13,7 @@ class CoolUtil
 
 	public static function difficultyString():String
 	{
-		if(PlayState.storyDifficulty == difficultyArray.length) // no crash
+		if (PlayState.storyDifficulty == difficultyArray.length) // no crash
 			return defaultDifficulty;
 		return difficultyArray[PlayState.storyDifficulty];
 	}

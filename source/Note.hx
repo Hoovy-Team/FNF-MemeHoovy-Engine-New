@@ -29,7 +29,8 @@ class Note extends FlxSprite
 
 	public var noteType(default, set):String;
 
-	function set_noteType(daType:String){
+	function set_noteType(daType:String)
+	{
 		return noteType = daType; // unfinished
 	}
 
@@ -119,9 +120,12 @@ class Note extends FlxSprite
 				animation.play('redScroll');
 		}
 
-		if (Config.downscroll && sustainNote){
+		if (Config.downscroll && sustainNote)
+		{
 			flipY = true;
-		}else{
+		}
+		else
+		{
 			flipY = false;
 		}
 

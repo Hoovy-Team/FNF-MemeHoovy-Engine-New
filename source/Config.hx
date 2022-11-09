@@ -6,7 +6,6 @@ using StringTools;
 
 // I borrowed this from FPS Plus https://github.com/ThatRozebudDude/FPS-Plus-Public
 // thank you rozebud
-
 class Config
 {
 	public static var downscroll:Bool = false;

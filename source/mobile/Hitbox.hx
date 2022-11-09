@@ -21,7 +21,7 @@ class Hitbox extends FlxSpriteGroup
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
-	
+
 	public function new(?widghtScreen:Float)
 	{
 		super();
@@ -31,11 +31,9 @@ class Hitbox extends FlxSpriteGroup
 
 		sizex = widghtScreen != null ? widghtScreen / 4 : 320;
 
-		
-		//add graphic
+		// add graphic
 		hitbox = new FlxSpriteGroup();
 		hitbox.scrollFactor.set();
-
 
 		hitbox.add(add(buttonLeft = createhitbox(0, "left")));
 
@@ -46,38 +44,51 @@ class Hitbox extends FlxSpriteGroup
 		hitbox.add(add(buttonRight = createhitbox(sizex * 3, "right")));
 	}
 
-	public function createhitbox(X:Float, framestring:String) {
+	public function createhitbox(X:Float, framestring:String)
+	{
 		var button = new FlxButton(X, 0);
 		var frames = Paths.getSparrowAtlas('hitbox', 'shared');
-		
-        var graphic:FlxGraphic = FlxGraphic.fromFrame(frames.getByName(framestring));
 
-        button.loadGraphic(graphic);
+		var graphic:FlxGraphic = FlxGraphic.fromFrame(frames.getByName(framestring));
 
-        button.alpha = 0;
-    
-        button.onDown.callback = function (){
-            FlxTween.num(0, 0.75, .075, {ease: FlxEase.circInOut}, function (a:Float) { button.alpha = a; });
-        };
+		button.loadGraphic(graphic);
 
-        button.onUp.callback = function (){
-            FlxTween.num(0.75, 0, .1, {ease: FlxEase.circInOut}, function (a:Float) { button.alpha = a; });
-        }
-        
-        button.onOut.callback = function (){
-            FlxTween.num(button.alpha, 0, .2, {ease: FlxEase.circInOut}, function (a:Float) { button.alpha = a; });
-        }
+		button.alpha = 0;
 
-        return button;
+		button.onDown.callback = function()
+		{
+			FlxTween.num(0, 0.75, .075, {ease: FlxEase.circInOut}, function(a:Float)
+			{
+				button.alpha = a;
+			});
+		};
+
+		button.onUp.callback = function()
+		{
+			FlxTween.num(0.75, 0, .1, {ease: FlxEase.circInOut}, function(a:Float)
+			{
+				button.alpha = a;
+			});
+		}
+
+		button.onOut.callback = function()
+		{
+			FlxTween.num(button.alpha, 0, .2, {ease: FlxEase.circInOut}, function(a:Float)
+			{
+				button.alpha = a;
+			});
+		}
+
+		return button;
 	}
 
 	override public function destroy():Void
-		{
-			super.destroy();
-	
-			buttonLeft = null;
-			buttonDown = null;
-			buttonUp = null;
-			buttonRight = null;
-		}
+	{
+		super.destroy();
+
+		buttonLeft = null;
+		buttonDown = null;
+		buttonUp = null;
+		buttonRight = null;
+	}
 }

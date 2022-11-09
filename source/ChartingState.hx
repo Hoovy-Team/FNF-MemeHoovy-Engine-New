@@ -351,15 +351,18 @@ class ChartingState extends MusicBeatState
 		{
 			FlxG.sound.music.stop();
 			/*if(vocals != null)
-				vocals.stop();*/
+				vocals.stop(); */
 		}
 
 		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
 
 		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
-		if(daSong != 'tutorial' && daSong != 'test') {
+		if (daSong != 'tutorial' && daSong != 'test')
+		{
 			vocals = new FlxSound().loadEmbedded(Paths.voices(daSong));
-		} else {
+		}
+		else
+		{
 			vocals = new FlxSound();
 		}
 		FlxG.sound.list.add(vocals);
@@ -962,10 +965,13 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		if(song.replace(' ', '').length > 1) {
+		if (song.replace(' ', '').length > 1)
+		{
 			PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 			FlxG.resetState();
-		} else {
+		}
+		else
+		{
 			trace('ChartingState.hx: loadSong: no song name founded');
 			throw new Exception("no song");
 		}
@@ -973,10 +979,13 @@ class ChartingState extends MusicBeatState
 
 	function loadAutosave():Void
 	{
-		if(FlxG.save.data.autosave != null) {
+		if (FlxG.save.data.autosave != null)
+		{
 			PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
 			FlxG.resetState();
-		} else {
+		}
+		else
+		{
 			trace('no autosave detected');
 			throw new Exception('no autosave saved');
 		}
@@ -1005,7 +1014,7 @@ class ChartingState extends MusicBeatState
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 			_file.save(data.trim(), _song.song.toLowerCase() + ".json");
-			//FlxG.log.notice('Trying to save SONG DATA');
+			// FlxG.log.notice('Trying to save SONG DATA');
 		}
 	}
 
@@ -1027,7 +1036,7 @@ class ChartingState extends MusicBeatState
 		_file.removeEventListener(Event.CANCEL, onSaveCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 		_file = null;
-		//FlxG.log.notice('Canceled saved SONG DATA');
+		// FlxG.log.notice('Canceled saved SONG DATA');
 	}
 
 	/**

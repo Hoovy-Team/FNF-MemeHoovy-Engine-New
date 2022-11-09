@@ -2,7 +2,6 @@ package mobile;
 
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
-
 import mobile.Hitbox;
 
 class Mobilecontrols extends FlxSpriteGroup
@@ -11,7 +10,7 @@ class Mobilecontrols extends FlxSpriteGroup
 
 	public var _hitbox:Hitbox;
 
-	public function new() 
+	public function new()
 	{
 		super();
 
@@ -20,6 +19,7 @@ class Mobilecontrols extends FlxSpriteGroup
 	}
 }
 
-enum ControlsGroup {
+enum ControlsGroup
+{
 	HITBOX;
 }

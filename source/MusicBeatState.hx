@@ -29,7 +29,7 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
-		//everyStep();
+		// everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
@@ -38,8 +38,8 @@ class MusicBeatState extends FlxUIState
 		if (oldStep != curStep && curStep > 0)
 			stepHit();
 
-		if(FlxG.stage != null)
-			if(FlxG.stage.frameRate != 150)
+		if (FlxG.stage != null)
+			if (FlxG.stage.frameRate != 150)
 				FlxG.stage.frameRate = 150;
 
 		super.update(elapsed);
@@ -74,6 +74,6 @@ class MusicBeatState extends FlxUIState
 
 	public function beatHit():Void
 	{
-		//do literally nothing dumbass
+		// do literally nothing dumbass
 	}
 }

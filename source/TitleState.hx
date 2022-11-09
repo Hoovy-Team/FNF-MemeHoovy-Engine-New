@@ -55,7 +55,8 @@ class TitleState extends MusicBeatState
 
 		FlxG.autoPause = false; // might make this an option ¯\_(ツ)_/¯
 
-		if (Assets.exists(Paths.image('owo')) == false){
+		if (Assets.exists(Paths.image('owo')) == false)
+		{
 			throw new Exception("bruh");
 		}
 
@@ -94,10 +95,11 @@ class TitleState extends MusicBeatState
 
 		#if desktop
 		DiscordClient.initialize();
-		
-		Application.current.onExit.add (function (exitCode) {
+
+		Application.current.onExit.add(function(exitCode)
+		{
 			DiscordClient.shutdown();
-		 });
+		});
 		#end
 	}
 

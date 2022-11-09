@@ -12,6 +12,7 @@ class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
+
 	var normalAnim:Array<String> = ['singLEFT', 'singUP', 'singDOWN', 'singRIGHT'];
 	var normalAnimLow:Array<String> = ['left', 'up', 'down', 'right'];
 
@@ -555,7 +556,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 				hpcolor = 0xFF0F0F0F;
-			case 'bf-holding-gf':	
+			case 'bf-holding-gf':
 				frames = Paths.getSparrowAtlas('bfAndGF');
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
@@ -665,7 +666,7 @@ class Character extends FlxSprite
 		{
 			switch (curCharacter)
 			{
-				case 'gf' | 'gf-christmas' | 'gf-car'| 'gf-pixel'| 'gf-tank':
+				case 'gf' | 'gf-christmas' | 'gf-car' | 'gf-pixel' | 'gf-tank':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
@@ -691,7 +692,7 @@ class Character extends FlxSprite
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
-		if(!animOffsets.exists(AnimName))
+		if (!animOffsets.exists(AnimName))
 			return; // no crash
 
 		animation.play(AnimName, Force, Reversed, Frame);

@@ -1,4 +1,3 @@
-
 package;
 
 import flixel.FlxSprite;

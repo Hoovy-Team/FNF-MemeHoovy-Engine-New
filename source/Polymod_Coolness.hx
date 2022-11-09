@@ -5,31 +5,31 @@ import polymod.format.ParseRules;
 #end
 
 /**
-    Class for loading mods with `Polymod`.
+	Class for loading mods with `Polymod`.
 **/
 class Polymod_Coolness
 {
-    public static var mod_dirs:Array<String> = [];
+	public static var mod_dirs:Array<String> = [];
 
 	public static function reloadMods()
 	{
 		#if desktop
-        polymod.PolymodConfig.modMetadataFile = "mod.json";
-        polymod.PolymodConfig.modIconFile = "mod.png";
+		polymod.PolymodConfig.modMetadataFile = "mod.json";
+		polymod.PolymodConfig.modIconFile = "mod.png";
 
 		mod_dirs = [];
 
-		for(meta in polymod.Polymod.scan("mods"))
+		for (meta in polymod.Polymod.scan("mods"))
 		{
 			mod_dirs.push(meta.id);
 		}
 
-            mod_dirs = [];
+		mod_dirs = [];
 
-        var parse_rules:ParseRules = ParseRules.getDefault();
-        parse_rules.addFormat("json", new JsonLoaderFuni());
+		var parse_rules:ParseRules = ParseRules.getDefault();
+		parse_rules.addFormat("json", new JsonLoaderFuni());
 
-        polymod.Polymod.init({
+		polymod.Polymod.init({
 			modRoot: "mods",
 			dirs: mod_dirs,
 			framework: OPENFL,
@@ -41,7 +41,7 @@ class Polymod_Coolness
 				assetLibraryPaths: [
 					"songs" => "songs",
 					"shared" => "shared",
-                    "tutorial" => "tutorial",
+					"tutorial" => "tutorial",
 					"week1" => "week1",
 					"week2" => "week2",
 					"week3" => "week3",
@@ -50,7 +50,7 @@ class Polymod_Coolness
 					"week6" => "week6"
 				]
 			},
-            parseRules: parse_rules
+			parseRules: parse_rules
 		});
 		#end
 	}

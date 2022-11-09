@@ -11,7 +11,7 @@ typedef BPMChangeEvent =
 
 class Conductor
 {
-	public static var timeSignature:Array<Int> = [4,4];
+	public static var timeSignature:Array<Int> = [4, 4];
 	public static var bpm:Int = 100;
 	public static var crochet:Float = ((60 / bpm) * 1000); // beats in milliseconds
 	public static var stepCrochet:Float = crochet / 4; // steps in milliseconds
@@ -37,7 +37,7 @@ class Conductor
 		var totalPos:Float = 0;
 		for (i in 0...song.notes.length)
 		{
-			if(song.notes[i].changeBPM && song.notes[i].bpm != curBPM)
+			if (song.notes[i].changeBPM && song.notes[i].bpm != curBPM)
 			{
 				curBPM = song.notes[i].bpm;
 				var event:BPMChangeEvent = {
