@@ -129,8 +129,8 @@ class PlayState extends MusicBeatState
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
 	var songAccuracy:Float = 100;
-	var songRateingacc:String = 'Great';
-	var songRateingmiss:String = 'FC';
+	var songRatingacc:String = 'Great';
+	var songRatingmiss:String = 'FC';
 	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
@@ -1493,23 +1493,23 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Ratings:' +	songRateingacc + '(' + songRateingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
+		scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Combo:' + combo + ' | Accuracy:' + truncateFloat(songAccuracy, 2) + '% Ratings:' + songRatingacc + '(' + songRatingmiss + ')' + ' | Time:' + FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		//rate code
 		if(songMisses == 0 && bads > 0)
-			songRateingmiss = 'FC';
+			songRatingmiss = 'FC';
 		if(songMisses == 0 && goods > 0)
-			songRateingmiss = 'GFC';
+			songRatingmiss = 'GFC';
 		if(songMisses > 0 && songMisses < 5)
-			songRateingmiss = 'PG';
+			songRatingmiss = 'PG';
 		if(songMisses < 5 && songMisses > 10)
-			songRateingmiss = 'OOF';
+			songRatingmiss = 'OOF';
 		if(songMisses > 20)
-			songRateingmiss = 'Clear';
+			songRatingmiss = 'Clear';
 
 		if(songAccuracy < 80 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
-			songRateingacc = 'GREAT!';
+			songRatingacc = 'GREAT!';
 		if(songAccuracy < 99 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
-			songRateingacc = 'GOOD';
+			songRatingacc = 'GOOD';
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
