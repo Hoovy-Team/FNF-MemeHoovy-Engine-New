@@ -27,7 +27,7 @@ class Polymod_Coolness
 		mod_dirs = [];
 
 		var parse_rules:ParseRules = ParseRules.getDefault();
-		parse_rules.addFormat("json", new JsonLoaderFuni());
+		parse_rules.addFormat("json", new JsonTools());
 
 		polymod.Polymod.init({
 			modRoot: "mods",
