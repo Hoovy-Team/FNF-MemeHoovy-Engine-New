@@ -27,6 +27,13 @@ class Modifiers
         for (daMod in 0...mods) {
             // ((Std.isOfType(mods[daMod], Bool)) ? enabled : daString);
             (getModType() ? enabled : daString);
+
+            if (getModType() == Type.typeof(Bool)){
+                Reflect.setProperty(this, 'value', enabled);
+            }
+            else if (getModType() == Type.typeof(String)){
+                Reflect.setProperty(this, 'value', daString);
+            }
         }
 
         if (getModType() == null){
