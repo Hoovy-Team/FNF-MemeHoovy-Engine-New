@@ -84,8 +84,7 @@ class JsonTools extends JSONParseFormat
 
 			var stringedJSON = Json.stringify(jsonParsed);
 
-			if (stringedJSON != null || stringedJSON != '')
-				return stringedJSON;
+			return stringedJSON;
 		}
 		catch (e)
 		{
@@ -117,8 +116,7 @@ class JsonTools extends JSONParseFormat
 
 		var stringedJSON = Json.stringify(jsonParsed);
 
-		if (stringedJSON != null || stringedJSON != '')
-			return stringedJSON;
+		return stringedJSON;
 	}
 
 	#if polymod

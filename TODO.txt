@@ -25,6 +25,7 @@ TODO List:
 -Middlescroll
 -More than 2 strums (maybe?)
 -Credits Menu
+-Modifiers (possibly)
 -And many more I can't think of
 
 Misc Things:
@@ -37,5 +38,9 @@ DONE:
 -Practice mode
 -Death counter
 -Downscroll (Kinda buggy though)
+
+Scrapped:
+
+Nothing atm
 
 Wither362 is goated bro.
