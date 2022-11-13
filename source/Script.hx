@@ -35,14 +35,19 @@ class Script extends FlxBasic
 		}
 	}
 
-	public function setVariable(name:String, val:Dynamic)
+	public inline function setVariable(name:String, val:Dynamic)
 	{
 		hscript.variables.set(name, val);
 	}
 
-	public function getVariable(name:String):Dynamic
+	public inline function getVariable(name:String):Dynamic
 	{
 		return hscript.variables.get(name);
+	}
+
+	public inline function variableExists(name:String):Dynamic
+	{
+		return hscript.variables.exists(name);
 	}
 
 	public function executeFunc(funcName:String, ?args:Array<Any>):Dynamic
