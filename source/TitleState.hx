@@ -30,6 +30,9 @@ import openfl.utils.Assets;
 import flash.system.System;
 import haxe.Exception;
 import flixel.input.keyboard.FlxKey;
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+#end
 
 using StringTools;
 
@@ -99,6 +102,7 @@ class TitleState extends MusicBeatState
 		Application.current.onExit.add(function(exitCode)
 		{
 			DiscordClient.shutdown();
+			#if GAMEJOLT_ALLOWED GJClient.logout(); #end
 		});
 		#end
 	}

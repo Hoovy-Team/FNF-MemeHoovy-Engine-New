@@ -15,6 +15,11 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+import gamejolt.extras.Popup;
+import gamejolt.formats.User;
+#end
 
 using StringTools;
 
@@ -101,6 +106,14 @@ class MainMenuState extends MusicBeatState
 
 		changeItem();
 
+		#if GAMEJOLT_ALLOWED
+		GJClient.initialize(function (user:User)
+		{
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			add(new Popup(user.developer_name, "You're successfully logged in!"));
+		});
+		#end
+
 		super.create();
 	}
 
@@ -131,6 +144,13 @@ class MainMenuState extends MusicBeatState
 			{
 				FlxG.switchState(new TitleState());
 			}
+
+			#if GAMEJOLT_ALLOWED
+			if (FlxG.keys.justPressed.SEVEN)
+			{
+				FlxG.switchState(new gamejolt.menus.GJOptionsState());
+			}
+			#end
 
 			if (controls.ACCEPT)
 			{
