@@ -1,8 +1,9 @@
 #if FEATURE_HSCRIPT
 package;
 
+import hscript.Interp; // wouldn't this count as an unused import? why you gotta be so weird haxe
 import flixel.FlxBasic;
-import hscript.Interp;
+import hscript.*;
 import openfl.Lib;
 
 /**
@@ -92,6 +93,42 @@ class Script extends FlxBasic
 	{
 		super.destroy();
 		hscript = null;
+	}
+}
+#end
+
+// Based on Psych engine Extra
+// @author Starmapo
+// @co-author MemeHoovy
+#if FEATURE_HSCRIPT
+class HscriptTools extends Interp
+{
+	var useDefaultVars = false;
+
+	public function new() {
+		if (useDefaultVars)
+			defaultVars();
+
+		super();
+	}
+
+	public function defaultVars(){
+		// haxe variables
+		variables.set('Math', Math);
+		variables.set('Std', Std);
+		variables.set('Type', Type);
+		variables.set('FlxBasic', FlxBasic);
+
+		// FNF variables
+		variables.set('curBpm', Conductor.bpm);
+		variables.set('bpm', Conductor.bpm);
+		variables.set('crochet', Conductor.crochet);
+		variables.set('stepCrochet', Conductor.stepCrochet);
+		variables.set('signatureNumerator', Conductor.timeSignature[0]);
+		variables.set('signatureDenominator', Conductor.timeSignature[1]);
+		variables.set('scrollSpeed', PlayState.SONG.speed);
+		variables.set('isStoryMode', PlayState.isStoryMode);
+		variables.set('difficulty', PlayState.storyDifficulty);
 	}
 }
 #end
