@@ -22,6 +22,8 @@ Also if you make a mod with this engine, credit me, Brandon, & Wither, and also 
 
 [Yoshubs](https://github.com/Yoshubs) - Some inspiration.
 
+[Starmapo](https://github.com/Starmapo) - Inspiration & Hscript things. (And also being a cool person)
+
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 Also check out: [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
