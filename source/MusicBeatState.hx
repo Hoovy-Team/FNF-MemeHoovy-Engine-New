@@ -26,6 +26,7 @@ class MusicBeatState extends FlxUIState
 
 	override function create()
 	{
+		destroySubStates = false; // Avoid Crashing with SubMenus on theur reutilization
 		if (transIn != null)
 			trace('reg ' + transIn.region);
 
