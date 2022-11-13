@@ -6,6 +6,9 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;
 import flixel.util.FlxTimer;
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+#end
 
 class MusicBeatState extends FlxUIState
 {
@@ -15,6 +18,8 @@ class MusicBeatState extends FlxUIState
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 	private var controls(get, never):Controls;
+
+	private var pingTrigger:Bool = false;
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
@@ -41,6 +46,18 @@ class MusicBeatState extends FlxUIState
 		if (FlxG.stage != null)
 			if (FlxG.stage.frameRate != 150)
 				FlxG.stage.frameRate = 150;
+
+		#if GAMEJOLT_ALLOWED
+		if (GJClient.logged)
+		{
+			if (curBeat % 8 == 0 && pingTrigger)
+			{
+				GJClient.pingSession();
+				pingTrigger = false;
+			}
+			else if (curBeat % 8 == 1) pingTrigger = true;
+		}
+		#end
 
 		super.update(elapsed);
 	}

@@ -71,25 +71,16 @@ class JsonTools extends JSONParseFormat
 	 * @param json The JSON file to load.
 	 * @param library The library for the location of the JSON file.
 	 */
-	public static function StringifyJSON(json:String, ?library:String)
+	public static function StringifyJSON(json:String, ?library:String):Null<String>
 	{
 		var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
 
-		if (!Assets.exists(jsonPath))
-			return null;
+		if (!Assets.exists(jsonPath)) return null;
 
-		try
-		{
-			var jsonParsed = Json.parse(jsonPath);
+		var jsonParsed = Json.parse(jsonPath);
+		var stringedJSON = Json.stringify(jsonParsed);
 
-			var stringedJSON = Json.stringify(jsonParsed);
-
-			return stringedJSON;
-		}
-		catch (e)
-		{
-			throw e;
-		}
+		return stringedJSON;
 		/*else if (Std.isOfType(StringedJSON, Json)){
 				throw new Exception('Invalid Stringed JSON: ' + Json.stringify(stringedJSON));
 			}
@@ -105,7 +96,7 @@ class JsonTools extends JSONParseFormat
 	 * @param json The JSON file to load.
 	 * @param library The library for the location of the JSON file.
 	 */
-	public static function unsafeStringifyJSON(json:String, ?library:String)
+	public static function unsafeStringifyJSON(json:String, ?library:String):Null<String>
 	{
 		var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
 

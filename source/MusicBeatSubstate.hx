@@ -3,6 +3,9 @@ package;
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
 import flixel.FlxSubState;
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+#end
 
 class MusicBeatSubstate extends FlxSubState
 {
@@ -18,6 +21,8 @@ class MusicBeatSubstate extends FlxSubState
 	private var curBeat:Int = 0;
 	private var controls(get, never):Controls;
 
+	private var pingTrigger:Bool = false;
+
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
 
@@ -31,6 +36,18 @@ class MusicBeatSubstate extends FlxSubState
 
 		if (oldStep != curStep && curStep > 0)
 			stepHit();
+
+		#if GAMEJOLT_ALLOWED
+		if (GJClient.logged)
+		{
+			if (curBeat % 8 == 0 && pingTrigger)
+			{
+				GJClient.pingSession();
+				pingTrigger = false;
+			}
+			else if (curBeat % 8 == 1) pingTrigger = true;
+		}
+		#end
 
 		super.update(elapsed);
 	}
