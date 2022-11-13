@@ -11,6 +11,7 @@ class OptionsBeta extends MusicBeatState
 	var option_gt:FlxText;
 	var option_hpc:FlxText;
 	var option_downscroll:FlxText;
+	var option_globalAntialiasing:FlxText;
 
 	// public static var option_gt_int:Int = 0;
 	// public static var option_hpc_int:Int = 0;
@@ -19,6 +20,7 @@ class OptionsBeta extends MusicBeatState
 	public static var downValue:Bool = false;
 	public static var ghostValue:Bool = false;
 	public static var healthColorsValue:Bool = false;
+	public static var globalAntialiasing:Bool = true;
 
 	override function create() // this takes alot of code from my cookie clicker game huh
 	{
@@ -58,12 +60,21 @@ class OptionsBeta extends MusicBeatState
 		option_downscroll.screenCenter(X);
 		add(option_downscroll);
 
+		option_globalAntialiasing = new FlxText(0, 400, 0, "n/a", 30);
+		option_globalAntialiasing.pixelPerfectPosition = true;
+		option_globalAntialiasing.borderColor = FlxColor.BLACK;
+		option_globalAntialiasing.borderSize = 3;
+		option_globalAntialiasing.borderStyle = OUTLINE;
+		option_globalAntialiasing.screenCenter(X);
+		add(option_globalAntialiasing);
+
 		FlxG.mouse.visible = true;
 		FlxG.mouse.enabled = true;
 
 		downValue = Config.downscroll;
 		ghostValue = Config.ghostTapping;
 		healthColorsValue = Config.healthBarColors;
+		globalAntialiasing = Config.globalAntialiasing;
 
 		// if (FlxG.save.data.option_gt_int != option_gt_int)
 		// 	option_gt_int = FlxG.save.data.option_gt_int;
@@ -95,6 +106,12 @@ class OptionsBeta extends MusicBeatState
 		if (FlxG.mouse.overlaps(option_downscroll) && FlxG.mouse.justPressed)
 		{
 			downValue = !downValue;
+			writeToConfig();
+		}
+
+		if (FlxG.mouse.overlaps(option_globalAntialiasing) && FlxG.mouse.justPressed)
+		{
+			globalAntialiasing = !globalAntialiasing;
 			writeToConfig();
 		}
 
@@ -150,6 +167,6 @@ class OptionsBeta extends MusicBeatState
 
 	function writeToConfig()
 	{
-		Config.write(downValue, ghostValue, healthColorsValue);
+		Config.write(downValue, ghostValue, healthColorsValue, globalAntialiasing);
 	}
 }
