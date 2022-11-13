@@ -44,4 +44,8 @@ class Modifiers
         else
             return null;
     }
+
+    public inline function getMods() {
+        return Reflect.copy(mods[getModType()]);
+    }
 }
