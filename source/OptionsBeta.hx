@@ -13,10 +13,6 @@ class OptionsBeta extends MusicBeatState
 	var option_downscroll:FlxText;
 	var option_globalAntialiasing:FlxText;
 
-	// public static var option_gt_int:Int = 0;
-	// public static var option_hpc_int:Int = 0;
-	// public static var option_downscroll_int:Int = 0;
-	// public static var option_downscroll_bool:Bool = false;
 	public static var downValue:Bool = false;
 	public static var ghostValue:Bool = false;
 	public static var healthColorsValue:Bool = false;
@@ -76,16 +72,6 @@ class OptionsBeta extends MusicBeatState
 		healthColorsValue = Config.healthBarColors;
 		globalAntialiasing = Config.globalAntialiasing;
 
-		// if (FlxG.save.data.option_gt_int != option_gt_int)
-		// 	option_gt_int = FlxG.save.data.option_gt_int;
-		// if (FlxG.save.data.option_hpc_int != option_hpc_int)
-		// 	option_hpc_int = FlxG.save.data.option_hpc_int;
-		// if (FlxG.save.data.option_downscroll_int != option_downscroll_int)
-		// 	option_downscroll_int = FlxG.save.data.option_downscroll_int;
-		// if (FlxG.save.data.option_downscroll_bool != option_downscroll_bool) {
-		// 	option_downscroll_bool = FlxG.save.data.option_downscroll_bool;
-		//     downScrollEnabled = option_downscroll_bool;
-		// }
 		super.create();
 	}
 
@@ -142,18 +128,6 @@ class OptionsBeta extends MusicBeatState
 			option_downscroll.text = "Downscroll: false";
 		}
 
-		// if(option_gt_int > 1)
-		//     option_gt_int = 1;
-		// if(option_gt_int < 0)
-		//     option_gt_int = 0;
-		// if(option_hpc_int > 1)
-		//     option_hpc_int = 1;
-		// if(option_hpc_int < 0)
-		//     option_hpc_int = 0;
-		// if(option_downscroll_int > 1)
-		//     option_downscroll_int = 1;
-		// if(option_downscroll_int < 0)
-		//     option_downscroll_int = 0;
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxG.switchState(new MainMenuState());

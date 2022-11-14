@@ -1479,6 +1479,7 @@ class PlayState extends MusicBeatState
 						trainFrameTiming = 0;
 					}
 				}
+			phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed * 1.5;
 		}
 
 		super.update(elapsed);
@@ -2550,10 +2551,10 @@ class PlayState extends MusicBeatState
 					curLight = FlxG.random.int(0, phillyCityLights.length - 1);
 
 					phillyCityLights.members[curLight].visible = true;
-					// phillyCityLights.members[curLight].alpha = 1;
+					phillyCityLights.members[curLight].alpha = 1;
 				}
 
-				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
+				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8 && !trainSound.playing)
 				{
 					trainCooldown = FlxG.random.int(-4, 0);
 					trainStart();
