@@ -21,7 +21,7 @@ class CoolUtil
 
 	public static inline final defaultDifficulty:String = 'NORMAL'; // no suffix
 
-	public var theSprites:Map<String,FlxSprite> = new Map<String,FlxSprite>();
+	public static var theSprites:Map<String,FlxSprite> = new Map<String,FlxSprite>();
 
 	public static function difficultyString():String
 	{
