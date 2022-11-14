@@ -92,7 +92,7 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") 1,#end, framerate, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") 1,#end framerate, framerate, skipSplash, startFullscreen));
 
 		addChild(new FPS(10, 3, 0xFFFFFF));
 	}
