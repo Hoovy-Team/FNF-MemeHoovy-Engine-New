@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.util.FlxAxes;
@@ -88,5 +89,52 @@ class CoolUtil
 	inline public static function isInState(state:String)
 	{
 		return Type.getClassName(Type.getClass(FlxG.state)).contains(state);
+	}
+
+	public static function addSprite(x, y, path:String, scrollFactor:Float = 1, ?antialiasing:Bool = true, daState:FlxState):FlxSprite
+	{
+		var sprite:FlxSprite = new FlxSprite(x, y).loadGraphic(Paths.image(path));
+		sprite.scrollFactor.set(scrollFactor, scrollFactor);
+		sprite.active = false;
+		sprite.antialiasing = antialiasing;
+		daState.add(sprite);
+		return sprite;
+	}
+
+	public static function setSpr(name:String, sprite:FlxSprite):FlxSprite
+	{
+		theSprites.set(name, sprite);
+		return theSprites.get(name);
+	}
+
+	public static function getSpr(name:String):FlxSprite
+	{
+		return theSprites.get(name);
+	}
+
+	public static function addAnimPrefix(x, y, path:String, prefix:String, scrollFactor:Float = 1, loop:Bool = true, fps:Int = 24,
+			?antialiasing:Bool = true, daState:FlxState):FlxSprite
+	{
+		var sprite:FlxSprite = new FlxSprite(x, y);
+		sprite.frames = Paths.getSparrowAtlas(path);
+		sprite.animation.addByPrefix(prefix, prefix, fps, loop);
+		sprite.animation.play(prefix);
+		sprite.antialiasing = antialiasing;
+		sprite.scrollFactor.set(scrollFactor, scrollFactor);
+		daState.add(sprite);
+		return sprite;
+	}
+
+	public static function addAnimIndices(x, y, path:String, prefix:String, indices:Array<Int>, scrollFactor:Float = 1, loop:Bool = true, fps:Int = 24,
+			?antialiasing:Bool = true, daState:FlxState):FlxSprite
+	{
+		var sprite:FlxSprite = new FlxSprite(x, y);
+		sprite.frames = Paths.getSparrowAtlas(path);
+		sprite.animation.addByIndices(prefix, prefix, indices, "", fps, loop);
+		sprite.animation.play(prefix);
+		sprite.antialiasing = antialiasing;
+		sprite.scrollFactor.set(scrollFactor, scrollFactor);
+		daState.add(sprite);
+		return sprite;
 	}
 }
