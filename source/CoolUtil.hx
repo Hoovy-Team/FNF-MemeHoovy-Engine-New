@@ -101,13 +101,13 @@ class CoolUtil
 		return sprite;
 	}
 
-	public static function setSpr(name:String, sprite:FlxSprite):FlxSprite
+	public inline static function setSpr(name:String, sprite:FlxSprite):FlxSprite
 	{
 		theSprites.set(name, sprite);
 		return theSprites.get(name);
 	}
 
-	public static function getSpr(name:String):FlxSprite
+	public inline static function getSpr(name:String):FlxSprite
 	{
 		return theSprites.get(name);
 	}
