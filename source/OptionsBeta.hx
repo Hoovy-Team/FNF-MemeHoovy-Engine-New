@@ -4,6 +4,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 
 class OptionsBeta extends MusicBeatState
 {
@@ -17,6 +19,13 @@ class OptionsBeta extends MusicBeatState
 	public static var ghostValue:Bool = false;
 	public static var healthColorsValue:Bool = false;
 	public static var globalAntialiasing:Bool = true;
+
+	var seenWarning:Bool = false;
+
+	final doReset:Bool = true; // for debugging purposes
+
+	var warning:FlxText = new FlxText(0,0,0, 'WARNING, your save data will be resetted.\nDo you wish to continue?',32);
+	var blackScreen:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 
 	override function create() // this takes alot of code from my cookie clicker game huh
 	{
@@ -135,6 +144,39 @@ class OptionsBeta extends MusicBeatState
 			FlxG.mouse.enabled = false;
 			// Config.resetSettings();
 			writeToConfig();
+		}
+
+		if (FlxG.keys.justPressed.BACKSPACE)
+		{
+			if (!seenWarning) {
+				if (blackScreen != null)
+					FlxTween.tween(blackScreen, {alpha: 0.5}, 0.7, {ease: FlxEase.linear});
+
+				if (warning != null)
+					FlxTween.tween(warning, {alpha: 1.0}, 0.7, {ease: FlxEase.linear});
+
+				add(blackScreen);
+				add(warning);
+
+				seenWarning = true;
+			} else {
+				if (FlxG.keys.justPressed.ENTER) {
+					FlxG.switchState(new MainMenuState());
+					FlxG.mouse.visible = false;
+					FlxG.mouse.enabled = false;
+					if (doReset)
+						Config.resetSettings();
+					// writeToConfig();
+					remove(blackScreen);
+					remove(warning);
+					seenWarning = false;
+				}
+				else if (FlxG.keys.justPressed.ESCAPE){
+					remove(blackScreen);
+					remove(warning);
+					seenWarning = false;
+				}
+			}
 		}
 		super.update(elapsed);
 	}

@@ -6,6 +6,7 @@ import flixel.FlxObject;
 import flixel.util.FlxAxes;
 import lime.utils.Assets;
 import flixel.FlxSprite;
+import flixel.util.FlxTimer;
 
 using StringTools;
 

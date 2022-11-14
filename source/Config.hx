@@ -50,7 +50,7 @@ class Config
 			FlxG.save.data.healthBarColors = healthBarColors;
 		if (FlxG.save.data.ghostTapping == null)
 			FlxG.save.data.ghostTapping = ghostTapping;
-		if (FlxG.save.data.globalAntialiasing == null)
-			FlxG.save.data.globalAntialiasing = globalAntialiasing;
+		if (FlxG.save.data.antialiasing == null)
+			FlxG.save.data.antialiasing = globalAntialiasing;
 	}
 }
