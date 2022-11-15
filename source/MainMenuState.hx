@@ -20,6 +20,8 @@ import gamejolt.GJClient;
 import gamejolt.extras.Popup;
 import gamejolt.formats.User;
 #end
+import ui.PreferencesMenu;
+import ui.OptionsState;
 
 using StringTools;
 
@@ -48,7 +50,7 @@ class MainMenuState extends MusicBeatState
 
 		if (!FlxG.sound.music.playing)
 		{
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			CoolUtil.resetMusic();
 		}
 
 		persistentUpdate = persistentDraw = true;
@@ -74,8 +76,9 @@ class MainMenuState extends MusicBeatState
 		magenta.visible = false;
 		magenta.antialiasing = true;
 		magenta.color = 0xFFfd719b;
-		add(magenta);
-		// magenta.scrollFactor.set();
+
+		if (PreferencesMenu.getPref('flashing-menu'))
+			add(magenta);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -98,7 +101,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 30, 0,
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 33, 0,
 			"MemeHoovy Engine v" + engineVersion + '\nFNF v' + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -194,11 +197,9 @@ class MainMenuState extends MusicBeatState
 										trace("Story Menu Selected");
 									case 'freeplay':
 										FlxG.switchState(new FreeplayState());
-
 										trace("Freeplay Menu Selected");
-
 									case 'options':
-										FlxG.switchState(new OptionsBeta());
+										FlxG.switchState(new OptionsState());
 								}
 							});
 						}

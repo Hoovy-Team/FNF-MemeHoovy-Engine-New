@@ -5,7 +5,8 @@ import flixel.FlxSprite;
 import flixel.addons.ui.FlxUIGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import sys.FileSystem;
+import openfl.utils.Assets;
+import ui.PreferencesMenu;
 
 class TrophieBox extends FlxUIGroup
 {
@@ -34,7 +35,7 @@ class TrophieBox extends FlxUIGroup
     {
         super(x, y);
 
-        if (FileSystem.exists(Std.string(Paths.image(Std.string(bg)))) && bg != null)
+        if (Assets.exists(Std.string(Paths.image(Std.string(bg)))) && bg != null)
         {
             daBG = new FlxSprite().loadGraphic(Paths.image(bg));
             daBG.setGraphicSize(boxWidth, boxHeight);
@@ -46,7 +47,7 @@ class TrophieBox extends FlxUIGroup
             daBG.alpha = 0.65;
         }
 
-        if (FileSystem.exists(Std.string(Paths.image(Std.string(image)))) && image != null)
+        if (Assets.exists(Std.string(Paths.image(Std.string(image)))) && image != null)
             daImage = new FlxSprite().loadGraphic(Paths.image(image));
         else daImage = new FlxSprite().loadGraphic(Paths.image('unknownMod'));
 
@@ -85,6 +86,6 @@ class TrophieBox extends FlxUIGroup
         add(descBox);
         add(dateBox);
 
-        antialiasing = Config.globalAntialiasing;
+        antialiasing = PreferencesMenu.getPref('global-antialiasing');
     }
 }

@@ -46,6 +46,7 @@ import openfl.utils.Assets;
 import mobile.ControlsMobile;
 import mobile.Hitbox;
 #end
+import ui.PreferencesMenu;
 
 using StringTools;
 
@@ -767,13 +768,13 @@ class PlayState extends MusicBeatState
 
 		Conductor.songPosition = -5000;
 
-		if (Config.downscroll)
+		if (PreferencesMenu.getPref('downscroll'))
 		{
 			strumLine = new FlxSprite(0, 570).makeGraphic(FlxG.width, 10);
 		}
 		else
 		{
-			strumLine = new FlxSprite(0, 30).makeGraphic(FlxG.width, 10);
+			strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
 		}
 		strumLine.scrollFactor.set();
 
@@ -810,7 +811,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 
-		healthBarBG = new FlxSprite(0, Config.downscroll ? FlxG.height * 0.1 : FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
+		healthBarBG = new FlxSprite(0, PreferencesMenu.getPref('downscroll') ? FlxG.height * 0.1 : FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
@@ -818,7 +819,7 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		if (Config.healthBarColors)
+		if (PreferencesMenu.getPref('health-bar-colors'))
 			healthBar.createFilledBar(dad.hpcolor, boyfriend.hpcolor);
 		else
 			healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
@@ -833,7 +834,7 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		scoreTxt = new FlxText(487, !Config.downscroll ? healthBarBG.y + 30 : FlxG.height * 0.02, 0, "", 20);
+		scoreTxt = new FlxText(487, !PreferencesMenu.getPref('downscroll') ? healthBarBG.y + 30 : FlxG.height * 0.02, 0, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
@@ -1684,7 +1685,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (camZooming)
+		if (camZooming && PreferencesMenu.getPref('camera-zoom'))
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, 0.95);
@@ -1776,7 +1777,7 @@ class PlayState extends MusicBeatState
 					daNote.active = true;
 				}
 
-				if (!Config.downscroll)
+				if (!PreferencesMenu.getPref('downscroll'))
 					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
 				else
 					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
@@ -1831,7 +1832,7 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
-				if (daNote.y < -daNote.height && !Config.downscroll || daNote.y >= strumLine.y + 106 && Config.downscroll)
+				if (daNote.y < -daNote.height && !PreferencesMenu.getPref('downscroll') || daNote.y >= strumLine.y + 106 && PreferencesMenu.getPref('downscroll'))
 				{
 					if (daNote.tooLate || !daNote.wasGoodHit)
 					{
@@ -1999,7 +2000,7 @@ class PlayState extends MusicBeatState
 			sicks++;
 		}
 
-		if (doSplash)
+		if (doSplash && PreferencesMenu.getPref('note-splashes'))
 		{
 			var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
 			splash.setupNoteSplash(daNote.x, daNote.y, daNote.noteData);
@@ -2083,7 +2084,7 @@ class PlayState extends MusicBeatState
 			numScore.velocity.y -= FlxG.random.int(140, 160);
 			numScore.velocity.x = FlxG.random.float(-5, 5);
 
-			if (combo >= 10 || combo == 0)
+			if (combo >= 10)
 				add(numScore);
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
@@ -2232,7 +2233,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			health -= 0.04;
+			health -= 0.0475;
 
 			combo = 0;
 			if (combo > 5 && gf.animOffsets.exists('sad'))
@@ -2279,7 +2280,7 @@ class PlayState extends MusicBeatState
 		var downP = controls.UI_DOWN_P;
 		var leftP = controls.UI_LEFT_P;
 
-		if (!Config.ghostTapping)
+		if (!PreferencesMenu.getPref('ghost-tapping'))
 		{
 			if (leftP)
 			{
@@ -2496,21 +2497,22 @@ class PlayState extends MusicBeatState
 			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection)
 				dad.dance();
 		}
-		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
-		// HARDCODING FOR ZOOMS!
-		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}
-
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % curDenominator == 0)
-		{
-			// FlxTween.tween(camHUD, {zoom: camHUD.zoom + 0.07}, 0.3, {ease: FlxEase.circInOut});
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
+		if (PreferencesMenu.getPref('camera-zoom')) {
+			// HARDCODING FOR ZOOMS!
+			if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+			{
+				FlxG.camera.zoom += 0.015;
+				camHUD.zoom += 0.03;
+			}
+	
+			if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % curDenominator == 0)
+			{
+				// FlxTween.tween(camHUD, {zoom: camHUD.zoom + 0.07}, 0.3, {ease: FlxEase.circInOut});
+				FlxG.camera.zoom += 0.015;
+				camHUD.zoom += 0.03;
+			}
 		}
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));

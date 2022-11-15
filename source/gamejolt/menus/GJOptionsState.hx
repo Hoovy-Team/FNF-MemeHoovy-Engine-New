@@ -11,6 +11,7 @@ import flixel.util.FlxColor;
 import gamejolt.GJClient;
 import gamejolt.extras.ActionButton;
 import gamejolt.menus.*;
+import ui.PreferencesMenu;
 
 class GJOptionsState extends MusicBeatState
 {
@@ -31,7 +32,7 @@ class GJOptionsState extends MusicBeatState
         bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
         bg.color = FlxColor.LIME;
         bg.scrollFactor.set();
-        bg.antialiasing = Config.globalAntialiasing;
+        bg.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         add(bg);
 
         title = new Alphabet(0, 60, "GameJolt");

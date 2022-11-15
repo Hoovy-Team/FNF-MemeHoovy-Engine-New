@@ -10,6 +10,7 @@ import flixel.util.FlxColor;
 import gamejolt.GJClient;
 import gamejolt.extras.TrophieBox;
 import gamejolt.formats.Trophie;
+import ui.PreferencesMenu;
 
 class TrophiesSubState extends MusicBeatSubstate
 {
@@ -36,7 +37,7 @@ class TrophiesSubState extends MusicBeatSubstate
         trophList = GJClient.getTrophiesList();
 
         bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        bg.antialiasing = Config.globalAntialiasing;
+        bg.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         bg.scrollFactor.set();
         bg.color = FlxColor.GRAY;
         bg.alpha = 0;
@@ -48,21 +49,21 @@ class TrophiesSubState extends MusicBeatSubstate
 
         title = new Alphabet(0, 50, 'Trophies');
 		title.screenCenter(X);
-        title.antialiasing = Config.globalAntialiasing;
+        title.antialiasing = PreferencesMenu.getPref('global-antialiasing');
 		title.scrollFactor.set();
         title.alpha = 0;
 		add(title);
 
         leftArrow = new Alphabet(0, 25, '<');
 		leftArrow.x = title.x - leftArrow.width - 20;
-        leftArrow.antialiasing = Config.globalAntialiasing;
+        leftArrow.antialiasing = PreferencesMenu.getPref('global-antialiasing');
 		leftArrow.scrollFactor.set();
         leftArrow.alpha = 0;
 		add(leftArrow);
 
 		rightArrow = new Alphabet(0, 25, '>');
 		rightArrow.x = title.x + title.width + 20;
-        rightArrow.antialiasing = Config.globalAntialiasing;
+        rightArrow.antialiasing = PreferencesMenu.getPref('global-antialiasing');
 		rightArrow.scrollFactor.set();
         rightArrow.alpha = 0;
 		add(rightArrow);
@@ -99,7 +100,7 @@ class TrophiesSubState extends MusicBeatSubstate
             missInfo = new FlxText(0, 0, 0, "Sorry, the game doesn't have\nany trophie registered yet\n\nPlease go add some and retry later!");
             missInfo.setFormat(Paths.font('pixel.otf'), 35, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
             missInfo.screenCenter();
-            missInfo.antialiasing = Config.globalAntialiasing;
+            missInfo.antialiasing = PreferencesMenu.getPref('global-antialiasing');
             missInfo.scrollFactor.set();
             missInfo.visible = false;
             add(missInfo);

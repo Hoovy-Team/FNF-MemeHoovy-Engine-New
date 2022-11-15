@@ -8,7 +8,8 @@ import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
-import sys.FileSystem;
+import openfl.utils.Assets;
+import ui.PreferencesMenu;
 
 class Popup extends FlxUIGroup
 {
@@ -34,7 +35,7 @@ class Popup extends FlxUIGroup
 
         scrollFactor.set();
 
-        if (FileSystem.exists(Std.string(Paths.image(Std.string(bg)))) && bg != null)
+        if (Assets.exists(Std.string(Paths.image(Std.string(bg)))) && bg != null)
         {
             daBG = new FlxSprite().loadGraphic(Paths.image(bg));
             daBG.setGraphicSize(boxWidth, boxHeight);
@@ -46,7 +47,7 @@ class Popup extends FlxUIGroup
             daBG.alpha = 0.65;
         }
 
-        if (FileSystem.exists(Std.string(Paths.image(Std.string(image)))) && image != null)
+        if (Assets.exists(Std.string(Paths.image(Std.string(image)))) && image != null)
             daImage = new FlxSprite().loadGraphic(Paths.image(image));
         else daImage = new FlxSprite().loadGraphic(Paths.image('unknownMod'));
 
@@ -78,7 +79,7 @@ class Popup extends FlxUIGroup
         add(titleBox);
         add(descBox);
 
-        antialiasing = Config.globalAntialiasing;
+        antialiasing = PreferencesMenu.getPref('global-antialiasing');
         screenCenter(X);
 
         y = 0 - this.height;

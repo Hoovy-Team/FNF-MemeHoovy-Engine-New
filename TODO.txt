@@ -4,20 +4,19 @@ TODO List:
 -Add some things people would want
 -Fix Week 7 & finish it in general
 -Shaders support
--Finish the options menu (currently in beta)
 -Fix some input drops
 -Finish mobile support
 -Better chart editor
 -Mod support
 -Better HScript support (Maybe)
--Lua Support
+-Lua Support (Probably)
 -Extra Keys (Maybe)
 -Time signatures (Love them & Starmapo)
--Playback rates
+-Playback rates (Maybe)
 -Optimization
 -NoteTypes
 -Some 0.2.8 things
--Modchart support (That's what Lua & HScript is for)
+-Modchart support (That's what Lua & HScript is for, but also hardcoded because why not?)
 -Botplay
 -Events (ofc)
 -Editors (or some shit like that)
@@ -30,6 +29,7 @@ TODO List:
 Misc Things:
 -Fix Bugs
 -Merge PRS (That don't suck)
+-Deal with trolls (I fucking hate you trolls, you low-life sacks of shit)
 -Get new coders who wanna help (I'm already fine on my own but the help would be appreciated)
 
 DONE:
@@ -38,6 +38,7 @@ DONE:
 -Death counter
 -Downscroll (Kinda buggy though)
 -Notesplashes
+-Finish the options menu (thank fucking god, I hated the beta one)
 
 Scrapped:
 

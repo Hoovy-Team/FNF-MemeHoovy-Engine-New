@@ -24,6 +24,14 @@ Also if you make a mod with this engine, credit me, Brandon, & Wither, and also 
 
 [Starmapo](https://github.com/Starmapo) - Inspiration & Hscript things. (And also being a cool person)
 
+[Angel Bot](https://github.com/AngelDTF) - Inspiration & Week 7 shit. (Reverse engineered it)
+
+[M&M](https://github.com/ActualMandM) - Week 7 code.
+
+[MtH](https://github.com/PrincessMtH) - Week 7 code.
+
+[Stilic](https://github.com/Stilic) - Inspiration & Flaty Engine code, and in general, an cool person (Ily stilic, platonically).
+
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 Also check out: [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)

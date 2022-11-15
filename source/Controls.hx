@@ -14,7 +14,7 @@ import flixel.input.actions.FlxActionInput;
 import flixel.input.actions.FlxActionInputDigital;
 import flixel.input.actions.FlxActionManager;
 import flixel.input.actions.FlxActionSet;
-import flixel.input.gamepad.FlxGamepadButton;
+import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 
@@ -161,8 +161,9 @@ class Controls extends FlxActionSet
 	var byName:Map<String, FlxActionDigital> = new Map<String, FlxActionDigital>();
 	#end
 
-	public var gamepadsAdded:Array<Int> = [];
 	public var keyboardScheme = KeyboardScheme.None;
+
+	public var gamepads(default, null):Array<Int> = [];
 
 	public var UI_UP(get, never):Bool;
 
@@ -383,6 +384,8 @@ class Controls extends FlxActionSet
 		if (scheme == null)
 			scheme = None;
 		setKeyboardScheme(scheme, false);
+
+		FlxG.gamepads.deviceDisconnected.add(onGamepadDisconnection);
 	}
 	#end
 
@@ -629,10 +632,34 @@ class Controls extends FlxActionSet
 		}
 	}
 
-	public function addGamepadWithSaveData(id, data)
+	function removeGamepad(id:Int)
 	{
-		gamepadsAdded.push(id);
-		fromSaveData(data, Device.Gamepad(id));
+		for (action in digitalActions)
+		{
+			var i = action.inputs.length;
+			while (i-- > 0)
+			{
+				var input = action.inputs[i];
+				if (input.device == GAMEPAD && input.deviceID == id)
+					action.remove(input);
+			}
+		}
+
+		gamepads.remove(id);
+	}
+
+	function onGamepadDisconnection(pad:FlxGamepad)
+	{
+		removeGamepad(pad.id);
+	}
+
+	public function addGamepadWithSaveData(id:Int, data)
+	{
+		if (gamepads.contains(id))
+			removeGamepad(id);
+		else
+			gamepads.push(id);
+		fromSaveData(data, Gamepad(id));
 	}
 
 	public function addDefaultGamepad(id):Void
@@ -668,7 +695,10 @@ class Controls extends FlxActionSet
 		// Swap Y and X for switch
 		map.set(Control.RESET, [Y]);
 		#end
-		gamepadsAdded.push(id);
+		if (gamepads.contains(id))
+			removeGamepad(id);
+		else
+			gamepads.push(id);
 		var keys;
 		while ((keys = map.keys()).hasNext())
 		{
@@ -765,4 +795,10 @@ class Controls extends FlxActionSet
 		inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonuUI(action, hitbox.buttonRight, state));
 	}
 	#end
+
+	override function destroy()
+	{
+		FlxG.gamepads.deviceDisconnected.remove(onGamepadDisconnection);
+		super.destroy();
+	}	
 }

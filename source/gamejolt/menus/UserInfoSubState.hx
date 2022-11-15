@@ -7,6 +7,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import gamejolt.GJClient;
 import gamejolt.formats.User;
+import ui.PreferencesMenu;
 
 class UserInfoSubState extends MusicBeatSubstate
 {
@@ -27,14 +28,14 @@ class UserInfoSubState extends MusicBeatSubstate
         curUser = GJClient.getUserData();
 
         bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        bg.antialiasing = Config.globalAntialiasing;
+        bg.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         bg.scrollFactor.set();
         bg.color = FlxColor.GRAY;
         bg.alpha = 0;
         add(bg);
 
         extraBG = new FlxSprite().makeGraphic(Std.int(FlxG.width * 0.85), Std.int(FlxG.height * 0.85), FlxColor.BLACK);
-        extraBG.antialiasing = Config.globalAntialiasing;
+        extraBG.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         extraBG.scrollFactor.set();
         extraBG.screenCenter();
         extraBG.alpha = 0;
@@ -63,7 +64,7 @@ class UserInfoSubState extends MusicBeatSubstate
             userPhoto = new FlxSprite().loadGraphic(Paths.image('unknownMod'));
             userPhoto.setGraphicSize(imgRatio, imgRatio);
             userPhoto.updateHitbox();
-            userPhoto.antialiasing = Config.globalAntialiasing;
+            userPhoto.antialiasing = PreferencesMenu.getPref('global-antialiasing');
             userPhoto.scrollFactor.set();
             userPhoto.alpha = 0;
             userPhoto.y = extraBG.y + sep2;
@@ -92,7 +93,7 @@ class UserInfoSubState extends MusicBeatSubstate
 
             forEachOfType(FlxText, function (txt:FlxText)
             {
-                txt.antialiasing = Config.globalAntialiasing;
+                txt.antialiasing = PreferencesMenu.getPref('global-antialiasing');
                 txt.scrollFactor.set();
                 txt.visible = false;
             });

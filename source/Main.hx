@@ -11,6 +11,8 @@ import lime.app.Application;
 import flixel.tweens.FlxTween;
 import flixel.FlxG;
 import flixel.util.FlxTimer;
+import flixel.addons.transition.FlxTransitionableState;
+import ui.PreferencesMenu;
 
 class Main extends Sprite
 {
@@ -22,6 +24,8 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
 	public static var focusMusicTween:FlxTween;
+
+	public static var FPSCounter:FPS = new FPS();
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -112,12 +116,46 @@ class Main extends Sprite
 		}
 	}
 
+	public static function switchState(nextState:FlxState)
+	{
+		var callback = function()
+		{
+			if (nextState == FlxG.state)
+				FlxG.resetState();
+			else
+				FlxG.switchState(nextState);
+		};
+		if (!FlxTransitionableState.skipNextTransIn)
+		{
+			var state = FlxG.state;
+			@:privateAccess
+			if (Std.isOfType(state, FlxTransitionableState))
+				cast(state, FlxTransitionableState)._exiting = true;
+			while (state.subState != null)
+				state = state.subState;
+			state.openSubState(new FadeSubstate(0.5, false, callback));
+		}
+		else
+		{
+			FlxTransitionableState.skipNextTransIn = false;
+			callback();
+		}
+	}
+
+	inline public static function resetState()
+	{
+		switchState(FlxG.state);
+	}
+
 	private function init(?E:Event):Void
 	{
 		if (hasEventListener(Event.ADDED_TO_STAGE))
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 		}
+
+		// we load the preferences here in order to make the counter stuff working
+		PreferencesMenu.initPrefs();
 
 		setupGame();
 	}
@@ -126,6 +164,7 @@ class Main extends Sprite
 	{
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") 1,#end framerate, framerate, skipSplash, startFullscreen));
 
-		addChild(new FPS(10, 3, 0xFFFFFF));
+		FPSCounter = new FPS(10, 3, 0xFFFFFF);
+		addChild(FPSCounter);
 	}
 }

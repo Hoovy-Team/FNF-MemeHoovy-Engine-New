@@ -50,20 +50,20 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
-	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
+	var lastBeat:Int = 0;
+
+	var startedIntro:Bool = false;
 
 	override public function create():Void
 	{
 		PlayerSettings.init();
-
-		FlxG.autoPause = false; // might make this an option ¯\_(ツ)_/¯
 
 		if (Assets.exists(Paths.image('owo')) == false)
 		{
 			throw new Exception("bruh");
 		}
 
-		FlxG.sound.muteKeys = muteKeys;
+		FlxG.sound.muteKeys = [FlxKey.ZERO];
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
@@ -74,8 +74,6 @@ class TitleState extends MusicBeatState
 		FlxG.save.bind('funkin', 'memehoovy');
 
 		Highscore.load();
-
-		Config.configCheck();
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
@@ -130,18 +128,15 @@ class TitleState extends MusicBeatState
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;
 
-			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			CoolUtil.resetMusic(true);
 
-			FlxG.sound.music.fadeIn(4, 0, 0.7);
+			startedIntro = true;
 		}
 
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		// bg.antialiasing = true;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
 		add(bg);
 
 		logoBl = new FlxSprite(-150, -100);
@@ -150,8 +145,6 @@ class TitleState extends MusicBeatState
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
-		// logoBl.screenCenter();
-		// logoBl.color = FlxColor.BLACK;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
@@ -321,38 +314,47 @@ class TitleState extends MusicBeatState
 
 		FlxG.log.add(curBeat);
 
-		switch (curBeat)
+		if (curBeat > lastBeat)
 		{
-			case 1:
-				createCoolText(['MemeHoovy', 'Brandon', 'Wither']);
-			case 3:
-				addMoreText('presents');
-			case 4:
-				deleteCoolText();
-			case 5:
-				createCoolText(['Not in association', 'with']);
-			case 7:
-				addMoreText('these guys');
-				ngSpr.visible = true;
-			case 8:
-				deleteCoolText();
-				ngSpr.visible = false;
-			case 9:
-				createCoolText([curWacky[0]]);
-			case 11:
-				addMoreText(curWacky[1]);
-			case 12:
-				deleteCoolText();
-			case 13:
-				addMoreText('Friday Night');
-			case 14:
-				addMoreText('Funkin');
-			case 15:
-				addMoreText('MemeHoovy Engine');
-			case 16:
-				skipIntro();
+			if (startedIntro) {
+				for (i in lastBeat...curBeat)
+				{
+					switch (i + 1)
+					{
+						case 1:
+							createCoolText(['MemeHoovy', 'Brandon', 'Wither']);
+						case 3:
+							addMoreText('presents');
+						case 4:
+							deleteCoolText();
+						case 5:
+							createCoolText(['Not in association', 'with']);
+						case 7:
+							addMoreText('these guys');
+							ngSpr.visible = true;
+						case 8:
+							deleteCoolText();
+							ngSpr.visible = false;
+						case 9:
+							createCoolText([curWacky[0]]);
+						case 11:
+							addMoreText(curWacky[1]);
+						case 12:
+							deleteCoolText();
+						case 13:
+							addMoreText('Friday Night');
+						case 14:
+							addMoreText('Funkin');
+						case 15:
+							addMoreText('MemeHoovy Engine');
+						case 16:
+							skipIntro();
+					}
+				}
+			}
 		}
-	}
+		lastBeat = curBeat;
+	}	
 
 	var skippedIntro:Bool = false;
 

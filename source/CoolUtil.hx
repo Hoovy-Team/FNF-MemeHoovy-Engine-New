@@ -7,6 +7,7 @@ import flixel.util.FlxAxes;
 import lime.utils.Assets;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
+import flixel.math.FlxMath;
 
 using StringTools;
 
@@ -93,6 +94,27 @@ class CoolUtil
 	inline public static function isInState(state:String)
 	{
 		return Type.getClassName(Type.getClass(FlxG.state)).contains(state);
+	}
+
+	/**
+	 * ALWAYS CALL THIS AFTER THE STATE CHANGE!!!
+	 */
+	public static function resetMusic(?fade:Bool = false):Void
+	{
+		FlxG.sound.playMusic(Paths.music('freakyMenu'), fade ? 0 : 1);
+		if (fade)
+			FlxG.sound.music.fadeIn(4, 0, 0.7);
+	}
+
+	inline public static function coolLerp(a:Float, b:Float, ratio:Float, negativeRatio:Bool = false):Float
+	{
+		return FlxMath.lerp(a, b, camLerpShit(ratio, negativeRatio)); // twitter
+	}
+
+	inline public static function camLerpShit(ratio:Float, negative:Bool = false):Float
+	{
+		var cock:Float = FlxG.elapsed * (ratio * 60);
+		return FlxMath.bound(negative ? 1 - cock : cock, 0, 1);
 	}
 
 	public static function addSprite(x, y, path:String, scrollFactor:Float = 1, ?antialiasing:Bool = true, daState:FlxState):FlxSprite

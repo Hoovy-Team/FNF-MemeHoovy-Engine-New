@@ -7,6 +7,7 @@ import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import gamejolt.GJClient;
+import ui.PreferencesMenu;
 
 class LogoutSubState extends MusicBeatSubstate
 {
@@ -22,7 +23,7 @@ class LogoutSubState extends MusicBeatSubstate
     function createMenu()
     {
         bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        bg.antialiasing = Config.globalAntialiasing;
+        bg.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         bg.scrollFactor.set();
         bg.color = FlxColor.GRAY;
         bg.alpha = 0;
@@ -44,7 +45,7 @@ class LogoutSubState extends MusicBeatSubstate
         info = new FlxText(0, 0, 0, curText);
         info.setFormat(Paths.font('pixel.otf'), 30, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
         info.screenCenter();
-        info.antialiasing = Config.globalAntialiasing;
+        info.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         info.visible = false;
         info.scrollFactor.set();
         add(info);
