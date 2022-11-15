@@ -176,6 +176,8 @@ class PlayState extends MusicBeatState
 	public var bads:Int = 0;
 	public var shits:Int = 0;
 
+	private var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
+
 	override public function create()
 	{
 		openfl.system.System.gc(); // basic optimization
@@ -194,6 +196,11 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.add(camHUD);
 
 		FlxCamera.defaultCameras = [camGame];
+
+		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
+		var splash:NoteSplash = new NoteSplash(100, 100, 0);
+		grpNoteSplashes.add(splash);
+		splash.alpha = 0.1;
 
 		persistentUpdate = true;
 		persistentDraw = true;
@@ -773,6 +780,8 @@ class PlayState extends MusicBeatState
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
 
+		add(grpNoteSplashes);		
+
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
 		generateSong(SONG.song);
@@ -829,6 +838,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
 
+		grpNoteSplashes.cameras = [camHUD];
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
@@ -1937,7 +1947,7 @@ class PlayState extends MusicBeatState
 
 	var endingSong:Bool = false;
 
-	private function popUpScore(strumtime:Float):Void
+	private function popUpScore(strumtime:Float, daNote:Note):Void
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
 		// boyfriend.playAnim('hey');
@@ -1954,6 +1964,7 @@ class PlayState extends MusicBeatState
 		// var acc:Float = 0.10;
 
 		var daRating:String = "sick";
+		var doSplash:Bool = true;
 
 		if (noteDiff > Conductor.safeZoneOffset * 0.9)
 		{
@@ -1962,6 +1973,7 @@ class PlayState extends MusicBeatState
 			// acc = -0.20;
 			totalNotesHit += 1 - 0.9;
 			shits++;
+			doSplash = false;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
@@ -1970,6 +1982,7 @@ class PlayState extends MusicBeatState
 			// acc = -0.5;
 			totalNotesHit += 1 - 0.75;
 			bads++;
+			doSplash = false;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
@@ -1978,11 +1991,19 @@ class PlayState extends MusicBeatState
 			// acc = 0.5;
 			totalNotesHit += 1 - 0.2;
 			goods++;
+			doSplash = false;
 		}
 		if (daRating == 'sick')
 		{
 			totalNotesHit += 1;
 			sicks++;
+		}
+
+		if (doSplash)
+		{
+			var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+			splash.setupNoteSplash(daNote.x, daNote.y, daNote.noteData);
+			grpNoteSplashes.add(splash);
 		}
 
 		if (!practiceMode)
@@ -2296,7 +2317,7 @@ class PlayState extends MusicBeatState
 		{
 			if (!note.isSustainNote)
 			{
-				popUpScore(note.strumTime);
+				popUpScore(note.strumTime, note);
 				combo += 1;
 			}
 			else
