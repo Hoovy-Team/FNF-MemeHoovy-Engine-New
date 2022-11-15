@@ -20,7 +20,7 @@ class OptionsBeta extends MusicBeatState
 	public static var healthColorsValue:Bool = false;
 	public static var globalAntialiasing:Bool = true;
 
-	var seenWarning:Bool = false;
+	var quitting:Bool = false;
 
 	final doReset:Bool = true; // for debugging purposes
 
@@ -80,6 +80,14 @@ class OptionsBeta extends MusicBeatState
 		ghostValue = Config.ghostTapping;
 		healthColorsValue = Config.healthBarColors;
 		globalAntialiasing = Config.globalAntialiasing;
+
+		blackScreen.alpha = 0.5;
+		// warning.alpha = 0;
+		// add(blackScreen);
+		// add(warning);
+
+		// warning.visible = false;
+		// blackScreen.visible = false;
 
 		super.create();
 	}
@@ -146,19 +154,26 @@ class OptionsBeta extends MusicBeatState
 			writeToConfig();
 		}
 
-		if (FlxG.keys.justPressed.BACKSPACE)
-		{
-			if (!seenWarning) {
-				if (blackScreen != null)
-					FlxTween.tween(blackScreen, {alpha: 0.5}, 0.7, {ease: FlxEase.linear});
+		/*if (!quitting) {
+			if (!warning.visible) {
+				if (blackScreen != null) {
+					// FlxTween.tween(blackScreen, {alpha: 0.5}, 0.7, {ease: FlxEase.linear});
+					blackScreen.visible = true;
+				}
 
-				if (warning != null)
-					FlxTween.tween(warning, {alpha: 1.0}, 0.7, {ease: FlxEase.linear});
+				if (FlxG.keys.justPressed.ENTER) {
+					if (warning != null) {
+						// FlxTween.tween(warning, {alpha: 1.0}, 0.7, {ease: FlxEase.linear});
+						warning.screenCenter();
+						warning.visible = true;
+					}
+				}
 
-				add(blackScreen);
-				add(warning);
-
-				seenWarning = true;
+				if (FlxG.keys.justPressed.BACKSPACE) {
+					FlxG.sound.play(Paths.sound('cancelMenu'), 0.7);
+					FlxG.switchState(new MainMenuState());
+					quitting = true;
+				}
 			} else {
 				if (FlxG.keys.justPressed.ENTER) {
 					FlxG.switchState(new MainMenuState());
@@ -167,17 +182,22 @@ class OptionsBeta extends MusicBeatState
 					if (doReset)
 						Config.resetSettings();
 					// writeToConfig();
-					remove(blackScreen);
-					remove(warning);
-					seenWarning = false;
+					// remove(blackScreen);
+					// remove(warning);
+					warning.visible = false;
 				}
-				else if (FlxG.keys.justPressed.ESCAPE){
+				else if (FlxG.keys.justPressed.BACKSPACE){
 					remove(blackScreen);
 					remove(warning);
-					seenWarning = false;
+					warning.visible = false;
+					// quitting = true;
 				}
 			}
 		}
+		blackScreen.visible = warning.visible;*/
+
+
+
 		super.update(elapsed);
 	}
 
