@@ -2,7 +2,6 @@ TODO List:
 
 -Softcode characters
 -Add some things people would want
--Notesplashes
 -Fix Week 7 & finish it in general
 -Shaders support
 -Finish the options menu (currently in beta)
@@ -38,6 +37,7 @@ DONE:
 -Practice mode
 -Death counter
 -Downscroll (Kinda buggy though)
+-Notesplashes
 
 Scrapped:
 
