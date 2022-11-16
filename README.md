@@ -6,6 +6,8 @@ No, it's not dead, I've just been busy.
 
 ![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
 
+Discord Server: https://discord.gg/vS2rY5VaMV
+
 # THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.
 
 Also if you make a mod with this engine, credit me, Brandon, & Wither, and also open source your mods too you goons.
