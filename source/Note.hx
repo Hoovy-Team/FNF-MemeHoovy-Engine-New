@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import ui.PreferencesMenu;
 
 using StringTools;
 
@@ -120,7 +121,7 @@ class Note extends FlxSprite
 				animation.play('redScroll');
 		}
 
-		if (Config.downscroll && sustainNote)
+		if (PreferencesMenu.getPref('downscroll') && sustainNote)
 		{
 			flipY = true;
 		}

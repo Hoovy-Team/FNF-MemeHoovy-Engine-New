@@ -81,14 +81,14 @@ class GJOptionsState extends MusicBeatState
             userBox = new FlxInputText(0, userTitle.y + 60, boxSize, '', 44);
             userBox.setFormat(Paths.font('pixel.otf'), 40, FlxColor.BLACK, CENTER);
             userBox.x = FlxG.width - userBox.width - 60;
-            userBox.antialiasing = Config.globalAntialiasing;
+            userBox.antialiasing = PreferencesMenu.getPref('global-antialiasing');
             userBox.scrollFactor.set();
             add(userBox);
 
             tokenBox = new FlxInputText(0, tokenTitle.y + 60, boxSize, '', 44);
             tokenBox.setFormat(Paths.font('pixel.otf'), 40, FlxColor.BLACK, CENTER);
             tokenBox.x = FlxG.width - tokenBox.width - 60;
-            tokenBox.antialiasing = Config.globalAntialiasing;
+            tokenBox.antialiasing = PreferencesMenu.getPref('global-antialiasing');
             tokenBox.maxLength = 7;
             tokenBox.passwordMode = true;
             tokenBox.scrollFactor.set();
