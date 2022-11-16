@@ -15,7 +15,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import ui.PreferencesMenu;
 
 //crash handler stuff
-#if sys
+#if CRASH_HANDLER
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
@@ -181,7 +181,7 @@ class Main extends Sprite
 		FPSCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(FPSCounter);
 
-		#if sys
+		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 	}
@@ -189,7 +189,7 @@ class Main extends Sprite
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
 	// very cool person for real they don't get enough credit for their work
 	// this really was needed tbh
-	#if sys
+	#if CRASH_HANDLER
 	function onCrash(e:UncaughtErrorEvent):Void
 	{
 		var errMsg:String = "";

@@ -102,10 +102,7 @@
 
 	<haxedef name="no-deprecation-warnings" />
 
-	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
-
-	<!--In case you want to use nape with flixel-->
-	<!--<haxelib name="nape-haxe4" />-->
+	<define name="CRASH_HANDLER" if="desktop release" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
