@@ -781,7 +781,7 @@ class PlayState extends MusicBeatState
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
 
-		add(grpNoteSplashes);		
+		add(grpNoteSplashes);
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
@@ -1490,7 +1490,7 @@ class PlayState extends MusicBeatState
 						trainFrameTiming = 0;
 					}
 				}
-			phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed * 1.5;
+				phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed * 1.5;
 		}
 
 		super.update(elapsed);
@@ -1832,7 +1832,11 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
-				if (daNote.y < -daNote.height && !PreferencesMenu.getPref('downscroll') || daNote.y >= strumLine.y + 106 && PreferencesMenu.getPref('downscroll'))
+				if (daNote.y < -daNote.height
+					&& !PreferencesMenu.getPref('downscroll')
+					|| daNote.y >= strumLine.y + 106
+					&& PreferencesMenu.getPref('downscroll')
+					&& daNote.mustPress)
 				{
 					if (daNote.tooLate || !daNote.wasGoodHit)
 					{
@@ -2499,14 +2503,15 @@ class PlayState extends MusicBeatState
 		}
 		wiggleShit.update(Conductor.crochet);
 
-		if (PreferencesMenu.getPref('camera-zoom')) {
+		if (PreferencesMenu.getPref('camera-zoom'))
+		{
 			// HARDCODING FOR ZOOMS!
 			if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
 			{
 				FlxG.camera.zoom += 0.015;
 				camHUD.zoom += 0.03;
 			}
-	
+
 			if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % curDenominator == 0)
 			{
 				// FlxTween.tween(camHUD, {zoom: camHUD.zoom + 0.07}, 0.3, {ease: FlxEase.circInOut});
