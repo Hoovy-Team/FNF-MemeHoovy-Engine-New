@@ -39,6 +39,7 @@ DONE:
 -Downscroll (Kinda buggy though)
 -Notesplashes
 -Finish the options menu (thank fucking god, I hated the beta one)
+-Crash handler (from psych engine ofc)
 
 Scrapped:
 
