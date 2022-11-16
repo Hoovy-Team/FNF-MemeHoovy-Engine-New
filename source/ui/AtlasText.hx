@@ -137,13 +137,15 @@ class AtlasFontData implements IFlxDestroyable
 
 		var hasUpper:Bool = false;
 		var hasLower:Bool = false;
-		for (framedata in atlas.frames)
-		{
-			maxHeight = Math.max(maxHeight, framedata.frame.height);
-			if (!hasUpper)
-				hasUpper = upperChar.match(framedata.name);
-			if (!hasLower)
-				hasLower = lowerChar.match(framedata.name);
+		if (atlas != null) {
+			for (framedata in atlas.frames)
+			{
+				maxHeight = Math.max(maxHeight, framedata.frame.height);
+				if (!hasUpper)
+					hasUpper = upperChar.match(framedata.name);
+				if (!hasLower)
+					hasLower = lowerChar.match(framedata.name);
+			}
 		}
 		if (hasUpper != hasLower)
 			caseAllowed = hasUpper ? Upper : Lower;
