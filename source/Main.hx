@@ -77,7 +77,7 @@ class Main extends Sprite
 		focused = false;
 
 		// Lower global volume when unfocused
-		if (!CoolUtil.isInState('PlayState')) // imagine stealing my code smh
+		if (!CoolUtil.isInState('PlayState') || FlxG.autoPause != true) // imagine stealing my code smh
 		{
 			oldVol = FlxG.sound.volume;
 			if (oldVol > 0.3)
@@ -115,7 +115,7 @@ class Main extends Sprite
 		});
 
 		// Lower global volume when unfocused
-		if (!CoolUtil.isInState('PlayState'))
+		if (!CoolUtil.isInState('PlayState') || FlxG.autoPause != true)
 		{
 			trace("Game focused");
 
