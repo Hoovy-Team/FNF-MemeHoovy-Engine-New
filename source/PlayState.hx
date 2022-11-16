@@ -670,9 +670,6 @@ class PlayState extends MusicBeatState
 			gf.y += 10.2;
 		}
 
-		if (curStage == 'limo')
-			gfVersion = 'gf-car';
-
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
