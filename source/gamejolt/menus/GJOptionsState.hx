@@ -52,7 +52,7 @@ class GJOptionsState extends MusicBeatState
         }
         else if (GJClient.hasLoginInfo() && !GJClient.logged)
         {
-            missInfo = new FlxText(0, 0, 0, "No Internet Connection!");
+            missInfo = new FlxText(0, 0, 0, "Something went wrong...");
             missInfo.setFormat(Paths.font('pixel.otf'), 45, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
             missInfo.screenCenter();
             missInfo.scrollFactor.set();
