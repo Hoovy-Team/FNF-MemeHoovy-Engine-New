@@ -68,13 +68,13 @@ class TrophiesSubState extends MusicBeatSubstate
         rightArrow.alpha = 0;
 		add(rightArrow);
 
+        curScreen = 0;
+        screenPos = -1;
+        yPos = -1;
+        trophGroup = [];
+        
         if (trophList != null)
         {
-            curScreen = 0;
-            screenPos = -1;
-            yPos = -1;
-            trophGroup = [];
-
             for (i in 0...trophList.length)
             {
                 var curTroph:Trophie = cast trophList[i];

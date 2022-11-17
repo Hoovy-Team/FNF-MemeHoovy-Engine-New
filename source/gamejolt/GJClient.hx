@@ -1,6 +1,7 @@
 package gamejolt;
 
 import flixel.FlxG;
+import flixel.util.FlxTimer;
 import gamejolt.formats.*;
 import haxe.Http;
 import haxe.Json;
@@ -18,8 +19,6 @@ import haxe.crypto.Sha1;
 class GJClient
 {
     static var printPrefix:String = "GameJolt Client:";
-    public static function hasLoginInfo():Bool {return getUser() != null && getToken() != null;}
-    public static function hasGameInfo():Bool {return GJKeys.id != 0 && GJKeys.key != '';}
 
     /*
         ----------------------------------------------------------------
@@ -27,6 +26,18 @@ class GJClient
         --> EVERY COMMAND HERE WILL WORK ONLY IF GUI PARAMETERS EXIST!! <--
         ----------------------------------------------------------------
     */
+
+    /**
+     * Tells you if some GUI already exists in the game app or not.
+     * @return Is it available?
+     */
+    public static function hasLoginInfo():Bool {return getUser() != null && getToken() != null;}
+
+    /**
+     * Tells you if the GameJolt info about your game is available or not.
+     * @return Is it available?
+     */
+    public static function hasGameInfo():Bool {return GJKeys.id != 0 && GJKeys.key != '';}
 
     /**
      * It tells you if you're actually logged in or not (Read Only, don't change it!).
@@ -37,11 +48,6 @@ class GJClient
      * If `true`, the functions will use `Md5` encriptation for data processing; if `false`, they'll use `Sha1` encriptation instead.
      */
     public static var useMd5:Bool = true;
-
-    /**
-     * It tells you if you have enabled the auto-login option (Read Only, if you want to change it manually you must use `toggleAutoLogin()`).
-     */
-    public static var autoLogin:Bool = true;
 
     /**
      * Sets a new GUI in the database, the Username and the Game Token of the player respectively.
@@ -72,7 +78,7 @@ class GJClient
         if (hasLoginInfo())
         {
             authUser(
-                function () {printMsg('GUI Parameters Changed: New User -> ${getUser()} | New Token -> ${getToken()}'); toggleAutoLogin(true);},
+                function () {printMsg('GUI Parameters Changed: New User -> ${getUser()} | New Token -> ${getToken()}');},
                 function ()
                 {
                     FlxG.save.data.user = temp_user;
@@ -94,7 +100,13 @@ class GJClient
     {
         var urlData = urlResult(urlConstruct('users', 'auth'),
         function () {printMsg('User authenticated successfully!'); if (onSuccess != null) onSuccess();},
-        function () {printMsg('User authentication failed!'); if (onFail != null) onFail();});
+        function ()
+        {
+            printMsg('User authentication failed!');
+            setUserInfo(null, null);
+            noDataWarned = false;
+            if (onFail != null) onFail();
+        });
         if (urlData != null) urlData; else return;
     }
 
@@ -199,7 +211,7 @@ class GJClient
      * @param onSuccess     Put a function with actions here, they'll be processed if the process finish successfully.
      * @param onFail         Put a function with actions here, they'll be processed if an error has ocurred during the process.
      * @return The array with all the Trophies of the game in .json format
-     *          (return `null` if there are no Trophies in the game to fetch or if there's no GUI inserted in the application yet).
+     *          (returns `null` if there are no Trophies in the game to fetch or if there's no GUI inserted in the application yet).
      */
     public static function getTrophiesList(?achievedOnes:Bool, ?onSuccess:() -> Void, ?onFail:() -> Void):Null<Array<Trophie>>
     {
@@ -437,7 +449,6 @@ class GJClient
             if (!logged) {printMsg('Logged Successfully! Welcome back ${getUser()}!');}
             if (onSuccess != null && !logged && userData != null) onSuccess(userData);
             logged = true;
-            autoLogin = autoLoginToggle();
         },
         function ()
         {
@@ -464,7 +475,6 @@ class GJClient
             if (logged) printMsg('Logged out successfully!');
             if (onSuccess != null && logged) onSuccess();
             logged = false;
-            autoLogin = false;
         },
         function ()
         {
@@ -477,54 +487,36 @@ class GJClient
     /**
      * If there's a session active, this function keeps the session active, so it needs to be placed in somewhere it can be executed repeatedly.
      * 
+     * @param interval The time in seconds of the ping intervals (Default: 15)
      * @param onPing Put a function with actions here, they'll be processed every time a ping is made successfully.
      * @param onFail Put a function with actions here, they'll be processed if an error has ocurred during the process.  
      */
-    public static function pingSession(?onPing:() -> Void, ?onFail:() -> Void)
+    public static function pingSession(interval:Int = 15, ?onPing:() -> Void, ?onFail:() -> Void)
     {
-        var urlData = urlResult(urlConstruct('sessions', 'ping'),
-        function ()
+        if (logged && pingCompleted)
         {
-            if (logged)
+            pingCompleted = false;
+
+            new FlxTimer().start(interval, function (tmr:FlxTimer)
             {
-                printMsg('Session pinged!');
-                if (onPing != null) onPing();
-            }
-        },
-        function ()
-        {
-            if (logged)
-            {
-                printMsg('Ping failed! You\'ve been disconnected!');
-                if (onFail != null) onFail();
-            }
-            logged = false;
-        });
-        if (logged && urlData != null) urlData; else return;
+                var urlData = urlResult(urlConstruct('sessions', 'ping'),
+                function ()
+                {
+                    printMsg('Session pinged!');
+                    if (onPing != null) onPing();
+                },
+                function ()
+                {
+                    printMsg('Ping failed! You\'ve been disconnected!');
+                    if (onFail != null) onFail();
+                    logged = false;
+                });
+                if (urlData != null) urlData;
+            
+                pingCompleted = true;
+            });
+        }
     }
-
-    /**
-     * Tells you if there's a section active or not!
-     * 
-     * This is mostly used for confirmation, cuz the client works with the
-     * variable `logged` instead of this command for a better performance.
-     */
-    public static function checkSessionActive():Bool
-    {
-        var result:Bool = false;
-        var urlData = urlResult(urlConstruct('sessions', 'check'));
-
-        if (urlData != null && logged) result = urlData.success;
-
-        printMsg('Is a session active? : $result');
-        return result;
-    }
-    
-    /**
-     * It toggles the autoLogin option. Pretty self-explanatory, isn't it?
-     * @param toggle Want it to be active or not?
-     */
-    public static function toggleAutoLogin(toggle:Bool) {FlxG.save.data.autoLogin = autoLogin = toggle;}
 
     /**
      * This initialize the client in general.
@@ -538,9 +530,7 @@ class GJClient
      */
     public static function initialize(?onSuccess:User -> Void, ?onFail:() -> Void)
     {
-        if (FlxG.save.data.autoLogin == null) toggleAutoLogin(true);
-
-        if (hasLoginInfo() && !logged && autoLogin)
+        if (hasLoginInfo() && !logged)
         {
             authUser(function () {login(function (userData:User) {if (onSuccess != null && !logged) onSuccess(userData);},onFail);}, onFail);
             if (logged) printMsg('Initialized successfully!');
@@ -550,9 +540,11 @@ class GJClient
 
     // INTERNAL FUNCTIONS (DON'T ALTER IF YOU DON'T KNOW WHAT YOU'RE DOING!!)
 
+    static var pingCompleted:Bool = true;
+
     static var noDataWarned:Bool = false;
 
-    static function printMsg(message:String) {Sys.println(printPrefix + ' ' + message);}
+    static function printMsg(message:String) {Sys.println('$printPrefix $message');}
 
     static function urlConstruct(command:String, ?action:String, ?params:Array<Array<String>>, userAllowed:Bool = true, tokenAllowed:Bool = true):Null<Http>
     {
@@ -561,7 +553,7 @@ class GJClient
             var mainURL:String = "http://api.gamejolt.com/api/game/v1_2/";
 
             mainURL += command;
-            mainURL += '/' + (action != null ? '$action/?' : '?');    
+            mainURL += '/' + (action != null ? '$action/' : '') + '?';    
             mainURL += 'game_id=${Std.string(GJKeys.id)}'; // Private Thingie (Fuck you hackers lmao)
 
             if (userAllowed) mainURL += '&username=${getUser()}';
@@ -577,32 +569,40 @@ class GJClient
         }
 
         if (!hasGameInfo() && !noDataWarned) {printMsg('Game data was not provided!'); noDataWarned = true;}
-        if (!hasLoginInfo() && !noDataWarned) {printMsg('User data was not provided!'); noDataWarned = true;}
+        if (!hasLoginInfo() && !noDataWarned) {printMsg('User data was not provided for the command $command' + (action == null ? '' : '/$action') + ' !'); noDataWarned = true;}
 
         return null;
     }
 
     static function urlResult(daUrl:Null<Http>, ?onSuccess:() -> Void, ?onFail:() -> Void):Null<Dynamic>
     {
-        var result:String = '';
+        var result:Dynamic = '';
         var success:Bool = false;
 
         if (daUrl != null)
         {
             daUrl.onData = function (data:String)
             {
-                result = data;
-                success = true;
-                if (onSuccess != null) onSuccess();
+                result = Json.parse(data).response;
+                success = result.success == 'true';
+                if (success) {if (onSuccess != null) onSuccess();}
+                else
+                {
+                    printMsg(Std.string(result.message));
+                    if (onFail != null) onFail();
+                }
             };
-            daUrl.onError = function (error:String) {if (onFail != null) onFail();};
+            daUrl.onError = function (error:String)
+            {
+                printMsg(error);
+                if (onFail != null) onFail();
+            };
             daUrl.request(false);
         }
 
-        return success ? Json.parse(result).response : null;
+        return success ? result : null;
     }
 
     static function getUser():Null<String> {return FlxG.save.data.user;}
     static function getToken():Null<String> {return FlxG.save.data.token;}
-    static function autoLoginToggle():Null<Bool>{return FlxG.save.data.autoLogin;}
 }
