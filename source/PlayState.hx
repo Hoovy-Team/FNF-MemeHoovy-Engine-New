@@ -1626,8 +1626,6 @@ class PlayState extends MusicBeatState
 					Conductor.lastSongPos = Conductor.songPosition;
 				}
 			}
-
-			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
 
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
