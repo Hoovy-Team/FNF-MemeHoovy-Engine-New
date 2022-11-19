@@ -25,7 +25,7 @@ Also if you make a mod with this engine, please credit all the people who worked
 - [Starmapo](https://github.com/Starmapo) - Inspiration & Hscript things. (And also being a cool person)
 
 - [Angel Bot](https://github.com/AngelDTF) - Inspiration & Week 7 Shit. (Reverse engineered it)
-- 
+
 - [LeviXD](https://github.com/LEVIXDDLMAO) - HTML5 Handler
 
 - [M&M](https://github.com/ActualMandM) - Week 7 Code.
