@@ -146,6 +146,6 @@ class GJOptionsState extends MusicBeatState
     {
         super.update(elapsed);
 
-        if (controls.BACK) {FlxG.mouse.visible = false; FlxG.switchState(new MainMenuState());}
+        if (controls.BACK) {FlxG.mouse.visible = false; MusicBeatState.switchState(new MainMenuState());}
     }
 }

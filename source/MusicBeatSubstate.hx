@@ -3,15 +3,38 @@ package;
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
 import flixel.FlxSubState;
+import flixel.util.FlxTimer;
+
 #if GAMEJOLT_ALLOWED
 import gamejolt.GJClient;
 #end
 
 class MusicBeatSubstate extends FlxSubState
 {
+	#if GAMEJOLT_ALLOWED
+	var pingSubTrigger:FlxTimer;
+	#end
+	
 	public function new()
 	{
 		super();
+
+		#if GAMEJOLT_ALLOWED
+		openCallback = function ()
+		{
+			pingSubTrigger = new FlxTimer();
+			pingSubTrigger.start(5, function (tmr:FlxTimer) {GJClient.pingSession();}, 0);
+		};
+
+		closeCallback = function ()
+		{
+			if (pingSubTrigger.active)
+			{
+				pingSubTrigger.cancel();
+				pingSubTrigger.destroy();
+			}
+		};
+		#end
 	}
 
 	private var curStep:Int = 0;

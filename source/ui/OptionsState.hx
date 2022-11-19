@@ -66,6 +66,6 @@ class OptionsState extends MusicBeatState
 		if (currentPage != null)
 			currentPage.enabled = false;
 		// Main.switchState(new MainMenuState());
-		FlxG.switchState(new MainMenuState());
+		MusicBeatState.switchState(new MainMenuState());
 	}
 }

@@ -145,13 +145,13 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.BACK)
 			{
-				FlxG.switchState(new TitleState());
+				MusicBeatState.switchState(new TitleState());
 			}
 
 			#if GAMEJOLT_ALLOWED
 			if (FlxG.keys.justPressed.SEVEN)
 			{
-				FlxG.switchState(new gamejolt.menus.GJOptionsState());
+				MusicBeatState.switchState(new gamejolt.menus.GJOptionsState());
 			}
 			#end
 
@@ -193,13 +193,13 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story mode':
-										FlxG.switchState(new StoryMenuState());
+										MusicBeatState.switchState(new StoryMenuState());
 										trace("Story Menu Selected");
 									case 'freeplay':
-										FlxG.switchState(new FreeplayState());
+										MusicBeatState.switchState(new FreeplayState());
 										trace("Freeplay Menu Selected");
 									case 'options':
-										FlxG.switchState(new OptionsState());
+										MusicBeatState.switchState(new OptionsState());
 								}
 							});
 						}
