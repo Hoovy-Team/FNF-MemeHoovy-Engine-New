@@ -6,43 +6,41 @@ No, it's not dead, I've just been busy.
 
 ![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
 
-Discord Server: https://discord.gg/vS2rY5VaMV
+<b>`THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.`</b>
 
-# THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.
+Join to our [Discord Server](https://discord.gg/vS2rY5VaMV) for more questions and updates.
+Also if you make a mod with this engine, please credit all the people who worked here, and also open source your mods too you goons.
 
-Also if you make a mod with this engine, credit me, Brandon, & Wither, and also open source your mods too you goons.
+### Special Credits:
+- [MemeHoovy](https://github.com/MemeHoovy) - Main Programmer
 
-### Special Thanks:
+- [504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
 
-[Stillic](https://github.com/Stilic) - Polymod fix.
+- [Wither362](https://github.com/Wither362) - Contributor, Assistant Programmer.
 
-[504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
+- [GamerPablito](https://github.com/GamerPablito) - Contributor, Gamejolt Support.
 
-[Wither362](https://github.com/Wither362) - Contributor & Assistant Programmer.
+- [Yoshubs](https://github.com/Yoshubs) - Some inspiration.
 
-[LeviXD](https://github.com/LEVIXDDLMAO) - HTML5 Handler 
+- [Starmapo](https://github.com/Starmapo) - Inspiration & Hscript things. (And also being a cool person)
 
-[GamerPablito](https://github.com/GamerPablito) - Contributor & gamejolt support.
+- [Angel Bot](https://github.com/AngelDTF) - Inspiration & Week 7 Shit. (Reverse engineered it)
+- 
+- [LeviXD](https://github.com/LEVIXDDLMAO) - HTML5 Handler
 
-[Yoshubs](https://github.com/Yoshubs) - Some inspiration.
+- [M&M](https://github.com/ActualMandM) - Week 7 Code.
 
-[Starmapo](https://github.com/Starmapo) - Inspiration & Hscript things. (And also being a cool person)
+- [MtH](https://github.com/PrincessMtH) - Week 7 Code.
 
-[Angel Bot](https://github.com/AngelDTF) - Inspiration & Week 7 shit. (Reverse engineered it)
-
-[M&M](https://github.com/ActualMandM) - Week 7 code.
-
-[MtH](https://github.com/PrincessMtH) - Week 7 code.
-
-[Stilic](https://github.com/Stilic) - Inspiration & Flaty Engine code, and in general, an cool person (Ily stilic, platonically).
+- [Stilic](https://github.com/Stilic) - Polymod Fix, Extra Inspiration & Flaty Engine code, and in general, an cool person (Ily stilic, platonically).
 
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
-Also check out: [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
+Also check out:
+- [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
+- [Lite Funkin Engine](https://github.com/504brandon/lite-funkin-engine)
 
-And also check out [Lite Funkin Engine](https://github.com/504brandon/lite-funkin-engine)
-
-### Original description:
+# Original FNF description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
 
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
