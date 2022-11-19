@@ -20,6 +20,8 @@ Also if you make a mod with this engine, credit me, Brandon, & Wither, and also 
 
 [Wither362](https://github.com/Wither362) - Contributor & Assistant Programmer.
 
+[LeviXD](https://github.com/LEVIXDDLMAO) - HTML5 Handler 
+
 [GamerPablito](https://github.com/GamerPablito) - Contributor & gamejolt support.
 
 [Yoshubs](https://github.com/Yoshubs) - Some inspiration.
