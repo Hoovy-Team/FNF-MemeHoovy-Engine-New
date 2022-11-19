@@ -137,7 +137,7 @@ class Main extends Sprite
 			if (nextState == FlxG.state)
 				FlxG.resetState();
 			else
-				FlxG.switchState(nextState);
+				MusicBeatState.switchState(nextState);
 		};
 		if (!FlxTransitionableState.skipNextTransIn)
 		{

@@ -1,11 +1,13 @@
 package;
 
+import flixel.FlxState;
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;
 import flixel.util.FlxTimer;
+
 #if GAMEJOLT_ALLOWED
 import gamejolt.GJClient;
 #end
@@ -15,6 +17,10 @@ class MusicBeatState extends FlxUIState
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 	private var controls(get, never):Controls;
+
+	#if GAMEJOLT_ALLOWED
+	private static var pingTrigger:FlxTimer;
+	#end
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
@@ -44,7 +50,8 @@ class MusicBeatState extends FlxUIState
 				FlxG.stage.frameRate = 150;
 
 		#if GAMEJOLT_ALLOWED
-		GJClient.pingSession();
+		pingTrigger = new FlxTimer();
+		pingTrigger.start(5, function (tmr:FlxTimer) {GJClient.pingSession();}, 0);
 		#end
 
 		super.update(elapsed);
@@ -69,6 +76,19 @@ class MusicBeatState extends FlxUIState
 		}
 
 		curStep = lastChange.stepTime + Math.floor((Conductor.songPosition - lastChange.songTime) / Conductor.stepCrochet);
+	}
+
+	public static function switchState(nextState:FlxState)
+	{
+		#if GAMEJOLT_ALLOWED
+		if (pingTrigger.active)
+		{
+			pingTrigger.cancel();
+			pingTrigger.destroy();
+		}
+		#end
+
+		FlxG.switchState(nextState);
 	}
 
 	public function stepHit():Void
