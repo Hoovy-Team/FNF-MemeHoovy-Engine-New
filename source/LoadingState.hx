@@ -135,12 +135,12 @@ class LoadingState extends MusicBeatState
 		MusicBeatState.switchState(target);
 	}
 
-	static function getSongPath()
+	inline static function getSongPath()
 	{
 		return Paths.inst(PlayState.SONG.song);
 	}
 
-	static function getVocalPath()
+	inline static function getVocalPath()
 	{
 		return Paths.voices(PlayState.SONG.song);
 	}
@@ -168,12 +168,12 @@ class LoadingState extends MusicBeatState
 	}
 
 	#if NO_PRELOAD_ALL
-	static function isSoundLoaded(path:String):Bool
+	inline static function isSoundLoaded(path:String):Bool
 	{
 		return Assets.cache.hasSound(path);
 	}
 
-	static function isLibraryLoaded(library:String):Bool
+	inline static function isLibraryLoaded(library:String):Bool
 	{
 		return Assets.getLibrary(library) != null;
 	}
