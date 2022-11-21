@@ -35,7 +35,7 @@ class GJOptionsState extends MusicBeatState
         bg.antialiasing = PreferencesMenu.getPref('global-antialiasing');
         add(bg);
 
-        title = new Alphabet(0, 60, "GameJolt");
+        title = new Alphabet(0, 60, "GameJolt", true);
         title.screenCenter(X);
         title.scrollFactor.set();
         add(title);
@@ -114,7 +114,7 @@ class GJOptionsState extends MusicBeatState
         else
         {
             var optArr:Array<ActionButton> = [];
-            var optList:Array<String> = ['Log Out', 'Trophies', 'About Me'];
+            var optList:Array<String> = ['Log Out', 'Trophies', 'About Me', 'Friends'];
 
             daWidth = Std.int(FlxG.width * 0.3);
             daHeight = Std.int(FlxG.height * 0.15);
@@ -123,19 +123,22 @@ class GJOptionsState extends MusicBeatState
             [
                 new LogoutSubState(),
                 new TrophiesSubState(),
-                new UserInfoSubState()
+                new UserInfoSubState(),
+                new FriendsSubState()
             ];
 
             for (i in 0...optList.length)
             {
                 var daButton = new ActionButton
                 (
-                    0, (FlxG.height * 0.35) + ((daHeight + 20) * i),
+                    FlxG.width * (((i % 2) + 1)/3),
+                    (FlxG.height * 0.45) + ((daHeight + 25) * Math.floor(i / 2)),
                     daWidth, daHeight, optList[i],
                     function () {openSubState(subStateList[i]);}
                 );
                 daButton.scrollFactor.set();
-                daButton.screenCenter(X);
+                daButton.x -= daButton.width / 2;
+                // daButton.screenCenter(X);
                 optArr.push(daButton);
                 add(optArr[i]);
             }

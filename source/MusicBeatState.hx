@@ -28,8 +28,12 @@ class MusicBeatState extends FlxUIState
 	override function create()
 	{
 		destroySubStates = false; // Avoid Crashing with SubMenus on theur reutilization
-		if (transIn != null)
-			trace('reg ' + transIn.region);
+
+		#if GAMEJOLT_ALLOWED
+		pingTrigger = new FlxTimer().start(3, function (tmr:FlxTimer) {GJClient.pingSession();}, 0);
+		#end
+
+		if (transIn != null) trace('reg ' + transIn.region);
 
 		super.create();
 	}
@@ -48,11 +52,6 @@ class MusicBeatState extends FlxUIState
 		if (FlxG.stage != null)
 			if (FlxG.stage.frameRate != 150)
 				FlxG.stage.frameRate = 150;
-
-		#if GAMEJOLT_ALLOWED
-		pingTrigger = new FlxTimer();
-		pingTrigger.start(5, function (tmr:FlxTimer) {GJClient.pingSession();}, 0);
-		#end
 
 		super.update(elapsed);
 	}
@@ -81,11 +80,8 @@ class MusicBeatState extends FlxUIState
 	public static function switchState(nextState:FlxState)
 	{
 		#if GAMEJOLT_ALLOWED
-		if (pingTrigger.active)
-		{
-			pingTrigger.cancel();
-			pingTrigger.destroy();
-		}
+		pingTrigger.cancel();
+		pingTrigger.destroy();
 		#end
 
 		FlxG.switchState(nextState);
