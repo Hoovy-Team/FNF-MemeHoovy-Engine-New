@@ -37,6 +37,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 
 	static inline final engineVersion:String = '0.1.0-Pre-Alpha';
+	static inline final gjVersion:String = '1.4';
 
 	override function create()
 	{
@@ -101,8 +102,15 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 
+		#if GAMEJOLT_ALLOWED
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 53, 0, 'GameJolt Support v$gjVersion', 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+		#end
+
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 33, 0,
-			"MemeHoovy Engine v" + engineVersion + '\nFNF v' + Application.current.meta.get('version'), 12);
+			'MemeHoovy Engine v$engineVersion\nFNF v${Application.current.meta.get('version')}', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
