@@ -8,7 +8,7 @@ No, it's not dead, I've just been busy.
 
 <b>`THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.`</b>
 
-Join to our [Discord Server](https://discord.gg/vS2rY5VaMV) for more questions and updates.
+Join our [Discord Server](https://discord.gg/vS2rY5VaMV) for more questions and updates.
 Also if you make a mod with this engine, please credit all the people who worked here, and also open source your mods too you goons.
 
 ### Special Credits:
@@ -26,7 +26,7 @@ Also if you make a mod with this engine, please credit all the people who worked
 
 - [Angel Bot](https://github.com/AngelDTF) - Inspiration & Week 7 Shit. (Reverse engineered it)
 
-- [LeviXD](https://github.com/LEVIXDDLMAO) - HTML5 Handler
+- [LeviXD](https://github.com/LEVIXDDLMAO) - HTML5 Handler.
 
 - [M&M](https://github.com/ActualMandM) - Week 7 Code.
 
