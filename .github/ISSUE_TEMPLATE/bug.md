@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug or critical performance issue, issues from mods or forks will NOT be fixed (seriously, the issues involving hypnos lullaby on the FE repo is enough, I don't want anything like that here too)
+about: Report a bug or critical performance issue, issues from mods or forks will NOT be fixed
 title: 'Bug Report: [DESCRIBE YOUR BUG IN DETAIL HERE]'
 labels: bug
 ---
