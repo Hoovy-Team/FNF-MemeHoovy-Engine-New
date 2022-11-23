@@ -18,7 +18,7 @@ labels: bug
 [weed]: <> (Put an X in the [ ] thingies to fill out checkbox!)
 [weed]: <> (something like [x] pretty much, don't screw up or you will look stupid)
 
-Specify below which OS you are using, or if your playing via browser (LIKELY WON'T GET FIXED AS THERE IS NO OFFICIAL BROWSER PORT YET)
+Specify below which OS you are using, or if your playing via browser
 - - [ ] Windows
 - - [ ] Mac
 - - [ ] Linux
