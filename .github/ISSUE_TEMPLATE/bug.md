@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug or critical performance issue
+about: Report a bug or critical performance issue, issues from mods or forks will NOT be fixed (seriously, the issues involving hypnos lullaby on the FE repo is enough, I don't want anything like that here too)
 title: 'Bug Report: [DESCRIBE YOUR BUG IN DETAIL HERE]'
 labels: bug
 ---
@@ -18,11 +18,11 @@ labels: bug
 [weed]: <> (Put an X in the [ ] thingies to fill out checkbox!)
 [weed]: <> (something like [x] pretty much, don't screw up or you will look stupid)
 
-- [ ] [Newgrounds](https://www.newgrounds.com/portal/view/770371)
-- [ ] [Itch.io](https://ninja-muffin24.itch.io/funkin)? Specify below
+Specify below which OS you are using, or if your playing via browser (LIKELY WON'T GET FIXED AS THERE IS NO OFFICIAL BROWSER PORT YET)
 - - [ ] Windows
 - - [ ] Mac
 - - [ ] Linux
+- - [ ] Browser
 
 ### If you are playing the game in a browser, what browser are you using?
 
