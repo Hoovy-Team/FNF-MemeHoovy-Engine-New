@@ -4,30 +4,58 @@ package modifiers; // getters AND setters, so this class name is technically a l
  * @author MemeHoovy
  */
 class Getters {
-    @:isVar public var daType(get, set):Any;
+    @:isVar public static var daType(get, set):Any;
 
-    private inline function get_daType(typeBud:Dynamic):Any {
+    private static inline function get_daType(typeBud:Dynamic):Any {
         // return Type.typeof(typeBud);
         return Std.isOfType(typeBud, Any);
     }
 
-    private function set_daType(anything:Any, typeBud:Dynamic):Any {
-        return anything = typeBud;
+    private static inline function set_daType(typeBud:Dynamic) {
+        return daType = typeBud;
+    }    
+
+    public static inline function getBool(daBool:Bool):Bool {
+        if (Std.isOfType(daBool, Bool))
+            return daBool;
     }
 
-    public inline function getBool(daBool:Bool):Bool {
-        return Std.isOfType(daBool, Bool);
+    public static inline function getString(daString:String):String {
+        if(Std.isOfType(daString, String))
+            return daString;
     }
 
-    public inline function getString(daString:String):String {
-        return Std.isOfType(daString, String);
-    }
-
-    public inline function getAny(daAny:Dynamic):Any {
-        return Std.isOfType(daAny, Any);
-    }
-
-    public function setAnyValue():Any {
+    public static inline function getAny():Any {
         return 0;
+    }
+
+    /**
+     * [Description] Returns the different possible runtime types of a value.
+     * @param daTypeName The type, see below for a list.
+     * @see `https://api.haxe.org/ValueType.html` 
+     */
+    public static function returnTypeName(daTypeName:Dynamic){
+        return switch(Type.typeof(daTypeName)) {
+            case TEnum(e):
+                Type.getEnumName(e);
+            case TClass(c):
+                Type.getClassName(c);
+            case TInt:
+                'int';
+			case TFloat:
+				"float";
+			case TBool:
+				"bool";
+			case TObject:
+				"object";
+			case TFunction:
+				"function";
+			case TNull:
+				"null";
+			case TUnknown:
+				"unknown";
+			default:
+				"";
+        }
     }
 }
