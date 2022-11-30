@@ -4,6 +4,8 @@ I have an engine based off myself now, watch me fail.
 
 No, it's not dead, I've just been busy.
 
+This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
+
 ![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
 
 <b>`THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.`</b>
