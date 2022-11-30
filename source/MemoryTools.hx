@@ -30,8 +30,15 @@ import java.vm.Gc;
 import neko.vm.Gc;
 #end
 import flixel.FlxG;
+import openfl.Assets;
 
 class MemoryTools {
+	inline public static function clearMinor() {
+		#if (cpp || java || neko)
+		Gc.run(false);
+		#end
+	}
+
 	inline public static function runGC():Void
 	{
 		#if cpp
@@ -61,24 +68,30 @@ class MemoryTools {
 		#end
     }
 
-    // made these easier ig because fuck it, why not?
-    inline public static function clearCache():Void
+    // basically openfl garbage collector
+    inline public static function takeOutTheTrash():Void
     {
-        FlxG.bitmap.clearCache();
+        openfl.system.System.gc();
     }
 
-    inline static public function dumpCache():Void
-    {
-        FlxG.bitmap.dumpCache();
-    }
-
-    inline static public function unDumpCache():Void
-    {
-        FlxG.bitmap.undumpCache();
-    }
-
-    inline public static function clearUnusedCache():Void
-    {
-        FlxG.bitmap.clearUnused();
-    }    
+	// taken from forever engine, cuz optimization very pog.
+	// thank you shubs :)
+    // I took this from kade engine >:)
+	public static function dumpCache()
+	{
+		///* SPECIAL THANKS TO HAYA
+		@:privateAccess
+		for (key in FlxG.bitmap._cache.keys())
+		{
+			var obj = FlxG.bitmap._cache.get(key);
+			if (obj != null)
+			{
+				Assets.cache.removeBitmapData(key);
+				FlxG.bitmap._cache.remove(key);
+				obj.destroy();
+			}
+		}
+		Assets.cache.clear("songs");
+		// */
+	}
 }

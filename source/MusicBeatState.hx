@@ -40,7 +40,6 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
-		// everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
@@ -80,8 +79,10 @@ class MusicBeatState extends FlxUIState
 	public static function switchState(nextState:FlxState)
 	{
 		#if GAMEJOLT_ALLOWED
-		pingTrigger.cancel();
-		pingTrigger.destroy();
+		if (pingTrigger != null){
+			pingTrigger.cancel();
+			pingTrigger.destroy();
+		}
 		#end
 
 		FlxG.switchState(nextState);

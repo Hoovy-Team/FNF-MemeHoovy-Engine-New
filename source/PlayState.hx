@@ -60,42 +60,42 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
-	private var vocals:FlxSound;
+	public var vocals:FlxSound;
 
-	private var dad:Character;
-	private var gf:Character;
-	private var boyfriend:Boyfriend;
+	public var dad:Character;
+	public var gf:Character;
+	public var boyfriend:Boyfriend;
 
 	private var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
 
-	private var strumLine:FlxSprite;
-	private var curSection:Int = 0;
+	public var strumLine:FlxSprite;
+	public var curSection:Int = 0;
 
-	private var camFollow:FlxObject;
+	public var camFollow:FlxObject;
 
-	private static var prevCamFollow:FlxObject;
+	public static var prevCamFollow:FlxObject;
 
-	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
-	private var playerStrums:FlxTypedGroup<FlxSprite>;
+	public var strumLineNotes:FlxTypedGroup<FlxSprite>;
+	public var playerStrums:FlxTypedGroup<FlxSprite>;
 
-	private var camZooming:Bool = true;
-	private var curSong:String = "";
+	public var camZooming:Bool = true;
+	public var curSong:String = "";
 
-	private var gfSpeed:Int = 1;
-	private var health:Float = 1;
-	private var combo:Int = 0;
+	public var gfSpeed:Int = 1;
+	public var health:Float = 1;
+	public var combo:Int = 0;
 
-	private var healthBarBG:FlxSprite;
-	private var healthBar:FlxBar;
+	public var healthBarBG:FlxSprite;
+	public var healthBar:FlxBar;
 
-	private var generatedMusic:Bool = false;
-	private var startingSong:Bool = false;
+	public var generatedMusic:Bool = false;
+	public var startingSong:Bool = false;
 
-	private var iconP1:HealthIcon;
-	private var iconP2:HealthIcon;
-	private var camHUD:FlxCamera;
-	private var camGame:FlxCamera;
+	public var iconP1:HealthIcon;
+	public var iconP2:HealthIcon;
+	public var camHUD:FlxCamera;
+	public var camGame:FlxCamera;
 
 	var dialogue:Array<String> = ['bf:beep bo bop lol >:]', 'dad:no u'];
 
@@ -127,16 +127,16 @@ class PlayState extends MusicBeatState
 	var smokeLeft:FlxSprite;
 	var tower:FlxSprite;
 
-	var songScore:Int = 0;
-	var songMisses:Int = 0;
-	var songAccuracy:Float = 100;
-	var songRatingacc:String = 'Great';
-	var songRatingmiss:String = 'FC';
-	var scoreTxt:FlxText;
+	public var songScore:Int = 0;
+	public var songMisses:Int = 0;
+	public var songAccuracy:Float = 100;
+	public var songRatingacc:String = 'Great';
+	public var songRatingmiss:String = 'FC';
+	public var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
 
-	var defaultCamZoom:Float = 1.05;
+	public var defaultCamZoom:Float = 1.05;
 
 	// how big to stretch the pixel art assets
 	public static var daPixelZoom:Float = 6;
@@ -182,7 +182,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		openfl.system.System.gc(); // basic optimization
+		MemoryTools.dumpCache();
 
 		curNumerator = Conductor.timeSignature[0];
 		curDenominator = Conductor.timeSignature[1];
