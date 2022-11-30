@@ -130,37 +130,6 @@ class Main extends Sprite
 		}
 	}
 
-	public static function switchState(nextState:FlxState)
-	{
-		var callback = function()
-		{
-			if (nextState == FlxG.state)
-				FlxG.resetState();
-			else
-				MusicBeatState.switchState(nextState);
-		};
-		if (!FlxTransitionableState.skipNextTransIn)
-		{
-			var state = FlxG.state;
-			@:privateAccess
-			if (Std.isOfType(state, FlxTransitionableState))
-				cast(state, FlxTransitionableState)._exiting = true;
-			while (state.subState != null)
-				state = state.subState;
-			state.openSubState(new FadeSubstate(0.5, false, callback));
-		}
-		else
-		{
-			FlxTransitionableState.skipNextTransIn = false;
-			callback();
-		}
-	}
-
-	inline public static function resetState()
-	{
-		switchState(FlxG.state);
-	}
-
 	private function init(?E:Event):Void
 	{
 		if (hasEventListener(Event.ADDED_TO_STAGE))
