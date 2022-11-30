@@ -42,6 +42,7 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import openfl.utils.Assets;
+import modcharts.Modchart;
 #if mobile
 import mobile.ControlsMobile;
 import mobile.Hitbox;
@@ -1123,6 +1124,10 @@ class PlayState extends MusicBeatState
 						}
 					});
 					FlxG.sound.play(Paths.sound('introGo'), 0.6);
+
+					strumLineNotes.forEachAlive(function(strum:FlxSprite){
+						Modchart.coolRotations(strum);
+					});
 			}
 
 			swagCounter++;

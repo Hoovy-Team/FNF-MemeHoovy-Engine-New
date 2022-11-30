@@ -9,15 +9,6 @@ import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
 import flixel.graphics.FlxGraphic;
-#if cpp
-import cpp.NativeGc;
-#elseif hl
-import hl.Gc;
-#elseif java
-import java.vm.Gc;
-#elseif neko
-import neko.vm.Gc;
-#end
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -132,18 +123,6 @@ class CoolUtil
 	{
 		var cock:Float = FlxG.elapsed * (ratio * 60);
 		return FlxMath.bound(negative ? 1 - cock : cock, 0, 1);
-	}
-
-	inline public static function runGC():Void
-	{
-		#if cpp
-		NativeGc.compact();
-		NativeGc.run(true);
-		#elseif hl
-		Gc.major();
-		#elseif (java || neko)
-		Gc.run(true);
-		#end
 	}
 
 	inline public static function nativeTrace(data:Dynamic):Void

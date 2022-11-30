@@ -188,7 +188,7 @@ class Cache
 
 		clearUnusedSounds();
 
-		CoolUtil.runGC();
+		MemoryTools.runGC();
 	}
 
 	public static function clearUnused()
@@ -201,7 +201,7 @@ class Cache
 
 		clearUnusedSounds();
 
-		CoolUtil.runGC();
+		MemoryTools.runGC();
 	}
 
 	static function clearUnusedSounds()
