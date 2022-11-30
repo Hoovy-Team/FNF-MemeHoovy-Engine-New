@@ -7,7 +7,7 @@ TODO List:
 -Fix some input drops
 -Finish mobile support
 -Better chart editor
--Mod support
+-Mod support (maybe not use polymod? idk)
 -Better HScript support (Maybe)
 -Lua Support (Probably)
 -Extra Keys (Maybe)
