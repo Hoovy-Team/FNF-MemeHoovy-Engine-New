@@ -1,4 +1,4 @@
-# Friday Night Funkin MemeHoovy Engine
+# Friday Night Funkin - MemeHoovy Engine
 
 I have an engine based off myself now, watch me fail.
 
