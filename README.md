@@ -1,4 +1,4 @@
-# Friday Night Funkin MemeHoovy Engine
+# Friday Night Funkin' - MemeHoovy Engine
 
 I have an engine based off myself now, watch me fail.
 
@@ -20,7 +20,7 @@ Also if you make a mod with this engine, please credit all the people who worked
 
 - [Wither362](https://github.com/Wither362) - Contributor, Assistant Programmer.
 
-- [GamerPablito](https://github.com/GamerPablito) - Contributor, Gamejolt Support.
+- [GamerPablito](https://github.com/GamerPablito) - Contributor, Gamejolt Support, Assistant Programmer.
 
 - [Yoshubs](https://github.com/Yoshubs) - Some inspiration.
 
