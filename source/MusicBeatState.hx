@@ -45,7 +45,7 @@ class MusicBeatState extends FlxUIState
 		updateCurStep();
 		updateBeat();
 
-		if (oldStep != curStep && curStep > 0)
+		if (oldStep != curStep && curStep >= 0)
 			stepHit();
 
 		if (FlxG.stage != null)
