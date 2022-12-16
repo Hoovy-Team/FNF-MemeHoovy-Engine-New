@@ -73,12 +73,12 @@ IF YOU WANT TO COMPILE THE GAME YOURSELF, CONTINUE READING!!!
 
 First, you need to install Haxe and HaxeFlixel. I'm too lazy to write and keep updated with that setup (which is pretty simple). 
 1. [Install Haxe 4.2.5](https://haxe.org/download/version/4.2.5/)
-2. [Install HaxeFlixel (5.0.2)](https://haxeflixel.com/documentation/install-haxeflixel/) after downloading Haxe
+2. [Install HaxeFlixel (4.11.0)](https://haxeflixel.com/documentation/install-haxeflixel/) after downloading Haxe
 
 Other installations you'd need are the additional libraries, a fully updated list will be in `Project.xml` in the project root. Currently, these are all of the things you need to install:
 ```
-flixel 5.0.2
-flixel-addons
+flixel 4.11.0
+flixel-addons 2.11.0
 flixel-ui
 hscript
 ```
