@@ -153,27 +153,6 @@ class Paths
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 	}
 
-	// Credit: MAJigsaw77
-	public static function returnGraphic(key:String, ?cache:Bool = true):FlxGraphic
-	{
-		var path:String = 'assets/$key.png';
-		if (OpenFlAssets.exists(path, IMAGE))
-		{
-			if (!currentTrackedAssets.exists(path))
-			{
-				var graphic:FlxGraphic = FlxGraphic.fromBitmapData(OpenFlAssets.getBitmapData(path), false, path, cache);
-				graphic.persist = true;
-				currentTrackedAssets.set(path, graphic);
-			}
-
-			localTrackedAssets.push(path);
-			return currentTrackedAssets.get(path);
-		}
-
-		trace('oh no $key its returning null NOOOO');
-		return null;
-	}
-
 	// Credit: Stilic
 	public static function returnAtlas(key:String, type:AtlasType, ?library:String, persistUntilClear:Bool = false)
 	{
@@ -188,5 +167,11 @@ class Paths
 
 		trace('oh no ${key} is returning null NOOOO');
 		return null;
+	}
+}
+
+class ModPaths extends Paths {
+	inline public function modsFolder(){
+		return 'mods/';
 	}
 }

@@ -1,6 +1,5 @@
 package;
 
-import openfl.display.Window;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
@@ -174,8 +173,6 @@ class TitleState extends MusicBeatState
 		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", true);
 		credTextShit.screenCenter();
 
-		// credTextShit.alignment = CENTER;
-
 		credTextShit.visible = false;
 
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
@@ -194,8 +191,6 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		else
 			initialized = true;
-
-		// credGroup.add(credTextShit);
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -219,7 +214,6 @@ class TitleState extends MusicBeatState
 	{
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
-		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		if (FlxG.keys.justPressed.F)
 		{
@@ -254,7 +248,6 @@ class TitleState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 			transitioning = true;
-			// FlxG.sound.music.stop();
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
@@ -322,7 +315,7 @@ class TitleState extends MusicBeatState
 					switch (i + 1)
 					{
 						case 1:
-							createCoolText(['MemeHoovy', 'Brandon', 'Wither', 'and others']); // might not be enough room
+							createCoolText(['MemeHoovy', 'Brandon', 'Wither', 'GamerPablito', 'and others']); // might not be enough room
 						case 3:
 							addMoreText('presents');
 						case 4:
