@@ -2,7 +2,7 @@
 
 I have an engine based off myself now, watch me fail.
 
-No, it's not dead, I've just been busy.
+No, it's not dead, I've just been busy. (I haven't been committing as much as I'd like, but I'm busy with other things/tasks. And mind you, I code for free, I'm not getting paid to do any of the things that I do.)
 
 This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 
