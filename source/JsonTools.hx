@@ -51,22 +51,6 @@ class JsonTools extends JSONParseFormat
 	}
 
 	/**
-	 * [Description] Loads a JSON file from the specified path. (But does not include safety measures.)
-	 * @param json The JSON file to load.
-	 * @param library The library for the location of the JSON file.
-	 */
-	public static function unsafeLoadJSON(json:String, ?library:String)
-	{
-		var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
-
-		if (!Assets.exists(jsonPath))
-			return null;
-
-		var jsonParsed = Json.parse(jsonPath);
-		return jsonParsed;
-	}
-
-	/**
 	 * [Description] Loads a JSON file from the specified path & converts it into a string.
 	 * @param json The JSON file to load.
 	 * @param library The library for the location of the JSON file.
@@ -89,25 +73,6 @@ class JsonTools extends JSONParseFormat
 			}
 			else
 				return null; */
-	}
-
-	/**
-	 * [Description] Loads a JSON file from the specified path & converts it into a string. (But without safety measures).
-	 * @param json The JSON file to load.
-	 * @param library The library for the location of the JSON file.
-	 */
-	public static function unsafeStringifyJSON(json:String, ?library:String):Null<String>
-	{
-		var jsonPath = Assets.getText(Paths.jsonAnywhere(json, library));
-
-		if (!Assets.exists(jsonPath))
-			return null;
-
-		var jsonParsed = Json.parse(jsonPath);
-
-		var stringedJSON = Json.stringify(jsonParsed);
-
-		return stringedJSON;
 	}
 
 	#if polymod
