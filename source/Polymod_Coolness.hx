@@ -79,7 +79,7 @@ class Polymod_Coolness
 		return [for (j in scanner) j.id];
 	}
 
-	inline public static function removeMod():Void{
+	public static function removeMod():Void{
 		var assetLibrary:PolymodAssetLibrary = new PolymodAssetLibrary(null);
 		var scanner = Polymod.scan('mods');
 		if (assetLibrary != null) {
