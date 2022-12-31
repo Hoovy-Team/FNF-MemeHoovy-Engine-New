@@ -1256,7 +1256,7 @@ class PlayState extends MusicBeatState
 		generatedMusic = true;
 	}
 
-	function sortByShit(Obj1:Note, Obj2:Note):Int
+	inline function sortByShit(Obj1:Note, Obj2:Note):Int
 	{
 		return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
 	}
@@ -1364,7 +1364,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function tweenCamIn():Void
+	inline function tweenCamIn():Void
 	{
 		FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut});
 	}
@@ -1716,7 +1716,6 @@ class PlayState extends MusicBeatState
 					vocals.volume = 0;
 			}
 		}
-		// better streaming of shit
 
 		// RESET = Quick Game Over Screen
 		if (controls.RESET)
@@ -1739,8 +1738,6 @@ class PlayState extends MusicBeatState
 			deathCounter++;
 
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-
-			// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 			#if desktop
 			// Game Over doesn't get his own variable because it's only used here
@@ -1953,7 +1950,6 @@ class PlayState extends MusicBeatState
 	private function popUpScore(strumtime:Float, daNote:Note):Void
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
-		// boyfriend.playAnim('hey');
 		vocals.volume = 1;
 
 		var placement:String = Std.string(combo);
@@ -2101,7 +2097,6 @@ class PlayState extends MusicBeatState
 		}
 
 		coolText.text = Std.string(seperatedScore);
-		// add(coolText);
 
 		FlxTween.tween(rating, {alpha: 0}, 0.2, {
 			startDelay: Conductor.crochet * 0.001
