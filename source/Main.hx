@@ -172,7 +172,7 @@ class Main extends Sprite
 					}
 				}
 		
-				errMsg += '\nUncaught Error: ${e.error}\nGo report this issue in the GitHub page of the mod:\nhttps://github.com/GamerPablito/FNF-Turn-Bass-Mod';
+				errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-New\n\n> Crash Handler written by: sqirra-rng"
 		
 				if (!FileSystem.exists("./crash/")) FileSystem.createDirectory("./crash/");
 				File.saveContent(path, errMsg + "\n");
