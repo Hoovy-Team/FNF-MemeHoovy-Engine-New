@@ -150,51 +150,40 @@ class Main extends Sprite
 		FPSCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(FPSCounter);
 
+		// Original code by Gedehari (sqirra-rng)
+		// Simplified version by GamerPablito
 		#if CRASH_HANDLER
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,
+			function (e)
+			{
+				var callStack:Array<StackItem> = CallStack.exceptionStack(true);
+				var dateNow:String = Date.now().toString().replace(" ", "_").replace(":", "'");
+				var path:String = './crash/$dateNow.txt';
+				var errMsg:String = "";
+		
+				for (stackItem in callStack)
+				{
+					switch (stackItem)
+					{
+						case FilePos(s, file, line, column):
+							errMsg += '$file : Line -> $line : Column -> $column\n';
+						default:
+							Sys.println(stackItem);
+					}
+				}
+		
+				errMsg += '\nUncaught Error: ${e.error}\nGo report this issue in the GitHub page of the mod:\nhttps://github.com/GamerPablito/FNF-Turn-Bass-Mod';
+		
+				if (!FileSystem.exists("./crash/")) FileSystem.createDirectory("./crash/");
+				File.saveContent(path, errMsg + "\n");
+		
+				Sys.println(errMsg);
+				Sys.println("Crash register saved in " + Path.normalize(path));
+		
+				Application.current.window.alert(errMsg, "Error!");
+				Sys.exit(1);
+			}
+		);
 		#end
 	}
-
-	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
-	// very cool person for real they don't get enough credit for their work
-	// this really was needed tbh
-	#if CRASH_HANDLER
-	function onCrash(e:UncaughtErrorEvent):Void
-	{
-		var errMsg:String = "";
-		var path:String;
-		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-		var dateNow:String = Date.now().toString();
-
-		dateNow = dateNow.replace(" ", "_");
-		dateNow = dateNow.replace(":", "'");
-
-		path = "./crash/" + "MemeHoovyEngine_" + dateNow + ".txt";
-
-		for (stackItem in callStack)
-		{
-			switch (stackItem)
-			{
-				case FilePos(s, file, line, column):
-					errMsg += file + " (line " + line + ")\n";
-				default:
-					Sys.println(stackItem);
-			}
-		}
-
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-New\n\n> Crash Handler written by: sqirra-rng";
-
-		if (!FileSystem.exists("./crash/"))
-			FileSystem.createDirectory("./crash/");
-
-		File.saveContent(path, errMsg + "\n");
-
-		Sys.println(errMsg);
-		Sys.println("Crash dump saved in " + Path.normalize(path));
-
-		Application.current.window.alert(errMsg, "Error!");
-		DiscordClient.shutdown();
-		Sys.exit(1);
-	}
-	#end	
 }
