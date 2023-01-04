@@ -2020,7 +2020,7 @@ class PlayState extends MusicBeatState
 			if (daRating == 'sick')
 			{
 				totalNotesHit += 1;
-				sicks++;
+				ratingsNumber.set('sicks', ratingsNumber.get('sicks') + 1);
 			}
 		//}
 		/*if (noteDiff > Conductor.safeZoneOffset * 0.9)
