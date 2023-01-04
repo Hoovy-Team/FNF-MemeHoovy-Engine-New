@@ -173,10 +173,38 @@ class PlayState extends MusicBeatState
 
 	public static var instance:PlayState;
 
-	public var sicks:Int = 0;
-	public var goods:Int = 0;
-	public var bads:Int = 0;
-	public var shits:Int = 0;
+	public var ratingsOffsetString:Map<String, Float> = [
+		'shit' => 0.9,
+		'bad'  => 0.75,
+		'good' => 0.2
+	];
+	public var ratingsOffsetArrayFloat:Array<Float> = [
+		0.9,  // #h85 (shit)
+		0.75, // /@€ (bad)
+		0.2   // *99€ (good)
+	];
+	public var ratingsOffsetFloat:Map<Float, String> = [
+		0.9   => 'shit'
+		0.75  => 'bad',
+		0.2   => 'good'
+	];
+	public var ratingsNumber:Map<String, Int> = [ // im spanish ok!! i dont know englisshshshhs!!!
+		'sicks' => 0,
+		'goods' => 0,
+		'bads'  => 0,
+		'shits' => 0
+	];
+	public var ratingsScore:Map<String, Int> = [
+		'shit' => 50,
+		'bad'  => 100,
+		'good' => 200
+	];
+	public var ratingsSplash:Map<String, Bool> = [
+		'shit' => false,
+		'bad'  => false,
+		'good' => false,
+		'sick' => true
+	];
 
 	private var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
@@ -1530,21 +1558,32 @@ class PlayState extends MusicBeatState
 			+ ' | Time:'
 			+ FlxStringUtil.formatTime((FlxG.sound.music.length - FlxMath.bound(Conductor.songPosition, 0)) / 1000, false);
 		// rate code
-		if (songMisses == 0 && bads > 0)
-			songRatingmiss = 'FC';
-		if (songMisses == 0 && goods > 0)
-			songRatingmiss = 'GFC';
-		if (songMisses > 0 && songMisses < 5)
-			songRatingmiss = 'PG';
-		if (songMisses < 5 && songMisses > 10)
-			songRatingmiss = 'OOF';
-		if (songMisses > 20)
-			songRatingmiss = 'Clear';
+		if(ratingsNumber.exists('shits')
+		   && ratingsNumber.exists('goods')
+		   && ratingsNumber.exists('bads')
+		   && ratingsNumber.exists('sicks'))
+		{ // its a normal rating
+			final shits = ratingsNumber.get('shits');
+			final bads = ratingsNumber.get('bads');
+			final goods = ratingsNumber.get('goods');
+			final sicks = ratingsNumber.get('sicks');
 
-		if (songAccuracy < 80 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
-			songRatingacc = 'GREAT!';
-		if (songAccuracy < 99 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
-			songRatingacc = 'GOOD';
+			if (songMisses == 0 && bads > 0)
+				songRatingmiss = 'FC';
+			if (songMisses == 0 && goods > 0)
+				songRatingmiss = 'GFC';
+			if (songMisses > 0 && songMisses < 5)
+				songRatingmiss = 'PG';
+			if (songMisses < 5 && songMisses > 10)
+				songRatingmiss = 'OOF';
+			if (songMisses > 20)
+				songRatingmiss = 'Clear';
+
+			if (songAccuracy < 80 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
+				songRatingacc = 'GREAT!';
+			if (songAccuracy < 99 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
+				songRatingacc = 'GOOD';
+		}
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1962,41 +2001,55 @@ class PlayState extends MusicBeatState
 		var score:Int = 350;
 		// var acc:Float = 0.10;
 
-		var daRating:String = "sick";
+		var daRating:String = "sick"; // first one
 		var doSplash:Bool = true;
 
-		if (noteDiff > Conductor.safeZoneOffset * 0.9)
+		var already:Bool = false;
+		for(ratingOffset in ratingsOffsetArrayFloat) {
+			if(noteDiff > Conductor.safeZoneOffset * ratingOffset) {
+				daRating = ratingsOffsetFloat.get(ratingOffset); // string
+				score = ratingsScore.get(daRating);
+				// acc = ratingsAccuracy.get(daRating);
+				totalNotesHit += 1 - ratingOffset;
+				ratingsNumber.set(daRating + 's', ratingsNumber.get(daRating + 's') + 1);
+				doSplash = ratingsSplash.get(daRating);
+				//already = true;
+			}
+		}
+		//if(!already) {
+			if (daRating == 'sick')
+			{
+				totalNotesHit += 1;
+				sicks++;
+			}
+		//}
+		/*if (noteDiff > Conductor.safeZoneOffset * 0.9)
 		{
-			daRating = 'shit';
+			daRating = 'shit'; 
 			score = 50;
 			// acc = -0.20;
 			totalNotesHit += 1 - 0.9;
-			shits++;
+			shits++; 
 			doSplash = false;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
-			daRating = 'bad';
+			daRating = 'bad'; 
 			score = 100;
 			// acc = -0.5;
 			totalNotesHit += 1 - 0.75;
-			bads++;
+			bads++; 
 			doSplash = false;
-		}
+		} 
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
 			daRating = 'good';
-			score = 200;
+			score = 200; 
 			// acc = 0.5;
-			totalNotesHit += 1 - 0.2;
-			goods++;
+			totalNotesHit += 1 - 0.2; 
+			goods++; 
 			doSplash = false;
-		}
-		if (daRating == 'sick')
-		{
-			totalNotesHit += 1;
-			sicks++;
-		}
+		}*/
 
 		if (doSplash && PreferencesMenu.getPref('note-splashes'))
 		{
