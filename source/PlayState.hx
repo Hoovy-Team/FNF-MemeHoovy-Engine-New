@@ -130,7 +130,7 @@ class PlayState extends MusicBeatState
 	public var songScore:Int = 0;
 	public var songMisses:Int = 0;
 	public var songAccuracy:Float = 100;
-	public var songRatingacc:String = 'Great';
+	public var songRating:String = 'Great';
 	public var songRatingmiss:String = 'FC';
 	public var scoreTxt:FlxText;
 
@@ -174,8 +174,8 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState;
 
 	public var ratingsOffsetString:Map<String, Float> = [
-		'shit' => 0.9,
-		'bad'  => 0.75,
+		'shit', => 0.9,
+		'bad',  => 0.75,
 		'good' => 0.2
 	];
 	public var ratingsOffsetArrayFloat:Array<Float> = [
@@ -184,25 +184,25 @@ class PlayState extends MusicBeatState
 		0.2   // *99€ (good)
 	];
 	public var ratingsOffsetFloat:Map<Float, String> = [
-		0.9   => 'shit'
-		0.75  => 'bad',
+		0.9,   => 'shit'
+		0.75,  => 'bad',
 		0.2   => 'good'
 	];
 	public var ratingsNumber:Map<String, Int> = [ // im spanish ok!! i dont know englisshshshhs!!!
-		'sicks' => 0,
-		'goods' => 0,
-		'bads'  => 0,
+		'sicks', => 0,
+		'goods', => 0,
+		'bads',  => 0,
 		'shits' => 0
 	];
 	public var ratingsScore:Map<String, Int> = [
-		'shit' => 50,
-		'bad'  => 100,
+		'shit', => 50,
+		'bad',  => 100,
 		'good' => 200
 	];
 	public var ratingsSplash:Map<String, Bool> = [
-		'shit' => false,
-		'bad'  => false,
-		'good' => false,
+		'shit', => false,
+		'bad',  => false,
+		'good', => false,
 		'sick' => true
 	];
 
@@ -1551,7 +1551,7 @@ class PlayState extends MusicBeatState
 			+ ' | Accuracy:'
 			+ truncateFloat(songAccuracy, 2)
 			+ '% Ratings:'
-			+ songRatingacc
+			+ songRating
 			+ '('
 			+ songRatingmiss
 			+ ')'
@@ -1580,9 +1580,9 @@ class PlayState extends MusicBeatState
 				songRatingmiss = 'Clear';
 
 			if (songAccuracy < 80 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
-				songRatingacc = 'GREAT!';
+				songRating = 'GREAT!';
 			if (songAccuracy < 99 && sicks > 0 && goods < 0 && bads < 0 && shits < 0)
-				songRatingacc = 'GOOD';
+				songRating = 'GOOD';
 		}
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
