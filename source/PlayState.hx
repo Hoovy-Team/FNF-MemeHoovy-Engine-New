@@ -1488,12 +1488,11 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 
-	function truncateFloat(number:Float, precision:Int):Float
+	inline function truncateFloat(number:Float, precision:Int):Float
 	{
-		var num = number;
-		num = num * Math.pow(10, precision);
-		num = Math.round(num) / Math.pow(10, precision);
-		return num;
+		number = number * Math.pow(10, precision);
+		number = Math.round(number) / Math.pow(10, precision);
+		return number;
 	}
 
 	override public function update(elapsed:Float)
@@ -1656,7 +1655,6 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			// Conductor.songPosition = FlxG.sound.music.time;
 			Conductor.songPosition += FlxG.elapsed * 1000;
 
 			if (!paused)
@@ -1678,7 +1676,6 @@ class PlayState extends MusicBeatState
 			if (camFollow.x != dad.getMidpoint().x + 150 && !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 			{
 				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
 
 				switch (dad.curCharacter)
 				{
@@ -2008,6 +2005,7 @@ class PlayState extends MusicBeatState
 		var already:Bool = false;
 		for(ratingString in ratingsStringArr) {
 			// ratingOffset is a String type, get that in your mind
+			// it would actually help if people did something, and okay
 			final offset = ratingsOffsetString.get(ratingString); // Float
 			if(noteDiff > (Conductor.safeZoneOffset * offset)) {
 				daRating = ratingString; // string
