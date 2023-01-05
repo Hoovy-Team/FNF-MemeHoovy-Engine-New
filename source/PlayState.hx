@@ -2323,10 +2323,10 @@ class PlayState extends MusicBeatState
 		// just double pasting this shit cuz fuk u
 		// REDO THIS SYSTEM!
 		// legonds say he will never do it
-		var upP = controls.UI_UP_P;
-		var rightP = controls.UI_RIGHT_P;
-		var downP = controls.UI_DOWN_P;
-		var leftP = controls.UI_LEFT_P;
+		var leftP = controls.UI_LEFT_P;   // 0
+		var downP = controls.UI_DOWN_P;   // 1
+		var upP = controls.UI_UP_P;       // 2
+		var rightP = controls.UI_RIGHT_P; // 3
 
 		if (!PreferencesMenu.getPref('ghost-tapping'))
 		{
@@ -2457,44 +2457,51 @@ class PlayState extends MusicBeatState
 
 	function updateTrainPos():Void
 	{
-		if (trainSound.time >= 4700)
-		{
-			startedMoving = true;
-			gf.playAnim('hairBlow');
+		if(trainSound != null) {
+			if (trainSound.time >= 4700)
+			{
+				startedMoving = true;
+				gf.playAnim('hairBlow');
+			}
 		}
 
 		if (startedMoving)
 		{
-			phillyTrain.x -= 400;
+			if(phillyTrain != null) {
+				phillyTrain.x -= 400;
 
-			if (phillyTrain.x < -2000 && !trainFinishing)
-			{
-				phillyTrain.x = -1150;
-				trainCars -= 1;
+				if (phillyTrain.x < -2000 && !trainFinishing)
+				{
+					phillyTrain.x = -1150;
+					trainCars -= 1;
 
-				if (trainCars <= 0)
-					trainFinishing = true;
+					if (trainCars <= 0)
+						trainFinishing = true;
+				}
+
+				if (phillyTrain.x < -4000 && trainFinishing)
+					trainReset();
 			}
-
-			if (phillyTrain.x < -4000 && trainFinishing)
-				trainReset();
 		}
 	}
 
 	function trainReset():Void
 	{
-		gf.playAnim('hairFall');
-		phillyTrain.x = FlxG.width + 200;
-		trainMoving = false;
-		trainCars = 8;
-		trainFinishing = false;
-		startedMoving = false;
+		if(phillyTrain != null) {
+			gf.playAnim('hairFall');
+			phillyTrain.x = FlxG.width + 200;
+			trainMoving = false;
+			trainCars = 8;
+			trainFinishing = false;
+			startedMoving = false;
+		}
 	}
 
 	function lightningStrikeShit():Void
 	{
 		FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
-		halloweenBG.animation.play('lightning');
+		//if(halloweenBG.animation != null)
+			halloweenBG.animation.play('lightning');
 
 		lightningStrikeBeat = curBeat;
 		lightningOffset = FlxG.random.int(8, 24);
@@ -2506,6 +2513,7 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+		//if(FlxG.sound != null)
 		if ((Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20)
 			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
 		{
@@ -2545,7 +2553,8 @@ class PlayState extends MusicBeatState
 			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection)
 				dad.dance();
 		}
-		wiggleShit.update(Conductor.crochet);
+		if(wiggleShit != null)
+			wiggleShit.update(Conductor.crochet);
 
 		if (PreferencesMenu.getPref('camera-zoom'))
 		{
@@ -2575,7 +2584,7 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.animation.curAnim != null)
 		{
 			boyfriend.playAnim('idle');
 		}
