@@ -183,10 +183,11 @@ class PlayState extends MusicBeatState
 		0.75, // /@€ (bad)
 		0.2   // *99€ (good)
 	];
-	public var ratingsOffsetFloat:Map<Float, String> = [
-		0.9   => 'shit',
-		0.75  => 'bad',
-		0.2   => 'good'
+	public final ratingsStringArr:Array<String> = [
+		'sicks',
+		'goods',
+		'bads',
+		'shits'
 	];
 	public var ratingsNumber:Map<String, Int> = [ // im spanish ok!! i dont know englisshshshhs!!!
 		'sicks' => 0,
@@ -2007,7 +2008,7 @@ class PlayState extends MusicBeatState
 		var already:Bool = false;
 		for(ratingOffset in ratingsOffsetArrayFloat) {
 			if(noteDiff > Conductor.safeZoneOffset * ratingOffset) {
-				daRating = ratingsOffsetFloat.get(ratingOffset); // string
+				daRating = ratingsStringArr.copy(Std.string(ratingOffset)); // string
 				score = ratingsScore.get(daRating);
 				// acc = ratingsAccuracy.get(daRating);
 				totalNotesHit += 1 - ratingOffset;
