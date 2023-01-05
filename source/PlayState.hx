@@ -2006,14 +2006,16 @@ class PlayState extends MusicBeatState
 		var doSplash:Bool = true;
 
 		var already:Bool = false;
-		for(ratingOffset in ratingsOffsetArrayFloat) {
-			if(noteDiff > Conductor.safeZoneOffset * ratingOffset) {
-				daRating = ratingsStringArr.copy(Std.string(ratingOffset)); // string
-				score = ratingsScore.get(daRating);
+		for(ratingString in ratingsStringArr) {
+			// ratingOffset is a String type, get that in your mind
+			final offset = ratingsOffsetString.get(ratingString); // Float
+			if(noteDiff > (Conductor.safeZoneOffset * offset)) {
+				daRating = ratingString; // string
+				score = ratingsScore.get(daRating); // Int
 				// acc = ratingsAccuracy.get(daRating);
-				totalNotesHit += 1 - ratingOffset;
+				totalNotesHit += 1 - offset;
 				ratingsNumber.set(daRating + 's', ratingsNumber.get(daRating + 's') + 1);
-				doSplash = ratingsSplash.get(daRating);
+				doSplash = ratingsSplash.get(daRating); // Bool
 				//already = true;
 			}
 		}
