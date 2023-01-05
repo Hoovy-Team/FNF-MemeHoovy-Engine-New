@@ -183,8 +183,8 @@ class PlayState extends MusicBeatState
 		0.75, // /@€ (bad)
 		0.2   // *99€ (good)
 	];
-	public final ratingsStringArr:Array<String> = [
-		'sicks',
+	public var ratingsStringArr:Array<String> = [
+		//'sicks',
 		'goods',
 		'bads',
 		'shits'
