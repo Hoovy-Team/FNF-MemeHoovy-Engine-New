@@ -1422,6 +1422,8 @@ class PlayState extends MusicBeatState
 			{
 				resyncVocals();
 			}
+			@:privateAccess
+			PauseSubState.pauseMusic.destroy(); // ensures it stops
 
 			if (!startTimer.finished && startTimer != null)
 				startTimer.active = true;

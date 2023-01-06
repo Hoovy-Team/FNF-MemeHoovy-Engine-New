@@ -20,11 +20,13 @@ class PauseSubState extends MusicBeatSubstate
 	var curSelected:Int = 0;
 	var practiceText:FlxText;
 
-	var pauseMusic:FlxSound;
+	static var pauseMusic:FlxSound;
 
 	public function new(x:Float, y:Float)
 	{
 		super();
+
+		FlxG.signals.preStateSwitch.add(destroy);
 
 		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
 		pauseMusic.volume = 0;
