@@ -6,6 +6,7 @@ import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import Character;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -17,14 +18,13 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public function new(x:Float, y:Float)
 	{
-		var daStage = PlayState.curStage;
-		switch (daStage)
+		switch (PlayState.curStage)
 		{
 			case 'school' | 'schoolEvil':
-				{
-					stageSuffix = '-pixel';
-					boyfriendName = 'bf-pixel-dead';
-				}
+			{
+				stageSuffix = '-pixel';
+				boyfriendName = 'bf-pixel-dead';
+			}
 		}
 
 		super();
@@ -40,8 +40,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
 		Conductor.changeBPM(100);
 
-		// FlxG.camera.followLerp = 1;
-		// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
 		FlxG.camera.scroll.set();
 		FlxG.camera.target = null;
 
@@ -67,12 +65,12 @@ class GameOverSubstate extends MusicBeatSubstate
 				MusicBeatState.switchState(new FreeplayState());
 		}
 
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
+		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12 && bf.animation.curAnim != null)
 		{
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
+		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished && bf.animation.curAnim != null)
 		{
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
 		}

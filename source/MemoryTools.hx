@@ -68,12 +68,6 @@ class MemoryTools {
 		#end
     }
 
-    // basically openfl garbage collector
-    inline public static function takeOutTheTrash():Void
-    {
-        openfl.system.System.gc();
-    }
-
 	// taken from forever engine, cuz optimization very pog.
 	// thank you shubs :)
     // I took this from kade engine >:)

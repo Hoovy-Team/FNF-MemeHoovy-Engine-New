@@ -95,14 +95,14 @@ class Conductor
 		return crochet * (timeSignature[1] / 4);
 	}
 
-	public static function get_normalizedStepCrochet():Float
+	inline public static function get_normalizedStepCrochet():Float
 	{
 		return stepCrochet * (timeSignature[1] / 4);
 	}
 
 	inline static public function setTimeSignature(newSignature:Array<Int>)
 	{
-		var backupSignature = [4, 4];
+		final backupSignature = [4, 4];
 		try
 		{
 			if (newSignature[0] > 0 && newSignature[1] > 0)

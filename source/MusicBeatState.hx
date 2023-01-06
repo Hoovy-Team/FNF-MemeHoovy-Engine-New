@@ -48,10 +48,6 @@ class MusicBeatState extends FlxUIState
 		if (oldStep != curStep && curStep >= 0)
 			stepHit();
 
-		if (FlxG.stage != null)
-			if (FlxG.stage.frameRate != 150)
-				FlxG.stage.frameRate = 150;
-
 		super.update(elapsed);
 	}
 

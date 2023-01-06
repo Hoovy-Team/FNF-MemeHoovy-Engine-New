@@ -150,6 +150,20 @@ class Main extends Sprite
 		FPSCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(FPSCounter);
 
+		// fixes memory??
+		FlxG.signals.preStateSwitch.add(function(){
+			FlxG.bitmap.clearCache();
+			MemoryTools.dumpCache();
+			openfl.system.System.gc();
+		});
+
+		// this is just better in general
+		FlxG.signals.postGameStart.add(function(){
+			if (FlxG.stage != null)
+				if (FlxG.stage.frameRate != 150)
+					FlxG.stage.frameRate = 150;
+		});
+
 		// Original code by Gedehari (sqirra-rng)
 		// Simplified version by GamerPablito
 		#if CRASH_HANDLER

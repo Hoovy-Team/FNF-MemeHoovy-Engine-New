@@ -43,6 +43,7 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import openfl.utils.Assets;
 import modcharts.Modchart;
+import Character;
 #if mobile
 import mobile.ControlsMobile;
 import mobile.Hitbox;
@@ -211,8 +212,6 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		MemoryTools.dumpCache();
-
 		curNumerator = Conductor.timeSignature[0];
 		curDenominator = Conductor.timeSignature[1];
 

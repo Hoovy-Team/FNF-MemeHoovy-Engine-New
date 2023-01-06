@@ -14,7 +14,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import lime.net.curl.CURLCode;
+import flixel.group.FlxSpriteGroup;
 
 using StringTools;
 
@@ -87,7 +87,7 @@ class StoryMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
+		scoreText = new FlxText(10, 10, 0, "SCORE: PLACEHOLDER", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
@@ -114,8 +114,6 @@ class StoryMenuState extends MusicBeatState
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
 
-		trace("Line 117");
-
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -130,7 +128,6 @@ class StoryMenuState extends MusicBeatState
 
 			weekThing.screenCenter(X);
 			weekThing.antialiasing = true;
-			// weekThing.updateHitbox();
 
 			// Needs an offset thingie
 			if (!weekUnlocked[i])
@@ -145,8 +142,6 @@ class StoryMenuState extends MusicBeatState
 			}
 		}
 
-		trace("Line 96");
-
 		for (char in 0...3)
 		{
 			var weekCharacterThing:MenuCharacter = new MenuCharacter((FlxG.width * 0.25) * (1 + char) - 150, weekCharacters[curWeek][char]);
@@ -157,7 +152,6 @@ class StoryMenuState extends MusicBeatState
 				case 'dad':
 					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
 					weekCharacterThing.updateHitbox();
-
 				case 'bf':
 					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
 					weekCharacterThing.updateHitbox();
@@ -177,8 +171,6 @@ class StoryMenuState extends MusicBeatState
 
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
-
-		trace("Line 124");
 
 		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
 		leftArrow.frames = ui_tex;
@@ -203,8 +195,6 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.animation.play('idle');
 		difficultySelectors.add(rightArrow);
 
-		trace("Line 206");
-
 		add(yellowBG);
 		add(grpWeekCharacters);
 
@@ -213,28 +203,22 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.font = rankText.font;
 		txtTracklist.color = 0xFFe55777;
 		add(txtTracklist);
-		// add(rankText);
 		add(scoreText);
 		add(txtWeekTitle);
 
 		updateText();
-
-		trace("Line 165");
 
 		super.create();
 	}
 
 	override function update(elapsed:Float)
 	{
-		// scoreText.setFormat('VCR OSD Mono', 32);
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.5));
 
 		scoreText.text = "WEEK SCORE:" + lerpScore;
 
 		txtWeekTitle.text = weekNames[curWeek].toUpperCase();
 		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
-
-		// FlxG.watch.addQuick('font', scoreText.font);
 
 		difficultySelectors.visible = weekUnlocked[curWeek];
 
@@ -355,10 +339,6 @@ class StoryMenuState extends MusicBeatState
 		sprDifficulty.y = leftArrow.y - 15;
 		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
 
-		#if !switch
-		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
-		#end
-
 		FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07);
 	}
 
@@ -434,8 +414,47 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.screenCenter(X);
 		txtTracklist.x -= FlxG.width * 0.35;
 
-		#if !switch
 		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
-		#end
+	}
+}
+
+class MenuItem extends FlxSpriteGroup
+{
+	public var targetY:Float = 0;
+	public var week:FlxSprite;
+	public var flashingInt:Int = 0;
+
+	public function new(x:Float, y:Float, weekNum:Int = 0)
+	{
+		super(x, y);
+		week = new FlxSprite().loadGraphic(Paths.image('storymenu/week' + weekNum));
+		add(week);
+	}
+
+	private var isFlashing:Bool = false;
+
+	inline public function startFlashing():Void
+	{
+		isFlashing = true;
+	}
+
+	// if it runs at 60fps, fake framerate will be 6
+	// if it runs at 144 fps, fake framerate will be like 14, and will update the graphic every 0.016666 * 3 seconds still???
+	// so it runs basically every so many seconds, not dependant on framerate??
+	// I'm still learning how math works thanks whoever is reading this lol
+	var fakeFramerate:Int = Math.round((1 / FlxG.elapsed) / 10);
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+		y = FlxMath.lerp(y, (targetY * 120) + 480, 0.17);
+
+		if (isFlashing)
+			flashingInt += 1;
+
+		if (flashingInt % fakeFramerate >= Math.floor(fakeFramerate / 2))
+			week.color = 0xFF33ffff;
+		else
+			week.color = FlxColor.WHITE;
 	}
 }
