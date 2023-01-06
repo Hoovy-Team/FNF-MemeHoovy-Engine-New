@@ -41,7 +41,10 @@ DONE:
 -Notesplashes
 -Finish the options menu (thank fucking god, I hated the beta one)
 -Crash handler (from psych engine ofc)
--Fix a crash when you pause/beat a song
+
+BUGS FIXED:
+-Fixed a crash when you pause/beat a song
+-Fixed pause menu music not stopping when you unpause
 
 Scrapped:
 
