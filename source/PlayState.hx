@@ -212,6 +212,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		MemoryTools.dumpCache(); // run it ONCE
+
 		curNumerator = Conductor.timeSignature[0];
 		curDenominator = Conductor.timeSignature[1];
 
