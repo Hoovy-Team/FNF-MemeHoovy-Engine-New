@@ -130,7 +130,7 @@ class ChartingState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = true;
-		FlxG.save.bind('funkin', 'memehoovy');
+		FlxG.save.bind('funkin' #if (flixel < "5.0.0", 'memehoovy' #end);
 
 		tempBpm = _song.bpm;
 
