@@ -152,7 +152,7 @@ class Main extends Sprite
 
 		// fixes memory??
 		FlxG.signals.preStateSwitch.add(function(){
-			FlxG.bitmap.clearCache();
+			FlxG.bitmap.dumpCache();
 			MemoryTools.dumpCache();
 			openfl.system.System.gc();
 		});
