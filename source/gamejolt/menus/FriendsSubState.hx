@@ -98,7 +98,7 @@ class FriendsSubState extends MusicBeatSubstate
         }
         else
         {
-            missInfo = new FlxText(0, 0, 0, "You don't have any friends\nto track info from yet!\nPlease, go add some and retry later");
+            missInfo = new FlxText(0, 0, 0, "You don't have any friends\nto track info from yet!\nPlease, go add some and retry later"); // me be like:
             missInfo.setFormat(Paths.font('pixel.otf'), 35, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
             missInfo.screenCenter();
             missInfo.antialiasing = PreferencesMenu.getPref('global-antialiasing');
@@ -109,7 +109,7 @@ class FriendsSubState extends MusicBeatSubstate
             FlxTween.tween(missInfo, {alpha: 0.25}, 0.5, {type: PINGPONG});
         }
 
-        FlxTween.tween(bg, {alpha: 1}, 0.7, {onComplete: function (twn:FlxTween) {if (friendList == null) missInfo.visible = true;}});
+        FlxTween.tween(bg, {alpha: 1}, 0.7, {onComplete: function (twn:FlxTween) {missInfo.visible = friendList == null;}});
         FlxTween.tween(title, {alpha: 1}, 0.7);
         FlxTween.tween(leftArrow, {alpha: 1}, 0.7);
         FlxTween.tween(rightArrow, {alpha: 1}, 0.7);
@@ -125,14 +125,14 @@ class FriendsSubState extends MusicBeatSubstate
         FlxTween.tween(camPos, {x: FlxG.width / 2 + FlxG.width * curScreen}, 0.6, {ease: FlxEase.smootherStepOut});
     }
 
-    override function update(elapsed:Float)
-    {
-        super.update(elapsed);
+	override function update(elapsed:Float)
+	{
+	    super.update(elapsed);
 
-        camPos.y = CoolUtil.slideEffect(6, COS, 2, 0.25, FlxG.height / 2);
+	    camPos.y = CoolUtil.slideEffect(6, COS, 2, 0.25, FlxG.height / 2);
 
-        var isMinCount:Bool = curScreen <= 0;
-		var isMaxCount:Bool = curScreen >= screenPos;
+	    var isMinCount:Bool = curScreen <= 0;
+	    var isMaxCount:Bool = curScreen >= screenPos;
 
 		leftArrow.visible = !isMinCount;
 		rightArrow.visible = !isMaxCount;
