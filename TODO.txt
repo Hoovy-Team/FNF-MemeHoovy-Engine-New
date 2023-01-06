@@ -24,8 +24,7 @@ TODO List:
 -More than 2 strums (maybe?)
 -Credits Menu
 -Modifiers (possibly)
--Better menu music
--Fix a crash
+-Better main menu music
 -And many more I can't think of
 
 Misc Things:
@@ -42,6 +41,7 @@ DONE:
 -Notesplashes
 -Finish the options menu (thank fucking god, I hated the beta one)
 -Crash handler (from psych engine ofc)
+-Fix a crash when you pause/beat a song
 
 Scrapped:
 
