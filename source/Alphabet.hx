@@ -117,7 +117,7 @@ class Alphabet extends FlxSpriteGroup
 		var xPos:Float = 0;
 		var curRow:Int = 0;
 
-		new FlxTimer().start(0.05, function(tmr:FlxTimer)
+		new FlxTimer().start(delay, function(tmr:FlxTimer)
 		{
 			if (_finalText.fastCodeAt(loopNum) == "\n".code)
 			{
@@ -184,7 +184,7 @@ class Alphabet extends FlxSpriteGroup
 
 			loopNum += 1;
 
-			tmr.time = FlxG.random.float(0.04, 0.09);
+			tmr.time = FlxG.random.float(0.04 /* delay - 0.01 */, 0.09 /* (delay * 2) - 0.01 */);
 		}, splitWords.length);
 	}
 
