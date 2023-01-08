@@ -23,7 +23,7 @@ class AnimationDebug extends FlxState
 	var animList:Array<String> = [];
 	var curAnim:Int = 0;
 	var isDad:Bool = true;
-	var daAnim:String = 'spooky';
+	var daAnim:String = 'spooky'; // shouldt it be daChar?????
 	var camFollow:FlxObject;
 
 	public function new(daAnim:String = 'spooky')
@@ -144,8 +144,7 @@ class AnimationDebug extends FlxState
 		{
 			curAnim -= 1;
 		}
-
-		if (FlxG.keys.justPressed.S)
+		else if (FlxG.keys.justPressed.S)
 		{
 			curAnim += 1;
 		}
@@ -179,11 +178,11 @@ class AnimationDebug extends FlxState
 			updateTexts();
 			if (upP)
 				char.animOffsets.get(animList[curAnim])[1] += 1 * multiplier;
-			if (downP)
+			else if (downP)
 				char.animOffsets.get(animList[curAnim])[1] -= 1 * multiplier;
-			if (leftP)
+			else if (leftP)
 				char.animOffsets.get(animList[curAnim])[0] += 1 * multiplier;
-			if (rightP)
+			else if (rightP)
 				char.animOffsets.get(animList[curAnim])[0] -= 1 * multiplier;
 
 			updateTexts();

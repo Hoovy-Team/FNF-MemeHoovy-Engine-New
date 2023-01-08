@@ -6,12 +6,12 @@ No, it's not dead, I've just been busy. (I haven't been committing as much as I'
 
 This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 
-![Repo size](https://img.shields.io/github/repo-size/MemeHoovy/FNF-MemeHoovy-Engine-New)
+![Repo Size](https://img.shields.io/github/repo-size/Hoovy-Team/FNF-MemeHoovy-Engine-New)
 
 <b>`THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.`</b>
 
 Join our [Discord Server](https://discord.gg/vS2rY5VaMV) for more questions and updates.
-Also if you make a mod with this engine, please credit all the people who worked here, and also open source your mods too you goons.
+Also if you make a mod with this engine, please credit all the people who worked here, and also **open source** your mods too you goons.
 
 ### Special Credits:
 - [MemeHoovy](https://github.com/MemeHoovy) - Main Programmer
