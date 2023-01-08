@@ -195,9 +195,9 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		inline final fullText:String = Assets.getText(Paths.txt('introText'));
+		final fullText:String = Assets.getText(Paths.txt('introText'));
 
-		inline final firstArray:Array<String> = fullText.split('\n');
+		final firstArray:Array<String> = fullText.split('\n');
 		// fullText = ''; // nope
 		var swagGoodArray:Array<Array<String>> = [];
 
