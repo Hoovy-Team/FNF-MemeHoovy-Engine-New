@@ -17,18 +17,16 @@ class FNFSprite extends FlxSprite
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
+		if(!animOffsets.exists(AnimName))
+			return;
+
 		animation.play(AnimName, Force, Reversed, Frame);
 
-		if (animOffsets.exists(AnimName))
-		{
-			var daOffset:Array<Float> = animOffsets.get(AnimName);
-			offset.set(daOffset[0], daOffset[1]);
-		}
-		else
-			offset.set();
+		var daOffset:Array<Float> = animOffsets.get(AnimName);
+		offset.set(daOffset[0], daOffset[1]);
 	}
 
-	public function addOffset(name:String, x:Float, y:Float)
+	public function addOffset(name:String, x:Float = 0, y:Float = 0)
 	{
 		animOffsets.set(name, [x, y]);
 	}
