@@ -70,7 +70,7 @@ class TitleState extends MusicBeatState
 
 		super.create();
 
-		FlxG.save.bind('funkin', 'memehoovy');
+		FlxG.save.bind('funkin' #if (flixel < "5.0.0"), 'memehoovy' #end);
 
 		Highscore.load();
 
@@ -195,9 +195,10 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('introText'));
+		inline final fullText:String = Assets.getText(Paths.txt('introText'));
 
-		var firstArray:Array<String> = fullText.split('\n');
+		inline final firstArray:Array<String> = fullText.split('\n');
+		// fullText = ''; // nope
 		var swagGoodArray:Array<Array<String>> = [];
 
 		for (i in firstArray)
@@ -301,7 +302,7 @@ class TitleState extends MusicBeatState
 		danceLeft = !danceLeft;
 
 		if (danceLeft)
-			gfDance.animation.play('danceRight');
+			gfDance.animation.play('danceRight'); // WHAT????!
 		else
 			gfDance.animation.play('danceLeft');
 
@@ -357,7 +358,8 @@ class TitleState extends MusicBeatState
 		{
 			remove(ngSpr);
 
-			FlxG.camera.flash(FlxColor.WHITE, 4);
+			//if(!FlxG.save.data.flashing)
+				FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
 			skippedIntro = true;
 		}
