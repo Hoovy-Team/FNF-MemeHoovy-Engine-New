@@ -22,9 +22,9 @@ class Cache
 
 	public static function isPersistant(path:String)
 	{
-		for (key in persistantAssets.keys())
+		for (key in persistantAssets.keys()) // i like it that way
 		{
-			if (path.endsWith(key))
+			if (path.contains(key))
 				return true;
 		}
 		return false;
@@ -59,7 +59,7 @@ class Cache
 		var image:FlxGraphic = getGraphic(path);
 		if (image != null)
 		{
-			path = path.substring(0, path.length - 4);
+			path = path.substring(0, path.length - 4); // deletes the last 4 letters (file definition)
 			var atlas:FlxAtlasFrames = null;
 			switch (type)
 			{
@@ -118,7 +118,7 @@ class Cache
 
 	inline public static function hasAtlas(id:String, ?type:AtlasType)
 	{
-		return atlases.exists(id) && (type == null || atlases.get(id).type == type);
+		return (atlases.exists(id) && (type == null || atlases.get(id).type == type));
 	}
 
 	inline public static function hasSound(id:String)
@@ -215,9 +215,14 @@ class Cache
 				usedSounds.push(sound._sound);
 		});
 
-		@:privateAccess
-		if (FlxG.sound.music != null && FlxG.sound.music._sound != null && !usedSounds.contains(FlxG.sound.music._sound))
-			usedSounds.push(FlxG.sound.music._sound);
+		@:privateAccess {
+			if (FlxG.sound.music != null
+			    && FlxG.sound.music._sound != null
+			    && !usedSounds.contains(FlxG.sound.music._sound))
+			{
+				usedSounds.push(FlxG.sound.music._sound);
+			}
+		}
 
 		for (key in sounds.keys())
 		{
