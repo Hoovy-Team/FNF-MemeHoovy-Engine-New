@@ -75,8 +75,6 @@ class ChartingState extends MusicBeatState
 	**/
 	var curSelectedNote:Array<Dynamic>;
 
-	var tempBpm:Int = 0;
-
 	var vocals:FlxSound;
 
 	var leftIcon:HealthIcon;
@@ -130,13 +128,9 @@ class ChartingState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = true;
-		FlxG.save.bind('funkin' #if (flixel < "5.0.0", 'memehoovy' #end);
-
-		tempBpm = _song.bpm;
+		FlxG.save.bind('funkin' #if (flixel < "5.0.0", 'memehoovy' #end));
 
 		addSection();
-
-		// sections = _song.notes;
 
 		updateGrid();
 
@@ -428,7 +422,7 @@ class ChartingState extends MusicBeatState
 			}
 			else if (wname == 'song_bpm')
 			{
-				tempBpm = Std.int(nums.value);
+				_song.bpm = Std.int(nums.value);
 				Conductor.mapBPMChanges(_song);
 				Conductor.changeBPM(Std.int(nums.value));
 			}
@@ -640,8 +634,6 @@ class ChartingState extends MusicBeatState
 				}
 			}
 		}
-
-		_song.bpm = tempBpm;
 
 		var shiftThing:Int = 1;
 		if (FlxG.keys.pressed.SHIFT)
