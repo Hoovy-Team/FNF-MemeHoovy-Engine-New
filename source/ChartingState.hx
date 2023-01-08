@@ -128,7 +128,7 @@ class ChartingState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = true;
-		FlxG.save.bind('funkin' #if (flixel < "5.0.0", 'memehoovy' #end));
+		FlxG.save.bind('funkin' #if (flixel < "5.0.0"), 'memehoovy' #end);
 
 		addSection();
 
