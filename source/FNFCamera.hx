@@ -52,8 +52,10 @@ class FNFCamera extends FlxCamera
 
 	override public function destroy()
 	{
-		camFollow = FlxDestroyUtil.put(camFollow);
-		camFollowPos = FlxDestroyUtil.destroy(camFollowPos);
+		if(camFollow != null)
+			camFollow = FlxDestroyUtil.put(camFollow);
+		if(camFollowPos != null)
+			camFollowPos = FlxDestroyUtil.destroy(camFollowPos);
 		super.destroy();
 	}
 }
