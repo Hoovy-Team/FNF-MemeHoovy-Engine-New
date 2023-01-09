@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 
 /**
  * Compared to `MP4Handler`. This loads slower!!
+ * Allows a sprite to be a video.
  */
 class MP4Sprite extends FlxSprite
 {

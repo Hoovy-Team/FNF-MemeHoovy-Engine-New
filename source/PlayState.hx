@@ -2640,12 +2640,9 @@ class PlayState extends MusicBeatState
 					trainStart();
 				}
 			case "tank":
-				tankBop1.animation.play('bop', true);
-				tankBop2.animation.play('bop', true);
-				tankBop3.animation.play('bop', true);
-				tankBop4.animation.play('bop', true);
-				tankBop5.animation.play('bop', true);
-				tankBop6.animation.play('bop', true);
+				for (e in [tankBop1, tankBop2, tankBop3, tankBop4, tankBop5, tankBop6])
+					e.animation.play('bop', true);
+
 				tower.animation.play('idle', true);
 		}
 
@@ -2708,6 +2705,14 @@ class PlayState extends MusicBeatState
 			script.setVariable("fromRGB", function(Red:Int, Green:Int, Blue:Int, Alpha:Int = 255)
 			{
 				return FlxColor.fromRGB(Red, Green, Blue, Alpha);
+			});
+
+			// additional shit for hscript
+			script.setVariable('getClass', function(name:String){
+				return Type.resolveClass(name);
+			});
+			script.setVariable('getEnum', function(name:String){
+				return Type.resolveEnum(name);
 			});
 
 			script.setVariable("curStep", curStep);

@@ -26,7 +26,7 @@ class FNFSprite extends FlxSprite
 		offset.set(daOffset[0], daOffset[1]);
 	}
 
-	public function addOffset(name:String, x:Float = 0, y:Float = 0)
+	inline public function addOffset(name:String, x:Float = 0, y:Float = 0)
 	{
 		animOffsets.set(name, [x, y]);
 	}
