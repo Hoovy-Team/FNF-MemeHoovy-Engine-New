@@ -210,6 +210,8 @@ class PlayState extends MusicBeatState
 
 	private var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
+	private final animArray:Array<String> = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];	
+
 	override public function create()
 	{
 		curNumerator = Conductor.timeSignature[0];
@@ -1839,18 +1841,7 @@ class PlayState extends MusicBeatState
 						if (SONG.notes[Math.floor(curStep / 16)].altAnim)
 							altAnim = '-alt';
 					}
-
-					switch (Math.abs(daNote.noteData))
-					{
-						case 0:
-							dad.playAnim('singLEFT' + altAnim, true);
-						case 1:
-							dad.playAnim('singDOWN' + altAnim, true);
-						case 2:
-							dad.playAnim('singUP' + altAnim, true);
-						case 3:
-							dad.playAnim('singRIGHT' + altAnim, true);
-					}
+					dad.playAnim(animArray[daNote.noteData % 4] + altAnim, true);
 
 					dad.holdTimer = 0;
 
@@ -2376,8 +2367,7 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.004;
 
-			var boyAnimArray:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
-			boyfriend.playAnim('sing' + boyAnimArray[note.noteData % 4], true);
+			boyfriend.playAnim(animArray[note.noteData % 4], true);
 
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
