@@ -2,8 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin' MemeHoovy Engine" file="MemeHoovy Engine" packageName="com.memehoovy.memehoovyengine" package="com.memehoovy.memehoovyengine" main="Main" version="0.2.7.1" company="memehoovy" />
-
+	<app title="Friday Night Funkin' MemeHoovy Engine" file="MemeHoovy Engine" packageName="com.memehoovy.memehoovyengine" package="com.memehoovy.memehoovyengine" main="Main" version="0.2.8" company="memehoovy" />
 	<app preloader="flixel.system.FlxPreloader" />
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
@@ -116,7 +115,6 @@
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 
 	<!-- Enable HScript fine error reporting at parsing time -->
-	<!-- Fixes polymods stupid bullshit -->
 	<haxedef name="hscriptPos" if="hscript" />
 
 	<!-- Defines if hscript are enabled. Dosen't work in browser -->

@@ -23,10 +23,10 @@ class NoteSplash extends FlxSprite
 
 	public function setupNoteSplash(x:Float, y:Float, ?notedata:Int = 0)
 	{
+		if (frames == null) return;		
 		setPosition(x, y);
 		alpha = 0.6;
 		animation.play('note' + notedata + '-' + FlxG.random.int(0, 1), true);
-		// animation.curAnim.frameRate += FlxG.random.int(-2, 2);
 		updateHitbox();
 		offset.set(width * 0.3, height * 0.3);
 	}
