@@ -173,27 +173,6 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 
 				hpcolor = 0xFFD57E00;
-			case 'mom':
-				tex = Paths.getSparrowAtlas('Mom_Assets');
-				frames = tex;
-
-				animation.addByPrefix('idle', "Mom Idle", 24, false);
-				animation.addByPrefix('singUP', "Mom Up Pose", 24, false);
-				animation.addByPrefix('singDOWN', "MOM DOWN POSE", 24, false);
-				animation.addByPrefix('singLEFT', 'Mom Left Pose', 24, false);
-				// ANIMATION IS CALLED MOM LEFT POSE BUT ITS FOR THE RIGHT
-				// CUZ DAVE IS DUMB!
-				animation.addByPrefix('singRIGHT', 'Mom Pose Left', 24, false);
-
-				addOffset('idle');
-				addOffset("singUP", 14, 71);
-				addOffset("singRIGHT", 10, -60);
-				addOffset("singLEFT", 250, -23);
-				addOffset("singDOWN", 20, -160);
-
-				playAnim('idle');
-
-				hpcolor = 0xFFD8558E;
 			case 'mom-car':
 				tex = Paths.getSparrowAtlas('momCar');
 				frames = tex;
@@ -721,7 +700,7 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function addOffset(name:String, x:Float = 0, y:Float = 0)
+	inline public function addOffset(name:String, x:Float = 0, y:Float = 0)
 	{
 		animOffsets[name] = [x, y];
 	}
