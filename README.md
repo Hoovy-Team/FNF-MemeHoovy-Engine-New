@@ -2,7 +2,9 @@
 
 I have an engine based off myself now, watch me fail.
 
-No, it's not dead, I've just been busy. (I haven't been committing as much as I'd like, but I'm busy with other things/tasks. And mind you, I code for free, I'm not getting paid to do any of the things that I do.)
+ ̶N̶o̶,̶ ̶i̶t̶'̶s̶ ̶n̶o̶t̶ ̶d̶e̶a̶d̶,̶ ̶I̶'̶v̶e̶ ̶j̶u̶s̶t̶ ̶b̶e̶e̶n̶ ̶b̶u̶s̶y̶.̶ ̶(̶I̶ ̶h̶a̶v̶e̶n̶'̶t̶ ̶b̶e̶e̶n̶ ̶c̶o̶m̶m̶i̶t̶t̶i̶n̶g̶ ̶a̶s̶ ̶m̶u̶c̶h̶ ̶a̶s̶ ̶I̶'̶d̶ ̶l̶i̶k̶e̶,̶ ̶b̶u̶t̶ ̶I̶'̶m̶ ̶b̶u̶s̶y̶ ̶w̶i̶t̶h̶ ̶o̶t̶h̶e̶r̶ ̶t̶h̶i̶n̶g̶s̶/̶t̶a̶s̶k̶s̶.̶ ̶A̶n̶d̶ ̶m̶i̶n̶d̶ ̶y̶o̶u̶,̶ ̶I̶ ̶c̶o̶d̶e̶ ̶f̶o̶r̶ ̶f̶r̶e̶e̶,̶ ̶I̶'̶m̶ ̶n̶o̶t̶ ̶g̶e̶t̶t̶i̶n̶g̶ ̶p̶a̶i̶d̶ ̶t̶o̶ ̶d̶o̶ ̶a̶n̶y̶ ̶o̶f̶ ̶t̶h̶e̶ ̶t̶h̶i̶n̶g̶s̶ ̶t̶h̶a̶t̶ ̶I̶ ̶d̶o̶.̶)̶
+ 
+ I'm done working on the engine, it's dead.
 
 This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 
