@@ -15,7 +15,7 @@ Also if you make a mod with this engine, please credit all the people who worked
 ### Special Credits:
 - [MemeHoovy](https://github.com/MemeHoovy) - Main Programmer
 
-- [504brandon](https://github.com/504brandon) - Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
+- [504brandon](https://github.com/504brandon) - Former Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
 
 - [Wither362](https://github.com/Wither362) - Contributor, Assistant Programmer.
 
@@ -39,8 +39,9 @@ Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 Also check out:
 - [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
-- [Lite Funkin Engine](https://github.com/504brandon/lite-funkin-engine)
-- [Test-Engine](https://github.com/504brandon/Test-Engine-V1---FNF)
+- [Denpa Engine](https://github.com/UmbratheUmbreon/PublicDenpaEngine)
+- [Joalor64Engine-Rewritten](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite)
+- [Screwed engine](https://github.com/miksel1/FNF-ScrewedEngine)
 
 # Original FNF description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
