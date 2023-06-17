@@ -13,7 +13,7 @@ This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 Also if you make a mod with this engine, please credit all the people who worked here, and also **open source** your mods too you goons.
 
 ### Special Credits:
-- [MemeHoovy](https://github.com/MemeHoovy) - Main Programmer
+- [MemeHovy](https://github.com/MemeHovy) - Main Programmer.
 
 - [504brandon](https://github.com/504brandon) - Former Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
 
