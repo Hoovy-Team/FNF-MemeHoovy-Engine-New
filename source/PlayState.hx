@@ -796,14 +796,7 @@ class PlayState extends MusicBeatState
 
 		Conductor.songPosition = -5000;
 
-		if (PreferencesMenu.getPref('downscroll'))
-		{
-			strumLine = new FlxSprite(0, 570).makeGraphic(FlxG.width, 10);
-		}
-		else
-		{
-			strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
-		}
+		strumLine = new FlxSprite(0, PreferencesMenu.getPref('downscroll')) ? 570 : 50).makeGraphic(FlxG.width, 10);
 		strumLine.scrollFactor.set();
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
@@ -836,8 +829,6 @@ class PlayState extends MusicBeatState
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
-
-		FlxG.fixedTimestep = false;
 
 		healthBarBG = new FlxSprite(0, PreferencesMenu.getPref('downscroll') ? FlxG.height * 0.1 : FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		healthBarBG.screenCenter(X);
