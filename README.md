@@ -10,7 +10,6 @@ This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 
 <b>`THIS ENGINE IS STILL A WORK IN PROGRESS, REPORT BUGS IN ISSUES.`</b>
 
-Join our [Discord Server](https://discord.gg/vS2rY5VaMV) for more questions and updates.
 Also if you make a mod with this engine, please credit all the people who worked here, and also **open source** your mods too you goons.
 
 ### Special Credits:
