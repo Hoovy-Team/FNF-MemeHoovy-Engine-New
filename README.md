@@ -1,6 +1,8 @@
 # Friday Night Funkin' - MemeHoovy Engine (Deprecated)
 
-This engine has since been deprecated, but I will occasionally work on it for fun and out of boredom, and to fix bugs. But, I will not be updating the gamebanana page, and it will stay that way. btw if you wanna revive the engine or something, go ahead, it's apache licensed so it's alright. --MemeHoovy
+This engine has since been deprecated, but I will occasionally work on it for fun and out of boredom, and to fix bugs. But, I will not be updating the gamebanana page, and it will stay that way. btw if you wanna revive the engine or something, go ahead, it's apache licensed so it's alright. --Moxie
+
+Btw, I might consider making a sequel based on Psych or something if I ever feel like it.
 
 I have an engine based off myself now, watch me fail.
 
@@ -13,15 +15,13 @@ This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 Also if you make a mod with this engine, please credit all the people who worked here, and also **open source** your mods too you goons.
 
 ### Special Credits:
-- [MemeHovy](https://github.com/MemeHovy) - Main Programmer.
+- [Moxie](https://github.com/moxie-coder) - Main Programmer.
 
 - [504brandon](https://github.com/504brandon) - Former Assistant Programmer. (And shit I took from Dike/Lite engine lol.)
 
 - [Wither362](https://github.com/Wither362) - Contributor, Assistant Programmer.
 
 - [GamerPablito](https://github.com/GamerPablito) - Contributor, Gamejolt Support, Assistant Programmer.
-
-- [Yoshubs](https://github.com/Yoshubs) - Some inspiration.
 
 - [Starmapo](https://github.com/Starmapo) - Inspiration & Hscript things. (And also being a cool person)
 
@@ -39,7 +39,7 @@ Also if you make a mod with this engine, please credit all the people who worked
 
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
-Also check out:
+Also check out these engines (codename is far more better then this piece of junk):
 - [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
 - [Denpa Engine](https://github.com/UmbratheUmbreon/PublicDenpaEngine)
 - [Joalor64Engine-Rewritten](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite)
