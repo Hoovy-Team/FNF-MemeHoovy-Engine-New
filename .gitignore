@@ -2,3 +2,4 @@ export/
 .vscode/
 APIStuff.hx
 # source/gamejolt/GJKeys.hx
+/.haxelib
