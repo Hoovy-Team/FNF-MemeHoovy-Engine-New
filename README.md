@@ -38,11 +38,17 @@ This is a WIP rewrite of Ninjamuffin99s Friday night Funkin.
 Original repo: https://github.com/MemeHoovy/FNF-MemeHoovy-Engine-Public-Legacy
 
 Also check out these engines (codename is far more better then this piece of junk):
-- [Chocolate Engine](https://github.com/Joalor64GH/Chocolate-Engine)
+- [Chocolate Engine (Deprecated)](https://github.com/Joalor64GH/Chocolate-Engine)
 - [Denpa Engine](https://github.com/UmbratheUmbreon/PublicDenpaEngine)
 - [Joalor64Engine-Rewritten](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite)
 - [Screwed engine](https://github.com/miksel1/FNF-ScrewedEngine)
 - [Codename engine](https://github.com/FNF-CNE-Devs/CodenameEngine)
+- [Psych Engine](https://github.com/ShadowMario/FNF-PsychEngine)
+- [Forever Engine](https://github.com/some-fnf-archives/Forever-Engine-Legacy)
+- [Dave Engine](https://github.com/Erizur/FNF-DaveEngine)
+- [Troll Engine](https://github.com/riconuts/troll-engine)
+
+### If you know any other good engines, make a PR please :)
 
 # Original FNF description:
 This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
