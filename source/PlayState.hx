@@ -232,7 +232,7 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>(8);
 		var splash:NoteSplash = new NoteSplash(100, 100, 0);
 		grpNoteSplashes.add(splash);
-		splash.alpha = 0.1;
+		splash.alpha = 0.0001;
 
 		persistentUpdate = true;
 		persistentDraw = true;
